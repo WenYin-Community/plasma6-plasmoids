@@ -116,7 +116,7 @@ PlasmoidItem {
         || Plasmoid.location === PlasmaCore.Types.BottomEdge
         || Plasmoid.location === PlasmaCore.Types.LeftEdge)
 
-    property int plasmaVersion
+    property int plasmaVersion: 6  // Default to Plasma 6
 
     Plasma5Support.DataSource {
         id: executable
@@ -124,7 +124,15 @@ PlasmoidItem {
         connectedSources: ["plasmashell -v"]
         onNewData: {
             if(data["exit code"] == 0){
-                plasmaVersion = data.stdout.split(" ")[1].split(".")[1];
+                // Parse version like "plasmashell 6.6.4"
+                var parts = data.stdout.trim().split(" ")
+                if (parts.length >= 2) {
+                    var versionParts = parts[1].split(".")
+                    if (versionParts.length >= 2) {
+                        // Return major version (6.x.x -> 6)
+                        plasmaVersion = parseInt(versionParts[0]) || 6
+                    }
+                }
             }
             disconnectSource(connectedSources)
         }

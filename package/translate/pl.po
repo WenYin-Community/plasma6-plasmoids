@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KdeControlStation\n"
 "Report-Msgid-Bugs-To: https://github.com/EliverLara/kde-control-station/tree/plasma6\n"
-"POT-Creation-Date: 2026-01-22 17:26-0600\n"
+"POT-Creation-Date: 2026-04-29 07:31+0800\n"
 "PO-Revision-Date: 2025-09-27 00:00+0000\n"
 "Last-Translator: Rygorr Mortis <EMAIL@ADDRESS>\n"
 "Language-Team: Polish <pl@li.org>\n"
@@ -37,6 +37,10 @@ msgstr "Schematy kolorów"
 #: ../contents/config/config.qml ../contents/ui/components/ScreenshotBtn.qml
 msgid "Screenshot"
 msgstr "Zrzut ekranu"
+
+#: ../contents/config/config.qml
+msgid "Quick Actions"
+msgstr ""
 
 #: ../contents/config/config.qml
 msgid "Support"
@@ -264,6 +268,10 @@ msgstr "Rozłączono"
 #: ../contents/ui/layouts/components/ControlCenter/LeftColumn.qml ../contents/ui/pages/BluetoothPage.qml
 msgid "Bluetooth"
 msgstr "Bluetooth"
+
+#: ../contents/ui/main.qml
+msgid "Edit Layout"
+msgstr ""
 
 #: ../contents/ui/pages/BatteryPage.qml
 msgid "The battery applet has enabled suppressing sleep and screen locking"

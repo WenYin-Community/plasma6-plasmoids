@@ -6,17 +6,15 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-import QtQuick 2.15
-import QtQuick.Controls 2.15
-import QtQuick.Window 2.15
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Window
 
-import org.kde.plasma.plasmoid 2.0
-import org.kde.plasma.components 3.0 as PC3
-import org.kde.plasma.extras 2.0 as PlasmaExtras
+import org.kde.plasma.plasmoid
+import org.kde.plasma.components as PC3
+import org.kde.plasma.extras as PlasmaExtras
 import org.kde.plasma.private.mpris as Mpris
-import org.kde.kirigami 2.20 as Kirigami
-
-import Qt5Compat.GraphicalEffects
+import org.kde.kirigami as Kirigami
 
 
 Item {
@@ -167,18 +165,12 @@ Item {
                 StackView.onDeactivated: destroy()
                 StackView.onRemoved: destroy()
 
-                layer.enabled: true
-                layer.effect: OpacityMask {
-                    maskSource: Item {
-                        width: img.width
-                        height: img.height
-                        Rectangle {
-                            anchors.centerIn: parent
-                            width: img.adapt ? img.width : Math.min(img.width, img.height)
-                            height: img.adapt ? img.height : width
-                            radius: 16//Math.min(width, height)
-                        }
-                    }
+                // Qt6 compatible: Use clip for rounded corners
+                Rectangle {
+                    anchors.fill: parent
+                    radius: 16
+                    clip: true
+                    color: "transparent"
                 }
             }
 

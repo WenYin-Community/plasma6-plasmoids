@@ -9,13 +9,12 @@
 
 import QtQuick
 import QtQuick.Layouts
-import Qt5Compat.GraphicalEffects
 
-import org.kde.plasma.plasmoid 2.0
-import org.kde.plasma.components 3.0 as PlasmaComponents3
-import org.kde.plasma.extras 2.0 as PlasmaExtras
-import org.kde.coreaddons 1.0 as KCoreAddons
-import org.kde.kirigami 2 as Kirigami
+import org.kde.plasma.plasmoid
+import org.kde.plasma.components as PlasmaComponents3
+import org.kde.plasma.extras as PlasmaExtras
+import org.kde.coreaddons as KCoreAddons
+import org.kde.kirigami as Kirigami
 import org.kde.plasma.private.mpris as Mpris
 
 PlasmaExtras.Representation {
@@ -196,50 +195,27 @@ PlasmaExtras.Representation {
             }
         }
 
-        ShaderEffect {
+        // Background image with simple overlay (Qt6 compatible, no blur effects)
+        Item {
             id: backgroundImage
-            property real scaleFactor: 1.0
-            property ShaderEffectSource source: ShaderEffectSource {
-                id: shaderEffectSource
-                sourceItem: albumArt.albumArt
-            }
-
             anchors.fill: albumArt
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenter: albumArt.verticalCenter
             visible: (albumArt.animating || albumArt.hasImage) && !softwareRendering
 
-            layer.enabled: !softwareRendering
-            layer.effect: HueSaturation {
-                cached: true
-
-                lightness: -0.2
-                saturation: 0.9
-
-                layer.enabled: true
-                layer.effect: FastBlur {
-                    cached: true
-
-                    radius: 128
-
-                    transparentBorder: true
-                }
+            Image {
+                id: bgImage
+                anchors.fill: parent
+                source: albumArt.albumArt.currentItem?.source ?? ""
+                fillMode: Image.PreserveAspectCrop
+                opacity: 0.3
+                visible: source.toString() !== ""
             }
-            // use State to avoid unnecessary reevaluation of width and height
-            states: State {
-                name: "albumArtReady"
-                when: backgroundImage.visible && shaderEffectSource.sourceItem.currentItem?.paintedWidth > 0
-                PropertyChanges {
-                    target: backgroundImage
-                    scaleFactor: Math.max(parent.width / shaderEffectSource.sourceItem.currentItem.paintedWidth, parent.height / shaderEffectSource.sourceItem.currentItem.paintedHeight)
-                    width: Math.round(shaderEffectSource.sourceItem.currentItem.paintedWidth)
-                    height: Math.round(shaderEffectSource.sourceItem.currentItem.paintedHeight)
-                }
-                PropertyChanges {
-                    target: shaderEffectSource
-                    // HACK: Fix background ratio when DPI > 1
-                    sourceRect: Qt.rect(0, 0, shaderEffectSource.sourceItem.width, shaderEffectSource.sourceItem.height)
-                }
+
+            // Dark overlay to simulate blur effect
+            Rectangle {
+                anchors.fill: parent
+                color: Qt.rgba(0, 0, 0, 0.4)
             }
         }
 

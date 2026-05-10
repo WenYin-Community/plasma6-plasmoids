@@ -1,9 +1,7 @@
-import QtQuick 2.15
-import QtQuick.Layouts 1.15
-//import QtGraphicalEffects 1.15
+import QtQuick
+import QtQuick.Layouts
 import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami as Kirigami
-import Qt5Compat.GraphicalEffects
 
 
 Item

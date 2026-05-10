@@ -1,7 +1,6 @@
-import QtQuick 2.15
-import QtQml 2.15
-import QtQuick.Layouts 1.15
-import Qt5Compat.GraphicalEffects
+import QtQuick
+import QtQml
+import QtQuick.Layouts
 import org.kde.plasma.plasmoid
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components as PlasmaComponents
@@ -69,9 +68,6 @@ Rectangle {
         
         anchors.fill: parent
         anchors.margins: 0
-        layer.enabled: true
-
-        opacity: 0.1 // This controls the opcity of the shadow
         clip: true
 
         /*
@@ -85,15 +81,17 @@ Rectangle {
             color: root.themeBgColor
             radius: cornerRadius
         }
-        DropShadow {
+
+        // Simple shadow using layered rectangles (Qt6 compatible)
+        Rectangle {
+            id: shadowEffect
             anchors.fill: shadowWidget
-            source: shadowWidget
-            transparentBorder: true
-            horizontalOffset: 0
-            verticalOffset: 2
-            radius: 12
-            samples: 25
-            color: "black"
+            anchors.margins: -2
+            color: "transparent"
+            border.color: Qt.rgba(0, 0, 0, 0.15)
+            border.width: 2
+            radius: cornerRadius + 2
+            z: -1
         }
     }
 
