@@ -66,6 +66,72 @@ KCM.SimpleKCM {
     property color cfg_slidersColor: Plasmoid.configuration.slidersColor
     property alias cfg_usePlasmaSliders: usePlasmaSliders.checked
 
+    // Default 属性声明（消除 Plasma 6 警告）
+    property int cfg_scaleDefault: 100
+    property int cfg_layoutDefault: 0
+    property bool cfg_transparencyDefault: false
+    property bool cfg_showKDEConnectDefault: true
+    property bool cfg_showNightLightDefault: true
+    property bool cfg_showColorSwitcherDefault: true
+    property bool cfg_showVolumeDefault: true
+    property bool cfg_showBrightnessDefault: true
+    property bool cfg_showMediaPlayerDefault: true
+    property bool cfg_showAvatarDefault: true
+    property bool cfg_showBatteryDefault: true
+    property bool cfg_showSessionActionsDefault: true
+    property bool cfg_showScreenshotDefault: false
+    property bool cfg_showCmd1Default: false
+    property bool cfg_showCmd2Default: false
+    property bool cfg_showPercentageDefault: false
+    property string cfg_iconDefault: "configure"
+    property bool cfg_useCustomButtonImageDefault: false
+    property string cfg_customButtonImageDefault: ""
+    property string cfg_cmdIcon1Default: "system-run-symbolic"
+    property string cfg_cmdRun1Default: ""
+    property string cfg_cmdTitle1Default: "Command Button"
+    property string cfg_cmdIcon2Default: "system-run-symbolic"
+    property string cfg_cmdRun2Default: ""
+    property string cfg_cmdTitle2Default: "Command Button"
+    property int cfg_transparencyLevelDefault: 40
+    property bool cfg_showBordersDefault: true
+    property bool cfg_volume_widget_flatDefault: false
+    property bool cfg_volume_widget_titleDefault: true
+    property bool cfg_volume_widget_thinDefault: false
+    property bool cfg_brightness_widget_flatDefault: false
+    property bool cfg_brightness_widget_titleDefault: true
+    property bool cfg_brightness_widget_thinDefault: false
+    property bool cfg_animationsDefault: false
+    property bool cfg_useSystemColorsOnTogglesDefault: true
+    property bool cfg_useSystemColorsOnSlidersDefault: true
+    property color cfg_toggleButtonsColorDefault: "#007aff"
+    property color cfg_toggleButtonsIconColorDefault: "#ffffff"
+    property color cfg_slidersColorDefault: "#ffffff"
+    property bool cfg_usePlasmaSlidersDefault: false
+    property bool cfg_showDnd: true
+    property bool cfg_showDndDefault: true
+    property bool cfg_isDarkTheme: false
+    property bool cfg_isDarkThemeDefault: false
+    property bool cfg_enableQuickActions: true
+    property bool cfg_enableQuickActionsDefault: true
+    property bool cfg_hideWidgetOnScreenshot: false
+    property bool cfg_hideWidgetOnScreenshotDefault: false
+    property string cfg_screenshotCommand: "spectacle"
+    property string cfg_screenshotCommandDefault: "spectacle"
+    property bool cfg_playVolumeFeedback: false
+    property bool cfg_playVolumeFeedbackDefault: false
+    property string cfg_customLayoutModel: ""
+    property string cfg_customLayoutModelDefault: ""
+    property bool cfg_preferChangeGlobalTheme: false
+    property bool cfg_preferChangeGlobalThemeDefault: false
+    property string cfg_lightTheme: "BreezeLight"
+    property string cfg_lightThemeDefault: "BreezeLight"
+    property string cfg_darkTheme: "BreezeDark"
+    property string cfg_darkThemeDefault: "BreezeDark"
+    property string cfg_lightGlobalTheme: "org.kde.breeze.desktop"
+    property string cfg_lightGlobalThemeDefault: "org.kde.breeze.desktop"
+    property string cfg_darkGlobalTheme: "org.kde.breezedark.desktop"
+    property string cfg_darkGlobalThemeDefault: "org.kde.breezedark.desktop"
+
     property int numChecked: (layout.currentIndex == 1 ? showKDEConnect.checked : showColorSwitcher.checked) + showNightLight.checked + showCmd1.checked + showCmd2.checked + showScreenshot.checked
     property int maxNum: layout.currentIndex == 0 && !showBrightness.checked ? 4 :  (layout.currentIndex == 2 || layout.currentIndex == 3 )? 6 : 2 
 
