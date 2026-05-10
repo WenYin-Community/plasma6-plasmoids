@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KdeControlStation\n"
 "Report-Msgid-Bugs-To: https://github.com/EliverLara/kde-control-station/tree/plasma6\n"
-"POT-Creation-Date: 2026-04-29 07:31+0800\n"
+"POT-Creation-Date: 2026-05-10 23:26+0800\n"
 "PO-Revision-Date: 2026-05-10 23:10+0800\n"
 "Last-Translator: wmk965 <wmk153024@gmail.com>\n"
 "Language-Team: Chinese Traditional\n"
@@ -150,6 +150,10 @@ msgid "Custom"
 msgstr "自訂佈局"
 
 #: ../contents/ui/config/configAppearance.qml
+msgid "You could edit your layout by right clicking on the widget > Edit Layout"
+msgstr "您可以透過右鍵點擊小部件 > 編輯佈局 來編輯您的佈局"
+
+#: ../contents/ui/config/configAppearance.qml
 msgid "General:"
 msgstr "一般："
 
@@ -268,6 +272,22 @@ msgstr "已斷線"
 #: ../contents/ui/layouts/components/ControlCenter/LeftColumn.qml ../contents/ui/pages/BluetoothPage.qml
 msgid "Bluetooth"
 msgstr "藍牙"
+
+#: ../contents/ui/layouts/components/Custom/Footer.qml
+msgid "Add new item"
+msgstr "新增項目"
+
+#: ../contents/ui/layouts/components/Custom/Footer.qml
+msgid "Add"
+msgstr "新增"
+
+#: ../contents/ui/layouts/components/Custom/Footer.qml
+msgid "Save"
+msgstr "儲存"
+
+#: ../contents/ui/layouts/components/Custom/Footer.qml
+msgid "Edit controls"
+msgstr "編輯控制項"
 
 #: ../contents/ui/main.qml
 msgid "Edit Layout"
@@ -1025,26 +1045,5 @@ msgstr "長時間使用此功能會損壞裝置的揚聲器。請僅在需要聽
 msgid "Raise maximum volume"
 msgstr "提高最大音量"
 
-#: ../contents/ui/config/configAppearance.qml
-msgid "You could edit your layout by right clicking on the widget > Edit Layout"
-msgstr "您可以透過右鍵點擊小部件 > 編輯佈局 來編輯您的佈局"
-
-#: ../contents/ui/layouts/components/Custom/Footer.qml
-msgid "Add new item"
-msgstr "新增項目"
-
-#: ../contents/ui/layouts/components/Custom/Footer.qml
-msgid "Add"
-msgstr "新增"
-
-#: ../contents/ui/layouts/components/Custom/Footer.qml
-msgid "Save"
-msgstr "儲存"
-
-#: ../contents/ui/layouts/components/Custom/Footer.qml
-msgid "Edit controls"
-msgstr "編輯控制項"
-
-#: ../contents/ui/layouts/components/Custom/Model.qml
-msgid "cmd"
-msgstr "命令"
+#~ msgid "cmd"
+#~ msgstr "命令"

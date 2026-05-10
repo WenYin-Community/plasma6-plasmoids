@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: KdeControlStation\n"
 "Report-Msgid-Bugs-To: https://github.com/EliverLara/kde-control-station/tree/"
 "plasma6\n"
-"POT-Creation-Date: 2026-04-29 07:31+0800\n"
+"POT-Creation-Date: 2026-05-10 23:26+0800\n"
 "PO-Revision-Date: 2025-08-27 23:11+0900\n"
 "Last-Translator: Hyeonwol123 <hyeonwol12345@kakao.com>\n"
 "Language-Team: \n"
@@ -160,6 +160,11 @@ msgid "Custom"
 msgstr ""
 
 #: ../contents/ui/config/configAppearance.qml
+msgid ""
+"You could edit your layout by right clicking on the widget > Edit Layout"
+msgstr ""
+
+#: ../contents/ui/config/configAppearance.qml
 msgid "General:"
 msgstr "일반:"
 
@@ -283,6 +288,22 @@ msgstr "연결되지 않음"
 #: ../contents/ui/pages/BluetoothPage.qml
 msgid "Bluetooth"
 msgstr "블루투스"
+
+#: ../contents/ui/layouts/components/Custom/Footer.qml
+msgid "Add new item"
+msgstr ""
+
+#: ../contents/ui/layouts/components/Custom/Footer.qml
+msgid "Add"
+msgstr ""
+
+#: ../contents/ui/layouts/components/Custom/Footer.qml
+msgid "Save"
+msgstr ""
+
+#: ../contents/ui/layouts/components/Custom/Footer.qml
+msgid "Edit controls"
+msgstr ""
 
 #: ../contents/ui/main.qml
 msgid "Edit Layout"
