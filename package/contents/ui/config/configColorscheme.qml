@@ -80,7 +80,7 @@ KCM.SimpleKCM {
 
     Connections {
         target: executable
-        onColorsListReady: {
+        function onColorsListReady(colors) {
             cBoxA.model = colors
             cBoxB.model = colors
             // look for color in list

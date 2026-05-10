@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: KdeControlStation\n"
 "Report-Msgid-Bugs-To: https://github.com/EliverLara/kde-control-station/tree/plasma6\n"
 "POT-Creation-Date: 2026-04-29 07:31+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2026-05-10 23:10+0800\n"
+"Last-Translator: wmk965 <wmk153024@gmail.com>\n"
+"Language-Team: Chinese Traditional\n"
 "Language: zh_Hant\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ../metadata.json
 msgid "KDE control station"
@@ -40,7 +40,7 @@ msgstr "截圖"
 
 #: ../contents/config/config.qml
 msgid "Quick Actions"
-msgstr ""
+msgstr "快速操作"
 
 #: ../contents/config/config.qml
 msgid "Support"
@@ -271,7 +271,7 @@ msgstr "藍牙"
 
 #: ../contents/ui/main.qml
 msgid "Edit Layout"
-msgstr ""
+msgstr "編輯佈局"
 
 #: ../contents/ui/pages/BatteryPage.qml
 msgid "The battery applet has enabled suppressing sleep and screen locking"
@@ -1024,3 +1024,27 @@ msgstr "長時間使用此功能會損壞裝置的揚聲器。請僅在需要聽
 #: ../contents/ui/pages/VolumePage.qml
 msgid "Raise maximum volume"
 msgstr "提高最大音量"
+
+#: ../contents/ui/config/configAppearance.qml
+msgid "You could edit your layout by right clicking on the widget > Edit Layout"
+msgstr "您可以透過右鍵點擊小部件 > 編輯佈局 來編輯您的佈局"
+
+#: ../contents/ui/layouts/components/Custom/Footer.qml
+msgid "Add new item"
+msgstr "新增項目"
+
+#: ../contents/ui/layouts/components/Custom/Footer.qml
+msgid "Add"
+msgstr "新增"
+
+#: ../contents/ui/layouts/components/Custom/Footer.qml
+msgid "Save"
+msgstr "儲存"
+
+#: ../contents/ui/layouts/components/Custom/Footer.qml
+msgid "Edit controls"
+msgstr "編輯控制項"
+
+#: ../contents/ui/layouts/components/Custom/Model.qml
+msgid "cmd"
+msgstr "命令"

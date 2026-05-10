@@ -7,6 +7,7 @@ import QtQuick.Dialogs
 import org.kde.kirigami as Kirigami
 import org.kde.iconthemes as KIconThemes
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.plasmoid
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.kcmutils as KCM
 
@@ -242,12 +243,12 @@ KCM.SimpleKCM {
             onActivated: toggleLayoutDefaults(index)
         }
 
-        Kirigami.InlineMessage {
-            id: inlineMessage
-            Layout.fillWidth: true
-            text: "You could edit your layout by right clicking on the widget > Edit Layout"
-            visible: layout.currentIndex === 4
-        }
+         Kirigami.InlineMessage {
+             id: inlineMessage
+             Layout.fillWidth: true
+             text: i18n("You could edit your layout by right clicking on the widget > Edit Layout")
+             visible: layout.currentIndex === 4
+         }
 
         Item {
             Kirigami.FormData.isSection: true
@@ -378,7 +379,7 @@ KCM.SimpleKCM {
                 id: cmdIcon1
                 Kirigami.FormData.label: i18n("Icon:")
                 icon.width: Kirigami.Units.iconSizes.medium
-                icon.height: icon.width
+                icon.height: Kirigami.Units.iconSizes.medium
                 onClicked: {
                     iconDialog.open()
                     iconDialog.target= cmdIcon1
@@ -404,7 +405,7 @@ KCM.SimpleKCM {
                 id: cmdIcon2
                 Kirigami.FormData.label: i18n("Icon:")
                 icon.width: Kirigami.Units.iconSizes.medium
-                icon.height: icon.width
+                icon.height: Kirigami.Units.iconSizes.medium
                 onClicked: {
                     iconDialog.open()
                     iconDialog.target= cmdIcon2

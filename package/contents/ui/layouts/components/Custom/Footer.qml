@@ -12,7 +12,7 @@ RowLayout {
     property bool addingNewWidget: false
 
     PlasmaComponents.Button {
-        text: "Add new item"
+        text: i18n("Add new item")
         visible: root.editingLayout
         font.pointSize: 10
         onClicked: {
@@ -30,7 +30,7 @@ RowLayout {
 
     PlasmaComponents.Button {
         id: addWidgetBtn
-        text: "Add"
+        text: i18n("Add")
         visible: root.editingLayout && addingNewWidget
         font.pointSize: 10
         onClicked: {
@@ -47,7 +47,7 @@ RowLayout {
         Layout.fillWidth: root.editingLayout ? true : false
         
         width: 100
-        text: root.editingLayout ? "Save" : "Edit controls"
+        text: root.editingLayout ? i18n("Save") : i18n("Edit controls")
         font.pointSize: 10
 
         property string datastore: ""        
