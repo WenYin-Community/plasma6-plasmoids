@@ -8,13 +8,61 @@ import org.kde.kcmutils as KCM
 import org.kde.kirigami as Kirigami
 
 KCM.SimpleKCM {
-    property alias cfg_lightTheme: labelA.text // labels to store previous choices (ComboBox doesn't like to do it by itself)
-    property alias cfg_darkTheme:  labelB.text // labels to store previous choices (ComboBox doesn't like to do it by itself)
-
-    property alias cfg_lightGlobalTheme: labelC.text// labels to store previous choices (ComboBox doesn't like to do it by itself)
-    property alias cfg_darkGlobalTheme:  labelD.text // labels to store previous choices (ComboBox doesn't like to do it by itself)
-    
+    // 声明所有配置属性以消除 "SimpleKCM does not have a property" 警告
+    property alias cfg_lightTheme: labelA.text
+    property alias cfg_darkTheme: labelB.text
+    property alias cfg_lightGlobalTheme: labelC.text
+    property alias cfg_darkGlobalTheme: labelD.text
     property alias cfg_preferChangeGlobalTheme: preferChangeGlobalTheme.checked
+
+    // 以下属性仅用于消除警告，configColorscheme 页面不使用它们
+    property int cfg_scale: 100
+    property int cfg_layout: 0
+    property bool cfg_animations: false
+    property bool cfg_transparency: false
+    property bool cfg_showBorders: true
+    property int cfg_transparencyLevel: 40
+    property bool cfg_isDarkTheme: false
+    property string cfg_icon: "configure"
+    property bool cfg_useCustomButtonImage: false
+    property string cfg_customButtonImage: ""
+    property bool cfg_showKDEConnect: true
+    property bool cfg_showNightLight: true
+    property bool cfg_showColorSwitcher: true
+    property bool cfg_showDnd: true
+    property bool cfg_showVolume: true
+    property bool cfg_showBrightness: true
+    property bool cfg_showMediaPlayer: true
+    property bool cfg_showAvatar: true
+    property bool cfg_showBattery: true
+    property bool cfg_showSessionActions: true
+    property bool cfg_showScreenshot: false
+    property bool cfg_showCmd1: false
+    property bool cfg_showCmd2: false
+    property bool cfg_showPercentage: false
+    property string cfg_cmdRun1: ""
+    property string cfg_cmdTitle1: ""
+    property string cfg_cmdIcon1: ""
+    property string cfg_cmdRun2: ""
+    property string cfg_cmdTitle2: ""
+    property string cfg_cmdIcon2: ""
+    property bool cfg_volume_widget_flat: false
+    property bool cfg_volume_widget_title: true
+    property bool cfg_volume_widget_thin: false
+    property bool cfg_brightness_widget_flat: false
+    property bool cfg_brightness_widget_title: true
+    property bool cfg_brightness_widget_thin: false
+    property bool cfg_useSystemColorsOnToggles: true
+    property bool cfg_useSystemColorsOnSliders: true
+    property color cfg_toggleButtonsColor: "#007aff"
+    property color cfg_toggleButtonsIconColor: "#ffffff"
+    property color cfg_slidersColor: "#ffffff"
+    property string cfg_customLayoutModel: "null"
+    property bool cfg_usePlasmaSliders: false
+    property bool cfg_hideWidgetOnScreenshot: false
+    property string cfg_screenshotCommand: "spectacle"
+    property bool cfg_enableQuickActions: true
+    property bool cfg_playVolumeFeedback: false
 
     property string command: preferChangeGlobalTheme.checked ? 
                             "plasma-apply-lookandfeel --list" : 

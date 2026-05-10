@@ -1,14 +1,6 @@
-<div align="center">
+
 
 # KDE Control Station
-
-A beautiful and modern configuration center for KDE plasma based on the awesome [kde_controlcentre](https://github.com/Prayag2/kde_controlcentre) by [Prayag2](https://github.com/Prayag2/)
-
-![main-widget](assets/KCS2.0.png)
-
-![layouts](assets/layouts.png)
-![layouts](assets/config.png)
-</div>
 
 ## Key features
 
