@@ -1,6 +1,6 @@
-import QtQml 2.15
-import QtQuick 2.15
-import QtQuick.Layouts 1.15
+import QtQml
+import QtQuick
+import QtQuick.Layouts
 import "../lib" as Lib
 import "../js/funcs.js" as Funcs
 import org.kde.notificationmanager as NotificationManager

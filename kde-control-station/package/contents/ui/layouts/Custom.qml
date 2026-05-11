@@ -1,7 +1,7 @@
-import QtQml 2.15
-import QtQuick 2.15
-import QtQuick.Layouts 1.15
-import QtQuick.Controls 2.0
+import QtQml
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
 import org.kde.plasma.components as PlasmaComponents
 import "../components" as Components
 import "components/Custom" as LayoutComponents 

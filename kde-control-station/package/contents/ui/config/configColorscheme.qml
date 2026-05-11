@@ -1,9 +1,9 @@
-import QtQml 2.0
-import QtQuick 2.0
-import QtQuick.Controls 2.0
-import QtQuick.Layouts 1.0
+import QtQml
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 import org.kde.plasma.plasma5support as Plasma5Support
-import org.kde.plasma.extras 2.0 as PlasmaExtras
+import org.kde.plasma.extras as PlasmaExtras
 import org.kde.kcmutils as KCM
 import org.kde.kirigami as Kirigami
 

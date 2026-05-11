@@ -1,6 +1,6 @@
-import QtQuick 2.15
-import QtQuick.Controls 2.0
-import QtQuick.Layouts 1.15
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 import org.kde.kcmutils as KCM// KCMLauncher
 import org.kde.plasma.components as PlasmaComponents3
 import org.kde.plasma.core as PlasmaCore

@@ -1,9 +1,9 @@
-import QtQml 2.0
-import QtQuick 2.0
-import QtQuick.Layouts 1.15
+import QtQml
+import QtQuick
+import QtQuick.Layouts
 
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.bluezqt 1.0 as BluezQt
+import org.kde.plasma.core as PlasmaCore
+import org.kde.bluezqt as BluezQt
 import org.kde.kirigami as Kirigami
 import org.kde.kcmutils as KCM
 

@@ -1,8 +1,8 @@
-import QtQuick 2.15
-import QtQuick.Controls 2.15
-import org.kde.plasma.plasmoid 2.0
+import QtQuick
+import QtQuick.Controls
+import org.kde.plasma.plasmoid
 import org.kde.kcmutils as KCM
-import org.kde.kirigami 2.3 as Kirigami
+import org.kde.kirigami as Kirigami
 
 KCM.SimpleKCM {
 

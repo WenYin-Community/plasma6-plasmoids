@@ -1,7 +1,7 @@
-import QtQml 2.15
-import QtQuick 2.15
+import QtQml
+import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls 2.0
+import QtQuick.Controls
 import "../components" as Components
 import "components/ControlCenter" as LayoutComponents 
 ColumnLayout {
