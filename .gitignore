@@ -1,1 +1,9 @@
+# kde-control-station
 kde-control-station/package/contents/ui/js/helpers.js
+
+# launchpad-plasma
+launchpad-plasma/package/contents/ui/js/helpers.js
+
+# General
+*.plasmoid
+*.mo
