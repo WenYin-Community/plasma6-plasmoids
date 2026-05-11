@@ -1,0 +1,53 @@
+# Plasma 6 小部件集合
+
+[English](README.md) | [中文](README_zh.md)
+
+KDE Plasma 6 小部件（plasmoids）集合。
+
+## 项目列表
+
+### 1. KDE 控制中心
+
+KDE Plasma 6 现代化控制中心小部件。
+
+**功能特性：**
+- 5 种布局变体（默认、控制中心、扁平、Tahoe、自定义）
+- 电池、网络、蓝牙、音量、亮度小部件
+- 会话操作（挂起、重启、关机、休眠、锁定、注销）
+- 深色/浅色模式，支持全局主题切换
+- 夜灯控制、配色方案切换
+- 媒体播放器，支持专辑封面
+- 自定义命令按钮
+- 支持 11 种语言
+
+**依赖项：**
+- KDE Plasma ≥ 6.0
+- 软件包：`plasma-nm`、`kdeplasma-addons`、`plasma-pa`
+
+**安装方法：**
+
+```bash
+git clone https://github.com/WenYin-Community/plasma6-plasmoids.git
+cd plasma6-plasmoids/kde-control-station
+sh ./build
+```
+
+通过系统设置 → 外观 → 小部件 → 从本地文件安装。
+
+### 2. Launchpad Plasma
+
+可配置的应用程序图标网格，无收藏面板。
+
+**功能特性：**
+- 应用程序启动器网格
+- 可自定义布局
+- 无收藏面板
+
+**安装方法：**
+
+将 `launchpad-plasma/` 复制到 `~/.local/share/plasma/plasmoids/tt.launchpadPlasma/`
+
+## 许可证
+
+- kde-control-station：[GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)
+- launchpad-plasma：[GPL-2.0+](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
