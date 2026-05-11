@@ -1,0 +1,70 @@
+name: Release Plasmoids
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install packaging tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gettext zip
+
+      - name: Package plasmoids
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mkdir -p dist
+
+          kcs_version="$(python3 -c 'import json; print(json.load(open("kde-control-station/package/metadata.json"))["KPlugin"]["Version"])')"
+          launchpad_version="$(python3 -c 'import json; print(json.load(open("launchpad-plasma/metadata.json"))["KPlugin"]["Version"])')"
+
+          for po in kde-control-station/package/translate/*.po; do
+            [ -f "$po" ] || continue
+            locale="$(basename "$po" .po)"
+            mo_dir="kde-control-station/package/contents/locale/$locale/LC_MESSAGES"
+            mkdir -p "$mo_dir"
+            msgfmt -o "$mo_dir/plasma_applet_KdeControlStation.mo" "$po"
+          done
+
+          for po in launchpad-plasma/contents/locale/*/LC_MESSAGES/*.po; do
+            [ -f "$po" ] || continue
+            mo="${po%.po}.mo"
+            msgfmt -o "$mo" "$po"
+          done
+
+          (
+            cd kde-control-station/package
+            zip -qr "../../dist/KdeControlStation-v${kcs_version}.plasmoid" . -x "translate/*"
+          )
+
+          (
+            cd launchpad-plasma
+            zip -qr "../dist/tt.launchpadPlasma-v${launchpad_version}.plasmoid" . -x "README.md"
+          )
+
+          ls -lh dist
+
+      - name: Upload workflow artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: plasmoid-packages
+          path: dist/*.plasmoid
+
+      - name: Upload release assets
+        if: github.event_name == 'release'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "${{ github.event.release.tag_name }}" dist/*.plasmoid --clobber

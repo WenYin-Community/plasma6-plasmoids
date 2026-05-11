@@ -5,17 +5,23 @@
       {
         "Email": "taylan@tatli.me",
         "Name": "Taylan Tatlı"
+      },
+      {
+        "Name": "WenYin-Community"
       }
     ],
-    "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=plasmashell&component=Application%20Menu%20(Kicker)",
+    "BugReportUrl": "https://github.com/WenYin-Community/plasma6-plasmoids/issues",
     "Category": "Application Launchers",
     "Description": "Modified Launchpad Plasma - Configurable grid of application icons without favorites panel.",
+    "Description[zh_CN]": "修改版 Launchpad Plasma - 可配置的应用程序图标网格，无收藏面板。",
     "EnabledByDefault": true,
     "Icon": "start-here-kde",
     "Id": "tt.launchpadPlasma",
     "License": "GPL-2.0+",
-    "Name": "Launchpad Plasma Mod",
-    "Website": "https://kde.org/plasma-desktop"
+    "Name": "Launchpad Plasma",
+    "Name[zh_CN]": "Launchpad 启动器",
+    "Version": "1.19",
+    "Website": "https://github.com/WenYin-Community/plasma6-plasmoids"
   },
   "X-Plasma-API-Minimum-Version": "6.0",
   "X-Plasma-Provides": ["org.kde.plasma.launchermenu"]

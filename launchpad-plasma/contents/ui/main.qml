@@ -40,11 +40,14 @@ PlasmoidItem {
 
     property QtObject globalFavorites: rootModel.favoritesModel
     property QtObject systemFavorites: rootModel.systemFavoritesModel
+    property QtObject applicationMenuFavorites: applicationMenuFavoritesModel
 
     Plasmoid.icon: Plasmoid.configuration.useCustomButtonImage ? Plasmoid.configuration.customButtonImage : Plasmoid.configuration.icon
 
     onSystemFavoritesChanged: {
-        systemFavorites.favorites = Plasmoid.configuration.favoriteSystemActions;
+        if (systemFavorites) {
+            systemFavorites.favorites = Plasmoid.configuration.favoriteSystemActions;
+        }
     }
 
     function action_menuedit() {
@@ -97,7 +100,9 @@ PlasmoidItem {
         target: systemFavorites
 
         function onFavoritesChanged() {
-            Plasmoid.configuration.favoriteSystemActions = target.favorites;
+            if (target) {
+                Plasmoid.configuration.favoriteSystemActions = target.favorites;
+            }
         }
     }
 
@@ -105,7 +110,9 @@ PlasmoidItem {
         target: Plasmoid.configuration
 
         function onFavoriteSystemActionsChanged() {
-            systemFavorites.favorites = Plasmoid.configuration.favoriteSystemActions;
+            if (systemFavorites) {
+                systemFavorites.favorites = Plasmoid.configuration.favoriteSystemActions;
+            }
         }
     }
 
@@ -141,6 +148,17 @@ PlasmoidItem {
             }
 
             return results;
+        }
+    }
+
+    Kicker.KAStatsFavoritesModel {
+        id: applicationMenuFavoritesModel
+        enabled: true
+        maxFavorites: -1
+
+        Component.onCompleted: {
+            initForClient("org.kde.plasma.kicker.favorites.instance-287")
+            refresh()
         }
     }
 
@@ -242,7 +260,9 @@ PlasmoidItem {
         kicker.hideOnWindowDeactivate = true;
 
         updateSvgMetrics();
-        PlasmaCore.Theme.themeChanged.connect(updateSvgMetrics);
+        if (PlasmaCore.Theme && PlasmaCore.Theme.themeChanged) {
+            PlasmaCore.Theme.themeChanged.connect(updateSvgMetrics);
+        }
 
         rootModel.refreshed.connect(reset);
 

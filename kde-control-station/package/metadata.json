@@ -40,7 +40,7 @@
 		"ServiceTypes": [
 			"Plasma/Applet"
 		],
-		"Version": "2.8.0",
+		"Version": "1.19",
 		"Website": "https://github.com/WenYin-Community/plasma6-plasmoids/tree/plasma6"
 	},
 	"X-Plasma-API-Minimum-Version": "6.0",

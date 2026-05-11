@@ -21,8 +21,7 @@ Item {
         && Plasmoid.configuration.customButtonImage.length !== 0)
 
     readonly property Component dashWindowComponent: kicker.isDash ? Qt.createComponent(Qt.resolvedUrl("./DashboardRepresentation.qml"), root) : null
-    readonly property Kicker.DashboardWindow dashWindow: dashWindowComponent && dashWindowComponent.status === Component.Ready
-        ? dashWindowComponent.createObject(root, { visualParent: root }) : null
+    property Kicker.DashboardWindow dashWindow: null
 
     onWidthChanged: updateSizeHints()
     onHeightChanged: updateSizeHints()
@@ -45,6 +44,19 @@ Item {
         } else {
             root.Layout.minimumWidth = Kirigami.Units.iconSizes.huge;
             root.Layout.minimumHeight = Kirigami.Units.iconSizes.huge;
+        }
+    }
+
+    function toggleDashWindow() {
+        if (!dashWindow && dashWindowComponent && dashWindowComponent.status === Component.Ready) {
+            dashWindow = dashWindowComponent.createObject(root, { visualParent: root });
+        } else if (dashWindowComponent && dashWindowComponent.status === Component.Error) {
+            console.warn("Launchpad dashboard failed to load:", dashWindowComponent.errorString());
+        }
+
+        if (dashWindow) {
+            dashWindow.toggle();
+            justOpenedTimer.start();
         }
     }
 
@@ -99,8 +111,7 @@ Item {
 
         onClicked: {
             if (kicker.isDash) {
-                root.dashWindow.toggle();
-                justOpenedTimer.start();
+                root.toggleDashWindow();
             } else {
                 kicker.expanded = !wasExpanded;
             }
@@ -109,11 +120,10 @@ Item {
 
     Connections {
         target: Plasmoid
-        enabled: kicker.isDash && root.dashWindow !== null
+        enabled: kicker.isDash
 
         function onActivated() {
-            root.dashWindow.toggle();
-            justOpenedTimer.start();
+            root.toggleDashWindow();
         }
     }
 }

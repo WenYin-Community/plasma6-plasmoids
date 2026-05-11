@@ -36,16 +36,23 @@ Install via System Settings → Appearance → Widgets → Install from local fi
 
 ### 2. Launchpad Plasma
 
-A configurable grid of application icons without favorites panel.
+A configurable application launcher grid for KDE Plasma 6.
 
 **Features:**
 - Application launcher grid
 - Customizable layout
-- No favorites panel
+- Bottom favorites row synced from the existing KDE Application Menu favorites
+- Separate system action buttons for power/session actions
 
 **Installation:**
 
-Copy `launchpad-plasma/` to `~/.local/share/plasma/plasmoids/tt.launchpadPlasma/`
+Install a local `.plasmoid` package:
+
+```bash
+kpackagetool6 -i tt.launchpadPlasma-v1.19.plasmoid
+```
+
+For development, copy `launchpad-plasma/` to `~/.local/share/plasma/plasmoids/tt.launchpadPlasma/` and restart Plasma Shell.
 
 ## License
 

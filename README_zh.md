@@ -36,16 +36,23 @@ sh ./build
 
 ### 2. Launchpad Plasma
 
-可配置的应用程序图标网格，无收藏面板。
+KDE Plasma 6 可配置的应用程序启动器网格。
 
 **功能特性：**
 - 应用程序启动器网格
 - 可自定义布局
-- 无收藏面板
+- 底部收藏应用栏，同步现有 KDE Application Menu 收藏应用
+- 独立的电源/会话系统操作按钮
 
 **安装方法：**
 
-将 `launchpad-plasma/` 复制到 `~/.local/share/plasma/plasmoids/tt.launchpadPlasma/`
+使用本地 `.plasmoid` 安装包：
+
+```bash
+kpackagetool6 -i tt.launchpadPlasma-v1.19.plasmoid
+```
+
+开发调试时，可将 `launchpad-plasma/` 复制到 `~/.local/share/plasma/plasmoids/tt.launchpadPlasma/`，然后重启 Plasma Shell。
 
 ## 许可证
 

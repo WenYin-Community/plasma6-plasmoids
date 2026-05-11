@@ -66,12 +66,12 @@ Kicker.DashboardWindow {
                          Math.floor(height / cellSize)
 
     property int actualRows: Plasmoid.configuration.useCustomGridSize ? 
-                            Math.min(Plasmoid.configuration.gridRows, Math.floor(height*0.7 / cellSize)) :
-                            Math.floor(height*0.7 / cellSize)
+                            Math.min(Plasmoid.configuration.gridRows, Math.floor(height*0.9 / cellSize)) :
+                            Math.floor(height*0.9 / cellSize)
 
     property int actualColumns: Plasmoid.configuration.useCustomGridSize ? 
-                               Math.min(Plasmoid.configuration.gridColumns, Math.floor(width*0.7 / cellSize)) :
-                               Math.floor(width*0.7 / cellSize)
+                               Math.min(Plasmoid.configuration.gridColumns, Math.floor(width*0.9 / cellSize)) :
+                               Math.floor(width*0.9 / cellSize)
 
     property int neededRows: {
         if (allAppsGrid.model && allAppsGrid.model.count > 0) {
@@ -83,6 +83,7 @@ Kicker.DashboardWindow {
     property int finalRows: Math.max(1, Math.min(actualRows, neededRows))
     
     property bool searching: searchField.text !== ""
+    readonly property var syncedFavoritesModel: applicationMenuFavorites && applicationMenuFavorites.count > 0 ? applicationMenuFavorites : globalFavorites
 
     //keyEventProxy: searchField
     backgroundColor:  "transparent"
@@ -127,6 +128,7 @@ Kicker.DashboardWindow {
 
         allAppsGrid.currentIndex = -1
         systemFavoritesGrid.currentIndex = -1;
+        favoritesGrid.currentIndex = -1;
 
         allAppsGrid.forceLayout()
 
@@ -300,10 +302,10 @@ Kicker.DashboardWindow {
             height: (root.finalRows * root.cellSize) + Kirigami.Units.largeSpacing * 2
             anchors{
                 horizontalCenter: parent.horizontalCenter
+                horizontalCenterOffset: Plasmoid.configuration.showSystemIcons === 1 ?
+                                        -(systemFavoritesGrid.width + Kirigami.Units.largeSpacing) / 2 : 0
                 verticalCenter: parent.verticalCenter
-                verticalCenterOffset: (searchField.height + searchField.anchors.topMargin) / 2 - 
-                                     (Plasmoid.configuration.showSystemIcons === 1 ? 
-                                      (systemFavoritesGrid.height + systemFavoritesGrid.anchors.bottomMargin) / 2 : 0)
+                verticalCenterOffset: (searchField.height + searchField.anchors.topMargin) / 2
             }
 
             initialItem:           Column {
@@ -428,12 +430,12 @@ Kicker.DashboardWindow {
         ItemGridView {
             id: systemFavoritesGrid
             visible: Plasmoid.configuration.showSystemIcons === 1
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: Kirigami.Units.largeSpacing
-            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.right: parent.right
+            anchors.rightMargin: Kirigami.Units.largeSpacing
+            anchors.verticalCenter: parent.verticalCenter
             clip: true
-            width: systemFavoritesGrid.model ? Math.min(Math.floor((root.width*0.85)/cellWidth)*cellWidth, systemFavoritesGrid.model.count*cellWidth) : 0
-            height: cellHeight
+            width: cellWidth
+            height: systemFavoritesGrid.model ? Math.min(Math.floor((root.height*0.7)/cellHeight)*cellHeight, systemFavoritesGrid.model.count*cellHeight) : 0
             cellWidth: iconSize + Kirigami.Units.largeSpacing * 2
             cellHeight: cellWidth
             iconSize: root.systemIconSize
@@ -452,6 +454,56 @@ Kicker.DashboardWindow {
                             }
             onKeyNavUp: {
                 systemFavoritesGrid.focus = false
+                if(root.searching){
+                    mainView.currentItem.tryActivate(0,0)
+                    mainView.currentItem.forceActiveFocus()
+                }
+                else{
+                    allAppsGrid.tryActivate(0,0)
+                    allAppsGrid.forceActiveFocus()
+                }
+            }
+        }
+
+        // 常用应用图标 - 底部水平布局
+        Rectangle{
+            anchors.centerIn: favoritesGrid
+            height: favoritesGrid.height + Kirigami.Units.largeSpacing
+            width: favoritesGrid.width + Kirigami.Units.largeSpacing
+            color: Kirigami.Theme.backgroundColor
+            radius: 10
+            opacity: 0.6
+            z:1
+            visible: favoritesGrid.count > 0
+        }
+
+        ItemGridView {
+            id: favoritesGrid
+            visible: count > 0
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: Kirigami.Units.largeSpacing
+            anchors.horizontalCenter: parent.horizontalCenter
+            clip: true
+            width: favoritesGrid.model ? Math.min(Math.floor((root.width*0.85)/cellWidth)*cellWidth, favoritesGrid.model.count*cellWidth) : 0
+            height: cellHeight
+            cellWidth: iconSize + Kirigami.Units.largeSpacing * 2
+            cellHeight: cellWidth
+            iconSize: root.systemIconSize
+            z:2
+            showLabels: false
+            model: root.syncedFavoritesModel
+            dragEnabled: false
+            dropEnabled: false
+            verticalScrollBarPolicy: PlasmaComponents.ScrollBar.AlwaysOff
+            Keys.onPressed: event => {
+                                if (event.key === Qt.Key_Tab) {
+                                    event.accepted = true;
+                                    favoritesGrid.focus = false
+                                    searchField.focus = true
+                                }
+                            }
+            onKeyNavUp: {
+                favoritesGrid.focus = false
                 if(root.searching){
                     mainView.currentItem.tryActivate(0,0)
                     mainView.currentItem.forceActiveFocus()

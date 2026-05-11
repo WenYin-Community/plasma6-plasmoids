@@ -1,0 +1,204 @@
+# Chinese (Simplified) translation for launchpad-plasma
+# SPDX-License-Identifier: GPL-2.0-or-later
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: launchpad-plasma\n"
+"Report-Msgid-Bugs-To: https://github.com/WenYin-Community/plasma6-plasmoids/issues\n"
+"POT-Creation-Date: 2024-01-01 00:00+0000\n"
+"PO-Revision-Date: 2024-01-01 00:00+0000\n"
+"Last-Translator: WenYin-Community\n"
+"Language-Team: Chinese (Simplified)\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: contents/ui/ConfigGeneral.qml:59
+msgid "Icon:"
+msgstr "图标:"
+
+#: contents/ui/ConfigGeneral.qml:139
+msgctxt "@item:inmenu Open icon chooser dialog"
+msgid "Choose…"
+msgstr "选择..."
+
+#: contents/ui/ConfigGeneral.qml:144
+msgctxt "@item:inmenu Reset icon to default"
+msgid "Clear Icon"
+msgstr "清除图标"
+
+#: contents/ui/ConfigGeneral.qml:162
+msgid "Show applications as:"
+msgstr "显示应用程序方式:"
+
+#: contents/ui/ConfigGeneral.qml:164
+msgid "Name only"
+msgstr "仅名称"
+
+#: contents/ui/ConfigGeneral.qml:164
+msgid "Description only"
+msgstr "仅描述"
+
+#: contents/ui/ConfigGeneral.qml:164
+msgid "Name (Description)"
+msgstr "名称 (描述)"
+
+#: contents/ui/ConfigGeneral.qml:164
+msgid "Description (Name)"
+msgstr "描述 (名称)"
+
+#: contents/ui/ConfigGeneral.qml:174
+msgid "Behavior:"
+msgstr "行为:"
+
+#: contents/ui/ConfigGeneral.qml:176
+msgid "Sort applications alphabetically"
+msgstr "按字母顺序排列应用程序"
+
+#: contents/ui/ConfigGeneral.qml:182
+msgid "Flatten sub-menus to a single level"
+msgstr "将子菜单展平为单级"
+
+#: contents/ui/ConfigGeneral.qml:188
+msgid "Show icons on the root level of the menu"
+msgstr "在菜单根级别显示图标"
+
+#: contents/ui/ConfigGeneral.qml:194
+msgid "Show categories:"
+msgstr "显示分类:"
+
+#: contents/ui/ConfigGeneral.qml:197
+msgid "Recent applications"
+msgstr "最近使用的应用程序"
+
+#: contents/ui/ConfigGeneral.qml:198
+msgid "Often used applications"
+msgstr "常用应用程序"
+
+#: contents/ui/ConfigGeneral.qml:204
+msgid "Recent files"
+msgstr "最近文件"
+
+#: contents/ui/ConfigGeneral.qml:205
+msgid "Often used files"
+msgstr "常用文件"
+
+#: contents/ui/ConfigGeneral.qml:212
+msgid "Sort items in categories by:"
+msgstr "分类排序方式:"
+
+#: contents/ui/ConfigGeneral.qml:213
+msgctxt "@item:inlistbox Sort items in categories by [Recently used | Often used]"
+msgid "Recently used"
+msgstr "最近使用"
+
+#: contents/ui/ConfigGeneral.qml:213
+msgctxt "@item:inlistbox Sort items in categories by [Recently used | Often used]"
+msgid "Often used"
+msgstr "经常使用"
+
+#: contents/ui/ConfigGeneral.qml:219
+msgid "Search:"
+msgstr "搜索:"
+
+#: contents/ui/ConfigGeneral.qml:220
+msgid "Expand search to bookmarks, files and emails"
+msgstr "将搜索扩展到书签、文件和电子邮件"
+
+#: contents/ui/ConfigGeneral.qml:226
+msgid "Align search results to bottom"
+msgstr "将搜索结果对齐到底部"
+
+#: contents/ui/ConfigGeneral.qml:231
+msgid "Apps icon size:"
+msgstr "应用图标大小:"
+
+#: contents/ui/ConfigGeneral.qml:232 contents/ui/ConfigGeneral.qml:238
+msgid "Small"
+msgstr "小"
+
+#: contents/ui/ConfigGeneral.qml:232 contents/ui/ConfigGeneral.qml:238
+msgid "Medium"
+msgstr "中"
+
+#: contents/ui/ConfigGeneral.qml:232 contents/ui/ConfigGeneral.qml:238
+msgid "Large"
+msgstr "大"
+
+#: contents/ui/ConfigGeneral.qml:232 contents/ui/ConfigGeneral.qml:238
+msgid "Huge"
+msgstr "特大"
+
+#: contents/ui/ConfigGeneral.qml:232
+msgid "HUGE"
+msgstr "超大"
+
+#: contents/ui/ConfigGeneral.qml:232 contents/ui/ConfigGeneral.qml:238
+msgid "Enormous"
+msgstr "巨大"
+
+#: contents/ui/ConfigGeneral.qml:237
+msgid "System icons size:"
+msgstr "系统图标大小:"
+
+#: contents/ui/ConfigGeneral.qml:243
+msgid "System Actions:"
+msgstr "系统操作:"
+
+#: contents/ui/ConfigGeneral.qml:244
+msgid "Hide"
+msgstr "隐藏"
+
+#: contents/ui/ConfigGeneral.qml:244
+msgid "Show"
+msgstr "显示"
+
+#: contents/ui/ConfigGeneral.qml:249
+msgid "Grid Layout Settings"
+msgstr "网格布局设置"
+
+#: contents/ui/ConfigGeneral.qml:254
+msgid "Grid Layout:"
+msgstr "网格布局:"
+
+#: contents/ui/ConfigGeneral.qml:255
+msgid "Use custom grid size"
+msgstr "使用自定义网格大小"
+
+#: contents/ui/ConfigGeneral.qml:261
+msgid "Columns:"
+msgstr "列数:"
+
+#: contents/ui/ConfigGeneral.qml:271
+msgid "Rows:"
+msgstr "行数:"
+
+#: contents/ui/ConfigGeneral.qml:280
+msgid "Appearance"
+msgstr "外观"
+
+#: contents/ui/ConfigGeneral.qml:284
+msgid "Background transparency:"
+msgstr "背景透明度:"
+
+#: contents/ui/ConfigGeneral.qml:312
+msgid "Background color:"
+msgstr "背景颜色:"
+
+#: contents/ui/ConfigGeneral.qml:313
+msgid "Use custom background color"
+msgstr "使用自定义背景颜色"
+
+#: contents/ui/ConfigGeneral.qml:321
+msgid "Custom Color:"
+msgstr "自定义颜色:"
+
+#: contents/ui/ConfigGeneral.qml:325
+msgid "Background Color"
+msgstr "背景颜色"
+
+#: contents/config/config.qml:13
+msgid "General"
+msgstr "通用"
