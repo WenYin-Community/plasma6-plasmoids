@@ -41,7 +41,7 @@
 			"Plasma/Applet"
 		],
 		"Version": "2.8.0",
-		"Website": "https://github.com/EliverLara/kde-control-station/tree/plasma6"
+		"Website": "https://github.com/WenYin-Community/plasma6-plasmoids/tree/plasma6"
 	},
 	"X-Plasma-API-Minimum-Version": "6.0",
 	"X-Plasma-MainScript": "ui/main.qml",

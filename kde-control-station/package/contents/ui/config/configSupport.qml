@@ -37,7 +37,7 @@ KCM.SimpleKCM {
         }
 
         Label {
-            text: "github.com/WenYin-Community/kde-control-station"
+            text: "github.com/WenYin-Community/plasma6-plasmoids"
             color: Kirigami.Theme.linkColor
             font: Kirigami.Theme.smallFont
             Layout.fillWidth: true
@@ -45,7 +45,7 @@ KCM.SimpleKCM {
             MouseArea {
                 anchors.fill: parent
                 cursorShape: Qt.PointingHandCursor
-                onClicked: Qt.openUrlExternally("https://github.com/WenYin-Community/kde-control-station")
+                onClicked: Qt.openUrlExternally("https://github.com/WenYin-Community/plasma6-plasmoids")
             }
         }
 

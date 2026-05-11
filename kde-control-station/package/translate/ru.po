@@ -1,42 +1,41 @@
-# Translation of KdeControlStation in French
+# Translation of KdeControlStation in Russian / Русский
 # Copyright (C) 2025
 # This file is distributed under the same license as the KdeControlStation package.
-# French Translation, 2025.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# dmali <dmali@vk.com>, 2025.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: KdeControlStation\n"
-"Report-Msgid-Bugs-To: https://github.com/EliverLara/kde-control-station/tree/plasma6\n"
+"Report-Msgid-Bugs-To: https://github.com/WenYin-Community/plasma6-plasmoids/tree/plasma6\n"
 "POT-Creation-Date: 2026-05-10 23:26+0800\n"
-"PO-Revision-Date: 2025-12-24 12:00+0100\n"
-"Last-Translator: rcspam@gmail.com\n"
-"Language-Team: French \n"
-"Language: fr\n"
+"PO-Revision-Date: 2025-12-30 07:49\n"
+"Last-Translator: dmali <dmali@example.com>\n"
+"Language-Team: Russian <ru@li.org>\n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: ../metadata.json
 msgid "KDE control station"
-msgstr "Station de contrôle KDE"
+msgstr "Панель управления KDE"
 
 #: ../metadata.json
 msgid "A modern control station for plasma based on the awesome work of prayag2!"
-msgstr "Une station de contrôle moderne pour Plasma basée sur l'excellent travail de prayag2 !"
+msgstr "Современная панель управления для Plasma, основанная на замечательной работе prayag2!"
 
 #: ../contents/config/config.qml ../contents/ui/layouts/components/ControlCenter/LeftColumn.qml
 msgid "Appearance"
-msgstr "Apparence"
+msgstr "Внешний вид"
 
 #: ../contents/config/config.qml
 msgid "Color schemes"
-msgstr "Jeux de couleurs"
+msgstr "Цветовые схемы"
 
 #: ../contents/config/config.qml ../contents/ui/components/ScreenshotBtn.qml
 msgid "Screenshot"
-msgstr "Capture d'écran"
+msgstr "Снимок экрана"
 
 #: ../contents/config/config.qml
 msgid "Quick Actions"
@@ -44,20 +43,20 @@ msgstr ""
 
 #: ../contents/config/config.qml
 msgid "Support"
-msgstr ""
+msgstr "Поддержка"
 
 #: ../contents/ui/components/Battery.qml ../contents/ui/pages/components/battery/BatteryItem.qml
 msgctxt "Placeholder is battery percentage"
 msgid "%1%"
-msgstr "%1 %"
+msgstr "%1%"
 
 #: ../contents/ui/components/ColorSchemeSwitcher.qml
 msgid "Dark Theme"
-msgstr "Thème sombre"
+msgstr "Тёмная тема"
 
 #: ../contents/ui/components/DndButton.qml
 msgid "Do Not Disturb"
-msgstr "Ne pas déranger"
+msgstr "Не беспокоить"
 
 #: ../contents/ui/components/KDEConnect.qml
 msgid "KDE Connect"
@@ -65,11 +64,11 @@ msgstr "KDE Connect"
 
 #: ../contents/ui/components/MediaPlayer.qml ../contents/ui/pages/components/mediaPlayer/AlbumArtStackView.qml
 msgid "No title"
-msgstr "Sans titre"
+msgstr "Без названия"
 
 #: ../contents/ui/components/MediaPlayer.qml ../contents/ui/pages/components/mediaPlayer/AlbumArtStackView.qml
 msgid "No media playing"
-msgstr "Aucun média en lecture"
+msgstr "Медиа не воспроизводится"
 
 #: ../contents/ui/components/NetworkBtn.qml
 msgid "Wi-Fi"
@@ -77,23 +76,23 @@ msgstr "Wi-Fi"
 
 #: ../contents/ui/components/NetworkBtn.qml
 msgid "Airplane mode"
-msgstr "Mode avion"
+msgstr "Режим полёта"
 
 #: ../contents/ui/components/NetworkBtn.qml ../contents/ui/pages/components/bluetooth/DeviceItem.qml
 msgid "Network"
-msgstr "Réseau"
+msgstr "Сеть"
 
 #: ../contents/ui/components/NightLight.qml ../contents/ui/pages/NightLightPage.qml
 msgid "Night Light"
-msgstr "Lumière nocturne"
+msgstr "Ночной свет"
 
 #: ../contents/ui/components/RedShift.qml
 msgid "Night Color"
-msgstr "Couleur nocturne"
+msgstr "Ночной цвет"
 
 #: ../contents/ui/components/SystemActions.qml
 msgid "Power Off"
-msgstr "Éteindre"
+msgstr "Выключить"
 
 #: ../contents/ui/components/UserAvatar.qml
 msgid "%1@%2"
@@ -101,53 +100,53 @@ msgstr "%1@%2"
 
 #: ../contents/ui/components/Volume.qml
 msgid "Volume"
-msgstr "Volume"
+msgstr "Громкость"
 
 #: ../contents/ui/config/components/ColorChooser.qml
 msgid "Please choose a color"
-msgstr "Veuillez choisir une couleur"
+msgstr "Пожалуйста, выберите цвет"
 
 #: ../contents/ui/config/configAppearance.qml
 msgid "Icon:"
-msgstr "Icône :"
+msgstr "Иконка:"
 
 #: ../contents/ui/config/configAppearance.qml
 msgctxt "@item:inmenu Open icon chooser dialog"
 msgid "Choose…"
-msgstr ""
+msgstr "Выбрать…"
 
 #: ../contents/ui/config/configAppearance.qml
 msgctxt "@item:inmenu Reset icon to default"
 msgid "Clear Icon"
-msgstr ""
+msgstr "Очистить иконку"
 
 #: ../contents/ui/config/configAppearance.qml
 msgid "Scale:"
-msgstr "Échelle :"
+msgstr "Масштаб:"
 
 #: ../contents/ui/config/configAppearance.qml
 msgid "Layout:"
-msgstr "Disposition :"
+msgstr "Макет:"
 
 #: ../contents/ui/config/configAppearance.qml
 msgid "KDE Control Station (Default)"
-msgstr "Station de contrôle KDE (par défaut)"
+msgstr "Панель управления KDE (По умолчанию)"
 
 #: ../contents/ui/config/configAppearance.qml
 msgid "Control Center"
-msgstr "Centre de contrôle"
+msgstr "Центр управления"
 
 #: ../contents/ui/config/configAppearance.qml
 msgid "Flat"
-msgstr "Plat"
+msgstr "Плоский"
 
 #: ../contents/ui/config/configAppearance.qml
 msgid "Tahoe"
-msgstr ""
+msgstr "Tahoe"
 
 #: ../contents/ui/config/configAppearance.qml
 msgid "Custom"
-msgstr ""
+msgstr "Пользовательский"
 
 #: ../contents/ui/config/configAppearance.qml
 msgid "You could edit your layout by right clicking on the widget > Edit Layout"
@@ -155,119 +154,119 @@ msgstr ""
 
 #: ../contents/ui/config/configAppearance.qml
 msgid "General:"
-msgstr "Général :"
+msgstr "Общие:"
 
 #: ../contents/ui/config/configAppearance.qml
 msgid "Show volume/brightness percentage"
-msgstr "Afficher le pourcentage de volume/luminosité"
+msgstr "Показывать процент громкости/яркости"
 
 #: ../contents/ui/config/configAppearance.qml
 msgid "Enable animations (Experimental)"
-msgstr "Activer les animations (expérimental)"
+msgstr "Включить анимации (Экспериментально)"
 
 #: ../contents/ui/config/configAppearance.qml
 msgid "Enable transparency"
-msgstr "Activer la transparence"
+msgstr "Включить прозрачность"
 
 #: ../contents/ui/config/configAppearance.qml
 msgid "Transparency level of widgets (%1%):"
-msgstr "Niveau de transparence des widgets (%1 %) :"
+msgstr "Уровень прозрачности виджетов (%1%):"
 
 #: ../contents/ui/config/configAppearance.qml
 msgid "Show borders aroud components"
-msgstr "Afficher les bordures autour des composants"
+msgstr "Показывать границы вокруг компонентов"
 
 #: ../contents/ui/config/configAppearance.qml
 msgid "Toggle buttons and sliders"
-msgstr "Boutons à bascule et curseurs"
+msgstr "Переключатели и ползунки"
 
 #: ../contents/ui/config/configAppearance.qml
 msgid "Toggle buttons"
-msgstr ""
+msgstr "Переключатели"
 
 #: ../contents/ui/config/configAppearance.qml
 msgid "Highlight color: "
-msgstr ""
+msgstr "Цвет выделения: "
 
 #: ../contents/ui/config/configAppearance.qml
 msgid "Icon color: "
-msgstr ""
+msgstr "Цвет иконки: "
 
 #: ../contents/ui/config/configAppearance.qml
 msgid "Sliders controls style"
-msgstr ""
+msgstr "Стиль управления ползунками"
 
 #: ../contents/ui/config/configAppearance.qml
 msgid "Sliders color: "
-msgstr ""
+msgstr "Цвет ползунков: "
 
 #: ../contents/ui/config/configAppearance.qml
 msgid "Show quick toggle buttons:"
-msgstr "Afficher les boutons de basculement rapide :"
+msgstr "Показывать быстрые переключатели:"
 
 #: ../contents/ui/config/configAppearance.qml
 msgid "Name:"
-msgstr "Nom :"
+msgstr "Имя:"
 
 #: ../contents/ui/config/configAppearance.qml
 msgid "Command:"
-msgstr "Commande :"
+msgstr "Команда:"
 
 #: ../contents/ui/config/configAppearance.qml
 msgid "Show other components:"
-msgstr "Afficher d'autres composants :"
+msgstr "Показывать другие компоненты:"
 
 #: ../contents/ui/config/configColorscheme.qml
 msgid "Change global theme instead of just changing color scheme"
-msgstr "Modifier le thème global au lieu de modifier uniquement le jeu de couleurs"
+msgstr "Изменять глобальную тему вместо только цветовой схемы"
 
 #: ../contents/ui/config/configColorscheme.qml
 msgid "Light color"
-msgstr "Couleur claire"
+msgstr "Светлый цвет"
 
 #: ../contents/ui/config/configColorscheme.qml
 msgid "Dark color"
-msgstr "Couleur sombre"
+msgstr "Тёмный цвет"
 
 #: ../contents/ui/config/configScreenshot.qml
 msgid "Hide widget before screenshotting:"
-msgstr ""
+msgstr "Скрывать виджет перед снимком экрана:"
 
 #: ../contents/ui/config/configScreenshot.qml
 msgid "Screenshot Command (default is 'spectacle'):"
-msgstr ""
+msgstr "Команда снимка экрана (по умолчанию 'spectacle'):"
 
 #: ../contents/ui/config/configSupport.qml
 msgid "I'd be very thankful if you like to support the development of this applet by donating or by simply spreading the word, TIA! :)"
-msgstr ""
+msgstr "Буду очень благодарен, если вы поддержите разработку этого апплета пожертвованием или просто распространив информацию, заранее спасибо! :)"
 
 #: ../contents/ui/js/funcs.js
 msgid "Disabled"
-msgstr "Désactivé"
+msgstr "Отключено"
 
 #: ../contents/ui/js/funcs.js
 msgid "Unavailable"
-msgstr "Indisponible"
+msgstr "Недоступно"
 
 #: ../contents/ui/js/funcs.js
 msgid "Offline"
-msgstr "Hors ligne"
+msgstr "Офлайн"
 
 #: ../contents/ui/js/funcs.js
 msgid "Not Connected"
-msgstr "Non connecté"
+msgstr "Не подключено"
 
 #: ../contents/ui/js/funcs.js
 msgid "On"
-msgstr "Activé"
+msgstr "Вкл"
 
 #: ../contents/ui/js/funcs.js ../contents/ui/pages/components/bluetooth/DeviceItem.qml ../contents/ui/pages/components/network/ConnectionItem.qml
 msgid "Connected"
-msgstr "Connecté"
+msgstr "Подключено"
 
 #: ../contents/ui/js/funcs.js
 msgid "Disconnected"
-msgstr "Déconnecté"
+msgstr "Отключено"
 
 #: ../contents/ui/layouts/components/ControlCenter/LeftColumn.qml ../contents/ui/pages/BluetoothPage.qml
 msgid "Bluetooth"
@@ -295,746 +294,748 @@ msgstr ""
 
 #: ../contents/ui/pages/BatteryPage.qml
 msgid "The battery applet has enabled suppressing sleep and screen locking"
-msgstr "L'applet de batterie a activé la suppression de la mise en veille et du verrouillage de l'écran"
+msgstr "Апплет батареи включил подавление сна и блокировки экрана"
 
 #: ../contents/ui/pages/BatteryPage.qml
 msgid "Power and Battery"
-msgstr "Alimentation et batterie"
+msgstr "Питание и батарея"
 
 #: ../contents/ui/pages/BatteryPage.qml ../contents/ui/pages/components/battery/PowerManagementItem.qml ../contents/ui/pages/components/battery/PowerProfileItem.qml
 msgid "Power Management"
-msgstr "Gestion de l'alimentation"
+msgstr "Управление питанием"
 
 #: ../contents/ui/pages/BluetoothPage.qml
 msgid "Enable"
-msgstr "Activer"
+msgstr "Включить"
 
 #: ../contents/ui/pages/BluetoothPage.qml
 msgid "Pair Device…"
-msgstr "Appairer un périphérique…"
+msgstr "Сопрячь устройство…"
 
 #: ../contents/ui/pages/BluetoothPage.qml
 msgid "No Bluetooth adapters available"
-msgstr "Aucun adaptateur Bluetooth disponible"
+msgstr "Адаптеры Bluetooth недоступны"
 
 #: ../contents/ui/pages/BluetoothPage.qml
 msgid "Bluetooth is disabled"
-msgstr "Bluetooth est désactivé"
+msgstr "Bluetooth отключён"
 
 #: ../contents/ui/pages/BluetoothPage.qml
 msgid "No devices paired"
-msgstr "Aucun périphérique appairé"
+msgstr "Нет сопряжённых устройств"
 
 #: ../contents/ui/pages/BrightnessControlPage.qml
 msgid "Brightness Control"
-msgstr "Contrôle de la luminosité"
+msgstr "Управление яркостью"
 
 #: ../contents/ui/pages/BrightnessControlPage.qml
 msgid "Keyboard Backlight"
-msgstr "Rétroéclairage du clavier"
+msgstr "Подсветка клавиатуры"
 
 #: ../contents/ui/pages/BrightnessControlPage.qml
 msgid "Keyboard Color"
-msgstr "Couleur du clavier"
+msgstr "Цвет клавиатуры"
 
 #: ../contents/ui/pages/components/battery/BatteryItem.qml
 msgid "Charging"
-msgstr "En charge"
+msgstr "Зарядка"
 
 #: ../contents/ui/pages/components/battery/BatteryItem.qml
 msgid "Discharging"
-msgstr "Décharge"
+msgstr "Разрядка"
 
 #: ../contents/ui/pages/components/battery/BatteryItem.qml
 msgid "Fully Charged"
-msgstr "Complètement chargée"
+msgstr "Полностью заряжено"
 
 #: ../contents/ui/pages/components/battery/BatteryItem.qml
 msgid "Not Charging"
-msgstr "Pas en charge"
+msgstr "Не заряжается"
 
 #: ../contents/ui/pages/components/battery/BatteryItem.qml
 msgctxt "Battery is currently not present in the bay"
 msgid "Not present"
-msgstr "Absente"
+msgstr "Отсутствует"
 
 #: ../contents/ui/pages/components/battery/BatteryItem.qml
 msgid "This battery's health is at only %1% and it should be replaced. Contact the manufacturer."
-msgstr "L'état de santé de cette batterie n'est que de %1 % et elle devrait être remplacée. Contactez le fabricant."
+msgstr "Здоровье этой батареи составляет всего %1%, её следует заменить. Обратитесь к производителю."
 
 #: ../contents/ui/pages/components/battery/BatteryItem.qml
 msgid "Time To Full:"
-msgstr "Temps avant charge complète :"
+msgstr "Время до полной зарядки:"
 
 #: ../contents/ui/pages/components/battery/BatteryItem.qml
 msgid "Remaining Time:"
-msgstr "Temps restant :"
+msgstr "Оставшееся время:"
 
 #: ../contents/ui/pages/components/battery/BatteryItem.qml
 msgctxt "@info"
 msgid "Estimating…"
-msgstr "Estimation…"
+msgstr "Оценка…"
 
 #: ../contents/ui/pages/components/battery/BatteryItem.qml
 msgid "Battery Health:"
-msgstr "État de santé de la batterie :"
+msgstr "Здоровье батареи:"
 
 #: ../contents/ui/pages/components/battery/BatteryItem.qml
 msgctxt "Placeholder is battery health percentage"
 msgid "%1%"
-msgstr "%1 %"
+msgstr "%1%"
 
 #: ../contents/ui/pages/components/battery/BatteryItem.qml
 msgid "Battery is configured to charge up to approximately %1%."
-msgstr "La batterie est configurée pour se charger jusqu'à environ %1 %."
+msgstr "Батарея настроена на зарядку до приблизительно %1%."
 
 #: ../contents/ui/pages/components/battery/PowerManagementItem.qml
 msgctxt "@title:group"
 msgid "Sleep and Screen Locking after Inactivity"
-msgstr "Mise en veille et verrouillage de l'écran après inactivité"
+msgstr "Сон и блокировка экрана после бездействия"
 
 #: ../contents/ui/pages/components/battery/PowerManagementItem.qml
 msgctxt "Sleep and Screen Locking after Inactivity"
 msgid "Blocked"
-msgstr ""
+msgstr "Заблокировано"
 
 #: ../contents/ui/pages/components/battery/PowerManagementItem.qml
 msgctxt "Sleep and Screen Locking after Inactivity"
 msgid "Automatic"
-msgstr ""
+msgstr "Автоматически"
 
 #: ../contents/ui/pages/components/battery/PowerManagementItem.qml
 msgctxt "@option:check Manually block sleep and screen locking after inactivity"
 msgid "Manually block"
-msgstr ""
+msgstr "Вручную заблокировать"
 
 #: ../contents/ui/pages/components/battery/PowerManagementItem.qml
 msgid "Failed to unblock automatic sleep and screen locking"
-msgstr ""
+msgstr "Не удалось разблокировать автоматический сон и блокировку экрана"
 
 #: ../contents/ui/pages/components/battery/PowerManagementItem.qml
 msgid "Failed to block automatic sleep and screen locking"
-msgstr ""
+msgstr "Не удалось заблокировать автоматический сон и блокировку экрана"
 
 #: ../contents/ui/pages/components/battery/PowerManagementItem.qml
 msgctxt "Minimize the length of this string as much as possible"
 msgid "Your laptop is configured not to sleep when closing the lid while an external monitor is connected."
-msgstr ""
+msgstr "Ваш ноутбук настроен не засыпать при закрытии крышки, когда подключён внешний монитор."
 
 #: ../contents/ui/pages/components/battery/PowerManagementItem.qml
 msgid "%1 application is currently blocking sleep and screen locking:"
 msgid_plural "%1 applications are currently blocking sleep and screen locking:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 приложение сейчас блокирует сон и блокировку экрана:"
+msgstr[1] "%1 приложения сейчас блокируют сон и блокировку экрана:"
+msgstr[2] "%1 приложений сейчас блокируют сон и блокировку экрана:"
 
 #: ../contents/ui/pages/components/battery/PowerManagementItem.qml
 msgid "%1 is currently blocking sleep and screen locking (%2)"
-msgstr ""
+msgstr "%1 сейчас блокирует сон и блокировку экрана (%2)"
 
 #: ../contents/ui/pages/components/battery/PowerManagementItem.qml
 msgid "%1 is currently blocking sleep and screen locking (unknown reason)"
-msgstr ""
+msgstr "%1 сейчас блокирует сон и блокировку экрана (неизвестная причина)"
 
 #: ../contents/ui/pages/components/battery/PowerManagementItem.qml
 msgid "An application is currently blocking sleep and screen locking (%1)"
-msgstr ""
+msgstr "Приложение сейчас блокирует сон и блокировку экрана (%1)"
 
 #: ../contents/ui/pages/components/battery/PowerManagementItem.qml
 msgid "An application is currently blocking sleep and screen locking (unknown reason)"
-msgstr ""
+msgstr "Приложение сейчас блокирует сон и блокировку экрана (неизвестная причина)"
 
 #: ../contents/ui/pages/components/battery/PowerManagementItem.qml
 msgctxt "Application name: reason for preventing sleep and screen locking"
 msgid "%1: %2"
-msgstr ""
+msgstr "%1: %2"
 
 #: ../contents/ui/pages/components/battery/PowerManagementItem.qml
 msgctxt "Application name: reason for preventing sleep and screen locking"
 msgid "%1: unknown reason"
-msgstr ""
+msgstr "%1: неизвестная причина"
 
 #: ../contents/ui/pages/components/battery/PowerManagementItem.qml
 msgctxt "Application name: reason for preventing sleep and screen locking"
 msgid "Unknown application: %1"
-msgstr ""
+msgstr "Неизвестное приложение: %1"
 
 #: ../contents/ui/pages/components/battery/PowerManagementItem.qml
 msgctxt "Application name: reason for preventing sleep and screen locking"
 msgid "Unknown application: unknown reason"
-msgstr ""
+msgstr "Неизвестное приложение: неизвестная причина"
 
 #: ../contents/ui/pages/components/battery/PowerProfileItem.qml
 msgid "Power Save"
-msgstr ""
+msgstr "Энергосбережение"
 
 #: ../contents/ui/pages/components/battery/PowerProfileItem.qml
 msgid "Balanced"
-msgstr "Équilibré"
+msgstr "Сбалансированный"
 
 #: ../contents/ui/pages/components/battery/PowerProfileItem.qml
 msgid "Performance"
-msgstr "Performance"
+msgstr "Производительность"
 
 #: ../contents/ui/pages/components/battery/PowerProfileItem.qml
 msgid "Power Profile"
-msgstr ""
+msgstr "Профиль питания"
 
 #: ../contents/ui/pages/components/battery/PowerProfileItem.qml
 msgctxt "Power profile"
 msgid "Not available"
-msgstr ""
+msgstr "Недоступно"
 
 #: ../contents/ui/pages/components/battery/PowerProfileItem.qml
 msgid "Failed to activate %1 mode"
-msgstr ""
+msgstr "Не удалось активировать режим %1"
 
 #: ../contents/ui/pages/components/battery/PowerProfileItem.qml
 msgid "Performance mode has been disabled to reduce heat generation because the computer has detected that it may be sitting on your lap."
-msgstr ""
+msgstr "Режим производительности отключён для снижения нагрева, так как компьютер обнаружил, что он может находиться на ваших коленях."
 
 #: ../contents/ui/pages/components/battery/PowerProfileItem.qml
 msgid "Performance mode is unavailable because the computer is running too hot."
-msgstr ""
+msgstr "Режим производительности недоступен, так как компьютер перегревается."
 
 #: ../contents/ui/pages/components/battery/PowerProfileItem.qml
 msgid "Performance mode is unavailable."
-msgstr ""
+msgstr "Режим производительности недоступен."
 
 #: ../contents/ui/pages/components/battery/PowerProfileItem.qml
 msgid "Performance may be lowered to reduce heat generation because the computer has detected that it may be sitting on your lap."
-msgstr ""
+msgstr "Производительность может быть снижена для уменьшения нагрева, так как компьютер обнаружил, что он может находиться на ваших коленях."
 
 #: ../contents/ui/pages/components/battery/PowerProfileItem.qml
 msgid "Performance may be reduced because the computer is running too hot."
-msgstr ""
+msgstr "Производительность может быть снижена, так как компьютер перегревается."
 
 #: ../contents/ui/pages/components/battery/PowerProfileItem.qml
 msgid "Performance may be reduced."
-msgstr ""
+msgstr "Производительность может быть снижена."
 
 #: ../contents/ui/pages/components/battery/PowerProfileItem.qml
 msgid "One application has requested activating %2:"
 msgid_plural "%1 applications have requested activating %2:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 приложение запросило активацию %2:"
+msgstr[1] "%1 приложения запросили активацию %2:"
+msgstr[2] "%1 приложений запросили активацию %2:"
 
 #: ../contents/ui/pages/components/battery/PowerProfileItem.qml
 msgctxt "%1 is the name of the application, %2 is the reason provided by it for activating performance mode"
 msgid "%1: %2"
-msgstr ""
+msgstr "%1: %2"
 
 #: ../contents/ui/pages/components/battery/PowerProfileItem.qml
 msgid "Power profiles may be supported on your device.<nl/>Try installing the <command>power-profiles-daemon</command> package using your distribution's package manager and restarting the system."
-msgstr ""
+msgstr "Профили питания могут поддерживаться на вашем устройстве.<nl/>Попробуйте установить пакет <command>power-profiles-daemon</command> с помощью менеджера пакетов вашего дистрибутива и перезапустите систему."
 
 #: ../contents/ui/pages/components/bluetooth/DeviceItem.qml ../contents/ui/pages/components/network/ConnectionItem.qml
 msgid "Disconnect"
-msgstr "Déconnecter"
+msgstr "Отключить"
 
 #: ../contents/ui/pages/components/bluetooth/DeviceItem.qml ../contents/ui/pages/components/network/ConnectionItem.qml
 msgid "Connect"
-msgstr "Connecter"
+msgstr "Подключить"
 
 #: ../contents/ui/pages/components/bluetooth/DeviceItem.qml
 msgid "Browse Files"
-msgstr ""
+msgstr "Просмотр файлов"
 
 #: ../contents/ui/pages/components/bluetooth/DeviceItem.qml
 msgid "Send File"
-msgstr ""
+msgstr "Отправить файл"
 
 #: ../contents/ui/pages/components/bluetooth/DeviceItem.qml ../contents/ui/pages/components/network/DetailsText.qml
 msgid "Copy"
-msgstr ""
+msgstr "Копировать"
 
 #: ../contents/ui/pages/components/bluetooth/DeviceItem.qml
 msgid "Yes"
-msgstr ""
+msgstr "Да"
 
 #: ../contents/ui/pages/components/bluetooth/DeviceItem.qml
 msgid "No"
-msgstr ""
+msgstr "Нет"
 
 #: ../contents/ui/pages/components/bluetooth/DeviceItem.qml
 msgctxt "@label %1 is human-readable adapter name, %2 is HCI"
 msgid "%1 (%2)"
-msgstr ""
+msgstr "%1 (%2)"
 
 #: ../contents/ui/pages/components/bluetooth/DeviceItem.qml
 msgid "Remote Name"
-msgstr ""
+msgstr "Удалённое имя"
 
 #: ../contents/ui/pages/components/bluetooth/DeviceItem.qml
 msgid "Address"
-msgstr ""
+msgstr "Адрес"
 
 #: ../contents/ui/pages/components/bluetooth/DeviceItem.qml
 msgid "Paired"
-msgstr ""
+msgstr "Сопряжено"
 
 #: ../contents/ui/pages/components/bluetooth/DeviceItem.qml
 msgid "Trusted"
-msgstr ""
+msgstr "Доверенное"
 
 #: ../contents/ui/pages/components/bluetooth/DeviceItem.qml
 msgid "Adapter"
-msgstr ""
+msgstr "Адаптер"
 
 #: ../contents/ui/pages/components/bluetooth/DeviceItem.qml
 msgid "Disconnecting"
-msgstr ""
+msgstr "Отключение"
 
 #: ../contents/ui/pages/components/bluetooth/DeviceItem.qml
 msgid "Connecting"
-msgstr ""
+msgstr "Подключение"
 
 #: ../contents/ui/pages/components/bluetooth/DeviceItem.qml
 msgid "Connection failed"
-msgstr ""
+msgstr "Подключение не удалось"
 
 #: ../contents/ui/pages/components/bluetooth/DeviceItem.qml
 msgid "Audio device"
-msgstr ""
+msgstr "Аудиоустройство"
 
 #: ../contents/ui/pages/components/bluetooth/DeviceItem.qml
 msgid "Input device"
-msgstr ""
+msgstr "Устройство ввода"
 
 #: ../contents/ui/pages/components/bluetooth/DeviceItem.qml
 msgid "Phone"
-msgstr ""
+msgstr "Телефон"
 
 #: ../contents/ui/pages/components/bluetooth/DeviceItem.qml
 msgid "File transfer"
-msgstr ""
+msgstr "Передача файлов"
 
 #: ../contents/ui/pages/components/bluetooth/DeviceItem.qml
 msgid "Send file"
-msgstr ""
+msgstr "Отправить файл"
 
 #: ../contents/ui/pages/components/bluetooth/DeviceItem.qml
 msgid "Input"
-msgstr "Entrée"
+msgstr "Ввод"
 
 #: ../contents/ui/pages/components/bluetooth/DeviceItem.qml
 msgid "Audio"
-msgstr "Audio"
+msgstr "Аудио"
 
 #: ../contents/ui/pages/components/bluetooth/DeviceItem.qml
 msgid "Other device"
-msgstr ""
+msgstr "Другое устройство"
 
 #: ../contents/ui/pages/components/bluetooth/DeviceItem.qml
 msgid "%1% Battery"
-msgstr ""
+msgstr "Батарея %1%"
 
 #: ../contents/ui/pages/components/bluetooth/Header.qml
 msgid "Configure Bluetooth"
-msgstr ""
+msgstr "Настроить Bluetooth"
 
 #: ../contents/ui/pages/components/brightness/BrightnessItem.qml
 msgctxt "Backlight on or off"
 msgid "Off"
-msgstr ""
+msgstr "Выкл"
 
 #: ../contents/ui/pages/components/brightness/BrightnessItem.qml
 msgctxt "Brightness level"
 msgid "Low"
-msgstr ""
+msgstr "Низкая"
 
 #: ../contents/ui/pages/components/brightness/BrightnessItem.qml
 msgctxt "Brightness level"
 msgid "Medium"
-msgstr ""
+msgstr "Средняя"
 
 #: ../contents/ui/pages/components/brightness/BrightnessItem.qml
 msgctxt "Brightness level"
 msgid "High"
-msgstr ""
+msgstr "Высокая"
 
 #: ../contents/ui/pages/components/brightness/BrightnessItem.qml
 msgctxt "Backlight on or off"
 msgid "On"
-msgstr ""
+msgstr "Вкл"
 
 #: ../contents/ui/pages/components/brightness/BrightnessItem.qml
 msgctxt "Placeholder is brightness percentage"
 msgid "%1%"
-msgstr ""
+msgstr "%1%"
 
 #: ../contents/ui/pages/components/brightness/BrightnessItem.qml
 msgctxt "Display brightness"
 msgid "Brightness"
-msgstr ""
+msgstr "Яркость"
 
 #: ../contents/ui/pages/components/brightness/BrightnessItem.qml
 msgctxt "Placeholder is display name"
 msgid "Display Brightness - %1"
-msgstr ""
+msgstr "Яркость дисплея - %1"
 
 #: ../contents/ui/pages/components/brightness/KeyboardColorItem.qml
 msgid "Follow accent color"
-msgstr ""
+msgstr "Следовать цвету акцента"
 
 #: ../contents/ui/pages/components/mediaPlayer/ExpandedRepresentation.qml
 msgctxt "Remaining time for song e.g -5:42"
 msgid "-%1"
-msgstr ""
+msgstr "-%1"
 
 #: ../contents/ui/pages/components/mediaPlayer/ExpandedRepresentation.qml
 msgctxt "@action:button"
 msgid "Shuffle"
-msgstr ""
+msgstr "Перемешать"
 
 #: ../contents/ui/pages/components/mediaPlayer/ExpandedRepresentation.qml
 msgctxt "Play previous track"
 msgid "Previous Track"
-msgstr "Piste précédente"
+msgstr "Предыдущий трек"
 
 #: ../contents/ui/pages/components/mediaPlayer/ExpandedRepresentation.qml
 msgctxt "Pause playback"
 msgid "Pause"
-msgstr "Pause"
+msgstr "Пауза"
 
 #: ../contents/ui/pages/components/mediaPlayer/ExpandedRepresentation.qml
 msgctxt "Start playback"
 msgid "Play"
-msgstr "Lecture"
+msgstr "Воспроизвести"
 
 #: ../contents/ui/pages/components/mediaPlayer/ExpandedRepresentation.qml
 msgctxt "Play next track"
 msgid "Next Track"
-msgstr "Piste suivante"
+msgstr "Следующий трек"
 
 #: ../contents/ui/pages/components/mediaPlayer/ExpandedRepresentation.qml
 msgid "Repeat Track"
-msgstr "Répéter la piste"
+msgstr "Повторять трек"
 
 #: ../contents/ui/pages/components/mediaPlayer/ExpandedRepresentation.qml
 msgid "Repeat"
-msgstr "Répéter"
+msgstr "Повтор"
 
 #: ../contents/ui/pages/components/network/ConnectionItem.qml
 msgid "Show Network's QR Code"
-msgstr "Afficher le QR Code du réseau"
+msgstr "Показать QR-код сети"
 
 #: ../contents/ui/pages/components/network/ConnectionItem.qml ../contents/ui/pages/NightLightPage.qml
 msgid "Configure…"
-msgstr "Configurer…"
+msgstr "Настроить…"
 
 #: ../contents/ui/pages/components/network/ConnectionItem.qml
 msgid "Speed"
-msgstr "Vitesse"
+msgstr "Скорость"
 
 #: ../contents/ui/pages/components/network/ConnectionItem.qml
 msgid "Details"
-msgstr "Détails"
+msgstr "Подробности"
 
 #: ../contents/ui/pages/components/network/ConnectionItem.qml
 msgctxt "@info:tooltip"
 msgid "Current download speed is %1 kibibytes per second; current upload speed is %2 kibibytes per second"
-msgstr "La vitesse de téléchargement actuelle est de %1 kibioctets par seconde ; la vitesse d'envoi actuelle est de %2 kibioctets par seconde"
+msgstr "Текущая скорость загрузки %1 кибибайт в секунду; текущая скорость выгрузки %2 кибибайт в секунду"
 
 #: ../contents/ui/pages/components/network/ConnectionItem.qml
 msgid "Connected, ⬇ %1/s, ⬆ %2/s"
-msgstr "Connecté, ⬇ %1/s, ⬆ %2/s"
+msgstr "Подключено, ⬇ %1/с, ⬆ %2/с"
 
 #: ../contents/ui/pages/components/network/ConnectionListPage.qml
 msgid "You need to log in to this network"
-msgstr "Vous devez vous connecter à ce réseau"
+msgstr "Вам нужно войти в эту сеть"
 
 #: ../contents/ui/pages/components/network/ConnectionListPage.qml
 msgctxt "@action:button"
 msgid "Log in"
-msgstr "Se connecter"
+msgstr "Войти"
 
 #: ../contents/ui/pages/components/network/ConnectionListPage.qml
 msgid "Airplane mode is enabled"
-msgstr "Le mode avion est activé"
+msgstr "Режим полёта включён"
 
 #: ../contents/ui/pages/components/network/ConnectionListPage.qml
 msgid "Wireless and mobile networks are deactivated"
-msgstr "Les réseaux sans fil et mobiles sont désactivés"
+msgstr "Беспроводные и мобильные сети деактивированы"
 
 #: ../contents/ui/pages/components/network/ConnectionListPage.qml
 msgid "Wireless is deactivated"
-msgstr "Le réseau sans fil est désactivé"
+msgstr "Беспроводная сеть деактивирована"
 
 #: ../contents/ui/pages/components/network/ConnectionListPage.qml
 msgid "Mobile network is deactivated"
-msgstr "Le réseau mobile est désactivé"
+msgstr "Мобильная сеть деактивирована"
 
 #: ../contents/ui/pages/components/network/ConnectionListPage.qml
 msgid "No matches"
-msgstr "Aucune correspondance"
+msgstr "Нет совпадений"
 
 #: ../contents/ui/pages/components/network/ConnectionListPage.qml
 msgid "No available connections"
-msgstr "Aucune connexion disponible"
+msgstr "Нет доступных подключений"
 
 #: ../contents/ui/pages/components/network/ShareNetworkQrCodePage.qml
 msgid "Scan this QR code with another device to connect to the \"%1\" network."
-msgstr "Scannez ce QR code avec un autre appareil pour vous connecter au réseau « %1 »."
+msgstr "Отсканируйте этот QR-код другим устройством для подключения к сети \"%1\"."
 
 #: ../contents/ui/pages/components/network/Toolbar.qml
 msgid "Enable Wi-Fi"
-msgstr "Activer le Wi-Fi"
+msgstr "Включить Wi-Fi"
 
 #: ../contents/ui/pages/components/network/Toolbar.qml
 msgid "Enable mobile network"
-msgstr "Activer le réseau mobile"
+msgstr "Включить мобильную сеть"
 
 #: ../contents/ui/pages/components/network/Toolbar.qml
 msgctxt "@info"
 msgid "Disable airplane mode<nl/><nl/>This will enable Wi-Fi and Bluetooth"
-msgstr "Désactiver le mode avion<nl/><nl/>Cela activera le Wi-Fi et le Bluetooth"
+msgstr "Отключить режим полёта<nl/><nl/>Это включит Wi-Fi и Bluetooth"
 
 #: ../contents/ui/pages/components/network/Toolbar.qml
 msgctxt "@info"
 msgid "Enable airplane mode<nl/><nl/>This will disable Wi-Fi and Bluetooth"
-msgstr "Activer le mode avion<nl/><nl/>Cela désactivera le Wi-Fi et le Bluetooth"
+msgstr "Включить режим полёта<nl/><nl/>Это отключит Wi-Fi и Bluetooth"
 
 #: ../contents/ui/pages/components/network/Toolbar.qml
 msgid "Hotspot"
-msgstr "Point d'accès"
+msgstr "Точка доступа"
 
 #: ../contents/ui/pages/components/network/Toolbar.qml
 msgid "Disable Hotspot"
-msgstr "Désactiver le point d'accès"
+msgstr "Отключить точку доступа"
 
 #: ../contents/ui/pages/components/network/Toolbar.qml
 msgid "Create Hotspot"
-msgstr "Créer un point d'accès"
+msgstr "Создать точку доступа"
 
 #: ../contents/ui/pages/components/network/Toolbar.qml
 msgid "Configure network connections…"
-msgstr "Configurer les connexions réseau…"
+msgstr "Настроить сетевые подключения…"
 
 #: ../contents/ui/pages/components/network/TrafficMonitor.qml
 msgid "/s"
-msgstr "/s"
+msgstr "/с"
 
 #: ../contents/ui/pages/components/network/TrafficMonitor.qml
 msgid "Upload"
-msgstr "Envoi"
+msgstr "Выгрузка"
 
 #: ../contents/ui/pages/components/network/TrafficMonitor.qml
 msgid "Download"
-msgstr "Téléchargement"
+msgstr "Загрузка"
 
 #: ../contents/ui/pages/components/volume/ListItemBase.qml
 msgid "Currently not recording"
-msgstr "Aucun enregistrement en cours"
+msgstr "Сейчас не записывается"
 
 #: ../contents/ui/pages/components/volume/ListItemBase.qml
 msgid "Currently not playing"
-msgstr "Aucune lecture en cours"
+msgstr "Сейчас не воспроизводится"
 
 #: ../contents/ui/pages/components/volume/ListItemBase.qml
 msgctxt "@action:button"
 msgid "Additional Options"
-msgstr "Options supplémentaires"
+msgstr "Дополнительные параметры"
 
 #: ../contents/ui/pages/components/volume/ListItemBase.qml
 msgid "Show additional options for %1"
-msgstr "Afficher les options supplémentaires pour %1"
+msgstr "Показать дополнительные параметры для %1"
 
 #: ../contents/ui/pages/components/volume/ListItemBase.qml
 msgctxt "@action:button"
 msgid "Unmute"
-msgstr "Réactiver le son"
+msgstr "Включить звук"
 
 #: ../contents/ui/pages/components/volume/ListItemBase.qml
 msgctxt "@action:button"
 msgid "Mute"
-msgstr "Muet"
+msgstr "Отключить звук"
 
 #: ../contents/ui/pages/components/volume/ListItemBase.qml
 msgid "Unmute %1"
-msgstr "Réactiver le son de %1"
+msgstr "Включить звук %1"
 
 #: ../contents/ui/pages/components/volume/ListItemBase.qml
 msgid "Mute %1"
-msgstr "Mettre %1 en sourdine"
+msgstr "Отключить звук %1"
 
 #: ../contents/ui/pages/components/volume/ListItemBase.qml
 msgctxt "Accessibility data on volume slider"
 msgid "Adjust volume for %1"
-msgstr "Ajuster le volume pour %1"
+msgstr "Настроить громкость для %1"
 
 #: ../contents/ui/pages/components/volume/ListItemBase.qml
 msgctxt "volume percentage"
 msgid "%1%"
-msgstr "%1 %"
+msgstr "%1%"
 
 #: ../contents/ui/pages/components/volume/ListItemBase.qml
 msgctxt "only used for sizing, should be widest possible string"
 msgid "100%"
-msgstr "100 %"
+msgstr "100%"
 
 #: ../contents/ui/pages/components/volume/StreamListItem.qml
 msgid "Stream name not found"
-msgstr "Nom du flux introuvable"
+msgstr "Имя потока не найдено"
 
 #: ../contents/ui/pages/MediaPlayerPage.qml
 msgid "Media Player"
-msgstr "Lecteur multimédia"
+msgstr "Медиаплеер"
 
 #: ../contents/ui/pages/NetworkPage.qml
 msgid "Networks"
-msgstr "Réseaux"
+msgstr "Сети"
 
 #: ../contents/ui/pages/NetworkPage.qml
 msgctxt "@action:button"
 msgid "Return to Network Connections"
-msgstr "Retour aux connexions réseau"
+msgstr "Вернуться к сетевым подключениям"
 
 #: ../contents/ui/pages/NightLightPage.qml
 msgid "Night light status"
-msgstr "État de la lumière nocturne"
+msgstr "Статус ночного света"
 
 #: ../contents/ui/pages/NightLightPage.qml
 msgctxt "Night light status"
 msgid "Suspended"
-msgstr "Suspendue"
+msgstr "Приостановлено"
 
 #: ../contents/ui/pages/NightLightPage.qml
 msgctxt "Night light status"
 msgid "Unavailable"
-msgstr "Indisponible"
+msgstr "Недоступно"
 
 #: ../contents/ui/pages/NightLightPage.qml
 msgctxt "Night light status"
 msgid "Not enabled"
-msgstr "Non activée"
+msgstr "Не включено"
 
 #: ../contents/ui/pages/NightLightPage.qml
 msgctxt "Night light status"
 msgid "Not running"
-msgstr "Non active"
+msgstr "Не запущено"
 
 #: ../contents/ui/pages/NightLightPage.qml
 msgctxt "Night light status"
 msgid "On"
-msgstr "Activée"
+msgstr "Вкл"
 
 #: ../contents/ui/pages/NightLightPage.qml
 msgctxt "Night light phase"
 msgid "Morning Transition"
-msgstr "Transition matinale"
+msgstr "Утренний переход"
 
 #: ../contents/ui/pages/NightLightPage.qml
 msgctxt "Night light phase"
 msgid "Day"
-msgstr "Jour"
+msgstr "День"
 
 #: ../contents/ui/pages/NightLightPage.qml
 msgctxt "Night light phase"
 msgid "Evening Transition"
-msgstr "Transition du soir"
+msgstr "Вечерний переход"
 
 #: ../contents/ui/pages/NightLightPage.qml
 msgctxt "Night light phase"
 msgid "Night"
-msgstr "Nuit"
+msgstr "Ночь"
 
 #: ../contents/ui/pages/NightLightPage.qml
 msgctxt "Placeholder is screen color temperature"
 msgid "%1K"
-msgstr "%1 K"
+msgstr "%1K"
 
 #: ../contents/ui/pages/NightLightPage.qml
 msgctxt "@action:button Night Light"
 msgid "Suspend"
-msgstr "Suspendre"
+msgstr "Приостановить"
 
 #: ../contents/ui/pages/NightLightPage.qml
 msgid "Enable and Configure…"
-msgstr "Activer et configurer…"
+msgstr "Включить и настроить…"
 
 #: ../contents/ui/pages/NightLightPage.qml
 msgctxt "Label for a time"
 msgid "Transition to day complete by:"
-msgstr "Transition vers le jour terminée à :"
+msgstr "Переход к дню завершится к:"
 
 #: ../contents/ui/pages/NightLightPage.qml
 msgctxt "Label for a time"
 msgid "Transition to night scheduled for:"
-msgstr "Transition vers la nuit programmée pour :"
+msgstr "Переход к ночи запланирован на:"
 
 #: ../contents/ui/pages/NightLightPage.qml
 msgctxt "Label for a time"
 msgid "Transition to night complete by:"
-msgstr "Transition vers la nuit terminée à :"
+msgstr "Переход к ночи завершится к:"
 
 #: ../contents/ui/pages/NightLightPage.qml
 msgctxt "Label for a time"
 msgid "Transition to day scheduled for:"
-msgstr "Transition vers le jour programmée pour :"
+msgstr "Переход к дню запланирован на:"
 
 #: ../contents/ui/pages/SystemSessionActionsPage.qml
 msgid "Session Actions"
-msgstr "Actions de session"
+msgstr "Действия сеанса"
 
 #: ../contents/ui/pages/SystemSessionActionsPage.qml
 msgid "Suspend"
-msgstr "Suspendre"
+msgstr "Приостановить"
 
 #: ../contents/ui/pages/SystemSessionActionsPage.qml
 msgid "Restart"
-msgstr "Redémarrer"
+msgstr "Перезагрузить"
 
 #: ../contents/ui/pages/SystemSessionActionsPage.qml
 msgid "Shutdown"
-msgstr "Éteindre"
+msgstr "Выключить"
 
 #: ../contents/ui/pages/SystemSessionActionsPage.qml
 msgid "Hibernate"
-msgstr ""
+msgstr "Гибернация"
 
 #: ../contents/ui/pages/SystemSessionActionsPage.qml
 msgid "Lock Screen"
-msgstr "Verrouiller l'écran"
+msgstr "Заблокировать экран"
 
 #: ../contents/ui/pages/SystemSessionActionsPage.qml
 msgid "Log Out"
-msgstr "Se déconnecter"
+msgstr "Выйти"
 
 #: ../contents/ui/pages/SystemSessionActionsPage.qml
 msgid "Switch User"
-msgstr ""
+msgstr "Переключить пользователя"
 
 #: ../contents/ui/pages/VolumePage.qml
 msgid "Audio Volume"
-msgstr "Volume audio"
+msgstr "Громкость звука"
 
 #: ../contents/ui/pages/VolumePage.qml
 msgid "No output or input devices found"
-msgstr "Aucun périphérique de sortie ou d'entrée trouvé"
+msgstr "Выходные или входные устройства не найдены"
 
 #: ../contents/ui/pages/VolumePage.qml
 msgid "Device name not found"
-msgstr "Nom du périphérique introuvable"
+msgstr "Имя устройства не найдено"
 
 #: ../contents/ui/pages/VolumePage.qml
 msgid "Devices"
-msgstr "Périphériques"
+msgstr "Устройства"
 
 #: ../contents/ui/pages/VolumePage.qml
 msgid "Applications"
-msgstr "Applications"
+msgstr "Приложения"
 
 #: ../contents/ui/pages/VolumePage.qml
 msgid "Force mute all playback devices"
-msgstr "Forcer la mise en sourdine de tous les périphériques de lecture"
+msgstr "Принудительно отключить звук всех устройств воспроизведения"
 
 #: ../contents/ui/pages/VolumePage.qml
 msgid "Configure Audio Devices"
-msgstr "Configurer les périphériques audio"
+msgstr "Настроить аудиоустройства"
 
 #: ../contents/ui/pages/VolumePage.qml
 msgid "No applications playing or recording audio"
-msgstr "Aucune application ne lit ou n'enregistre de l'audio"
+msgstr "Нет приложений, воспроизводящих или записывающих звук"
 
 #: ../contents/ui/pages/VolumePage.qml
 msgctxt "@info"
@@ -1044,89 +1045,3 @@ msgstr ""
 #: ../contents/ui/pages/VolumePage.qml
 msgid "Raise maximum volume"
 msgstr ""
-
-#~ msgid "Behaviour"
-#~ msgstr "Comportement"
-
-#~ msgid "Highlight color"
-#~ msgstr "Couleur de surbrillance"
-
-#~ msgid "Toggle buttons color"
-#~ msgstr "Couleur des boutons à bascule"
-
-#~ msgid "Sliders color"
-#~ msgstr "Couleur des curseurs"
-
-#~ msgid "Volume:"
-#~ msgstr "Volume :"
-
-#~ msgctxt "Sleep and Screen Locking after Inactivity"
-#~ msgid "On AC Power"
-#~ msgstr "Sur secteur"
-
-#~ msgctxt "Sleep and Screen Locking after Inactivity"
-#~ msgid "On Battery Power"
-#~ msgstr "Sur batterie"
-
-#~ msgctxt "Sleep and Screen Locking after Inactivity"
-#~ msgid "On Low Battery"
-#~ msgstr "Sur batterie faible"
-
-#~ msgctxt "@title:group"
-#~ msgid "Suspend Session"
-#~ msgstr "Suspendre la session"
-
-#~ msgctxt "Suspend Session"
-#~ msgid "Sleep"
-#~ msgstr "Mise en veille"
-
-#~ msgctxt "Suspend Session"
-#~ msgid "Hibernate"
-#~ msgstr "Hibernation"
-
-#~ msgctxt "Suspend Session"
-#~ msgid "Shutdown"
-#~ msgstr "Extinction"
-
-#~ msgctxt "Suspend Session"
-#~ msgid "Lock Screen"
-#~ msgstr "Verrouillage de l'écran"
-
-#~ msgid "When laptop lid is closed"
-#~ msgstr "Lorsque le capot de l'ordinateur portable est fermé"
-
-#~ msgid "Even when an external monitor is connected"
-#~ msgstr "Même lorsqu'un écran externe est connecté"
-
-#~ msgid "When power button is pressed"
-#~ msgstr "Lorsque le bouton d'alimentation est pressé"
-
-#~ msgid "Do nothing"
-#~ msgstr "Ne rien faire"
-
-#~ msgid "Never"
-#~ msgstr "Jamais"
-
-#~ msgid "Power Saver"
-#~ msgstr "Économie d'énergie"
-
-#~ msgid "Uses the least amount of power. Reduces system responsiveness and may decrease screen brightness."
-#~ msgstr "Utilise le minimum d'énergie. Réduit la réactivité du système et peut diminuer la luminosité de l'écran."
-
-#~ msgid "Balances performance and power consumption."
-#~ msgstr "Équilibre les performances et la consommation d'énergie."
-
-#~ msgid "Favors performance over power consumption."
-#~ msgstr "Privilégie les performances par rapport à la consommation d'énergie."
-
-#~ msgid "The TLP service automatically controls power profiles"
-#~ msgstr "Le service TLP contrôle automatiquement les profils d'alimentation"
-
-#~ msgid "File"
-#~ msgstr "Fichier"
-
-#~ msgid "No Artist"
-#~ msgstr "Aucun artiste"
-
-#~ msgid "No Album"
-#~ msgstr "Aucun album"
