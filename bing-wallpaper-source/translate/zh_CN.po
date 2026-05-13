@@ -1,0 +1,106 @@
+# Translation of Bing Wallpaper Source in Chinese Simplified / 中文（简体）
+# Copyright (C) 2026
+# This file is distributed under the same license as the Bing Wallpaper Source package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Bing Wallpaper Source\n"
+"Report-Msgid-Bugs-To: https://github.com/WenYin-Community/plasma6-plasmoids/tree/plasma6\n"
+"POT-Creation-Date: 2026-05-13 00:00+0800\n"
+"PO-Revision-Date: 2026-05-13 00:00+0800\n"
+"Last-Translator: WenYin Community\n"
+"Language-Team: Chinese Simplified\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: ../contents/ui/main.qml
+msgid "Refresh today's wallpaper"
+msgstr "刷新今日壁纸"
+
+#: ../contents/ui/main.qml
+msgid "Previous"
+msgstr "上一张"
+
+#: ../contents/ui/main.qml
+msgid "Next"
+msgstr "下一张"
+
+#: ../contents/ui/main.qml
+msgid "Search image info"
+msgstr "搜索图片信息"
+
+#: ../contents/ui/config.qml
+msgid "Positioning:"
+msgstr "定位方式："
+
+#: ../contents/ui/config.qml
+msgid "Scaled and cropped"
+msgstr "缩放并裁剪"
+
+#: ../contents/ui/config.qml
+msgid "Scaled"
+msgstr "拉伸"
+
+#: ../contents/ui/config.qml
+msgid "Scaled, keep proportions"
+msgstr "缩放，保持比例"
+
+#: ../contents/ui/config.qml
+msgid "Centered"
+msgstr "居中"
+
+#: ../contents/ui/config.qml
+msgid "Tiled"
+msgstr "平铺"
+
+#: ../contents/ui/config.qml
+msgid "Background color:"
+msgstr "背景色："
+
+#: ../contents/ui/config.qml
+msgid "Select Background Color"
+msgstr "选择背景色"
+
+#: ../contents/ui/config.qml
+msgid "Network:"
+msgstr "网络："
+
+#: ../contents/ui/config.qml
+msgid "Update when using metered network connection"
+msgstr "在按流量计费的网络连接时更新"
+
+#: ../contents/ui/config.qml
+msgid "Actions:"
+msgstr "操作："
+
+#: ../contents/ui/config.qml
+msgid "Open current image"
+msgstr "打开当前图片"
+
+#: ../contents/ui/config.qml
+msgid "Clean up images older than 30 days"
+msgstr "清理 30 天前的图片"
+
+#: ../contents/ui/config.qml
+msgid "History:"
+msgstr "历史壁纸："
+
+#: ../contents/ui/config.qml
+msgid "No history wallpapers"
+msgstr "暂无历史壁纸"
+
+#: ../contents/ui/config.qml
+msgid "Previous page"
+msgstr "上一页"
+
+#: ../contents/ui/config.qml
+#, kde-format
+msgid "%1 / %2"
+msgstr "%1 / %2"
+
+#: ../contents/ui/config.qml
+msgid "Next page"
+msgstr "下一页"

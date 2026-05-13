@@ -54,7 +54,24 @@ kpackagetool6 -i tt.launchpadPlasma-v1.19.plasmoid
 
 For development, copy `launchpad-plasma/` to `~/.local/share/plasma/plasmoids/tt.launchpadPlasma/` and restart Plasma Shell.
 
+### 3. Bing Wallpaper
+
+A Bing daily wallpaper plugin for KDE Plasma 6 with history browsing.
+
+**Features:**
+- Auto-fetch Bing daily wallpaper
+- Archive history wallpapers to `~/Pictures/bing-wallpaper-source/`
+- Browse and switch between history wallpapers via right-click menu
+- Configurable image positioning (crop, stretch, fit, center, tile)
+- Clean up old wallpapers (older than 30 days)
+- Chinese and English localization
+
+**Installation:**
+
+For development, copy `bing-wallpaper-source/` to `~/.local/share/plasma/wallpapers/com.wenyin.bingwallpapersource/` and restart Plasma Shell.
+
 ## License
 
 - kde-control-station: [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)
 - launchpad-plasma: [GPL-2.0+](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
+- bing-wallpaper-source: [GPL-3.0-or-later](https://www.gnu.org/licenses/gpl-3.0.en.html)

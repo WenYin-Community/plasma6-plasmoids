@@ -1,0 +1,108 @@
+# Translation of Bing Wallpaper Source in LANGUAGE
+# Copyright (C) 2026
+# This file is distributed under the same license as the Bing Wallpaper Source package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Bing Wallpaper Source\n"
+"Report-Msgid-Bugs-To: https://github.com/WenYin-Community/plasma6-plasmoids/tree/plasma6\n"
+"POT-Creation-Date: 2026-05-13 00:00+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: ../contents/ui/main.qml
+msgid "Refresh today's wallpaper"
+msgstr ""
+
+#: ../contents/ui/main.qml
+msgid "Previous"
+msgstr ""
+
+#: ../contents/ui/main.qml
+msgid "Next"
+msgstr ""
+
+#: ../contents/ui/main.qml
+msgid "Search image info"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Positioning:"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Scaled and cropped"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Scaled"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Scaled, keep proportions"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Centered"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Tiled"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Background color:"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Select Background Color"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Network:"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Update when using metered network connection"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Actions:"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Open current image"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Clean up images older than 30 days"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "History:"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "No history wallpapers"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Previous page"
+msgstr ""
+
+#: ../contents/ui/config.qml
+#, kde-format
+msgid "%1 / %2"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Next page"
+msgstr ""

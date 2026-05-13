@@ -30,6 +30,7 @@ jobs:
 
           kcs_version="$(python3 -c 'import json; print(json.load(open("kde-control-station/package/metadata.json"))["KPlugin"]["Version"])')"
           launchpad_version="$(python3 -c 'import json; print(json.load(open("launchpad-plasma/metadata.json"))["KPlugin"]["Version"])')"
+          bws_version="$(python3 -c 'import json; print(json.load(open("bing-wallpaper-source/metadata.json"))["KPlugin"]["Version"])')"
 
           for po in kde-control-station/package/translate/*.po; do
             [ -f "$po" ] || continue
@@ -45,6 +46,14 @@ jobs:
             msgfmt -o "$mo" "$po"
           done
 
+          for po in bing-wallpaper-source/translate/*.po; do
+            [ -f "$po" ] || continue
+            locale="$(basename "$po" .po)"
+            mo_dir="bing-wallpaper-source/contents/locale/$locale/LC_MESSAGES"
+            mkdir -p "$mo_dir"
+            msgfmt -o "$mo_dir/plasma_wallpaper_com.wenyin.bingwallpapersource.mo" "$po"
+          done
+
           (
             cd kde-control-station/package
             zip -qr "../../dist/KdeControlStation-v${kcs_version}.plasmoid" . -x "translate/*"
@@ -53,6 +62,11 @@ jobs:
           (
             cd launchpad-plasma
             zip -qr "../dist/tt.launchpadPlasma-v${launchpad_version}.plasmoid" . -x "README.md"
+          )
+
+          (
+            cd bing-wallpaper-source
+            zip -qr "../dist/BingWallpaper-v${bws_version}.plasmoid" . -x "translate/*"
           )
 
           ls -lh dist

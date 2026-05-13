@@ -1,0 +1,19 @@
+{
+  "KPackageStructure": "Plasma/Wallpaper",
+  "KPlugin": {
+    "Id": "com.wenyin.bingwallpapersource",
+    "Version": "1.19",
+    "Name": "Bing Wallpaper",
+    "Name[zh_CN]": "必应壁纸",
+    "Description": "Bing daily wallpaper with history browsing",
+    "Description[zh_CN]": "Bing 每日壁纸，支持历史切换",
+    "Icon": "preferences-desktop-wallpaper",
+    "License": "GPL-3.0-or-later",
+    "Authors": [
+      {
+        "Name": "WenYin Community"
+      }
+    ],
+    "Website": "https://github.com/WenYin-Community/plasma6-plasmoids"
+  }
+}

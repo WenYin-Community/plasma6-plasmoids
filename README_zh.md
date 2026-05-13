@@ -54,7 +54,24 @@ kpackagetool6 -i tt.launchpadPlasma-v1.19.plasmoid
 
 开发调试时，可将 `launchpad-plasma/` 复制到 `~/.local/share/plasma/plasmoids/tt.launchpadPlasma/`，然后重启 Plasma Shell。
 
+### 3. 必应壁纸
+
+KDE Plasma 6 Bing 每日壁纸插件，支持历史壁纸浏览。
+
+**功能特性：**
+- 自动获取 Bing 每日壁纸
+- 历史壁纸自动归档至 `~/Pictures/bing-wallpaper-source/`
+- 右键菜单浏览和切换历史壁纸
+- 可配置壁纸定位方式（裁剪、拉伸、适应、居中、平铺）
+- 清理 30 天前的旧壁纸
+- 支持中文和英文本地化
+
+**安装方法：**
+
+开发调试时，可将 `bing-wallpaper-source/` 复制到 `~/.local/share/plasma/wallpapers/com.wenyin.bingwallpapersource/`，然后重启 Plasma Shell。
+
 ## 许可证
 
 - kde-control-station：[GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)
 - launchpad-plasma：[GPL-2.0+](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
+- bing-wallpaper-source：[GPL-3.0-or-later](https://www.gnu.org/licenses/gpl-3.0.en.html)
