@@ -9,9 +9,12 @@ import org.kde.kquickcontrols as KQC2
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.plasma5support as Plasma5Support
 
-Kirigami.FormLayout {
+ColumnLayout {
     id: root
-    twinFormLayouts: parentLayout
+
+    property var configDialog
+    property var wallpaperConfiguration: wallpaper.configuration
+    property var parentLayout
 
     property string cfg_SelectedFile
     property int cfg_FillMode
@@ -91,167 +94,179 @@ Kirigami.FormLayout {
         ensureSelectedFile();
     }
 
-    QQC2.ComboBox {
-        id: resizeComboBox
-        Kirigami.FormData.label: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","Positioning:")
-        model: [
-            { label: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","Scaled and cropped"), fillMode: Image.PreserveAspectCrop },
-            { label: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","Scaled"), fillMode: Image.Stretch },
-            { label: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","Scaled, keep proportions"), fillMode: Image.PreserveAspectFit },
-            { label: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","Centered"), fillMode: Image.Pad },
-            { label: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","Tiled"), fillMode: Image.Tile }
-        ]
+    spacing: 0
 
-        textRole: "label"
-        onActivated: cfg_FillMode = model[currentIndex].fillMode
-        Component.onCompleted: {
-            for (var i = 0; i < model.length; i++) {
-                if (model[i].fillMode === cfg_FillMode) {
-                    currentIndex = i;
-                    return;
-                }
-            }
-            currentIndex = 0;
-        }
-    }
+    Kirigami.FormLayout {
+        id: formLayout
 
-    KQC2.ColorButton {
-        id: colorButton
-        Kirigami.FormData.label: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","Background color:")
-        dialogTitle: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","Select Background Color")
-    }
-
-    QQC2.CheckBox {
-        Kirigami.FormData.label: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","Network:")
-        text: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","Update when using metered network connection")
-        checked: cfg_UpdateOverMeteredConnection === 1
-        onToggled: cfg_UpdateOverMeteredConnection = checked ? 1 : 0
-    }
-
-    Kirigami.Separator {
-        Kirigami.FormData.isSection: true
-    }
-
-    RowLayout {
-        Kirigami.FormData.label: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","Actions:")
-
-        QQC2.Button {
-            text: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","Open current image")
-            icon.name: "document-open"
-            enabled: cfg_SelectedFile && cfg_SelectedFile.length > 0
-            onClicked: Qt.openUrlExternally("file://" + root.selectedFilePath())
-        }
-
-        QQC2.Button {
-            text: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","Clean up images older than 30 days")
-            icon.name: "edit-clear-history"
-            onClicked: cleanupExec.connectSource("find " + shellQuote(root.archiveDir) + " -maxdepth 1 -type f -name '*.jpg' -mtime +30 -delete")
-        }
-    }
-
-    Item {
-        Kirigami.FormData.label: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","History:")
-        Layout.fillWidth: true
-        Layout.preferredHeight: thumbsColumn.implicitHeight + Kirigami.Units.smallSpacing
-        visible: folderModel.count > 0
-
-        FolderListModel {
-            id: folderModel
-            folder: "file://" + root.archiveDir
-            nameFilters: ["*.jpg"]
-            sortField: FolderListModel.Name
-            sortReversed: true
-            showDirs: false
-
-            onCountChanged: root.ensureSelectedFile()
-            onStatusChanged: {
-                if (status === FolderListModel.Ready) {
-                    root.ensureSelectedFile();
-                }
+        Component.onCompleted: function() {
+            if (typeof appearanceRoot !== "undefined") {
+                twinFormLayouts.push(appearanceRoot.parentLayout);
             }
         }
 
-        ColumnLayout {
-            id: thumbsColumn
-            anchors.left: parent.left
-            anchors.right: parent.right
-            spacing: Kirigami.Units.smallSpacing
+        QQC2.ComboBox {
+            id: resizeComboBox
+            Kirigami.FormData.label: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","Positioning:")
+            model: [
+                { label: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","Scaled and cropped"), fillMode: Image.PreserveAspectCrop },
+                { label: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","Scaled"), fillMode: Image.Stretch },
+                { label: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","Scaled, keep proportions"), fillMode: Image.PreserveAspectFit },
+                { label: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","Centered"), fillMode: Image.Pad },
+                { label: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","Tiled"), fillMode: Image.Tile }
+            ]
 
-            RowLayout {
-                spacing: Kirigami.Units.smallSpacing
+            textRole: "label"
+            onActivated: cfg_FillMode = model[currentIndex].fillMode
+            Component.onCompleted: {
+                for (var i = 0; i < model.length; i++) {
+                    if (model[i].fillMode === cfg_FillMode) {
+                        currentIndex = i;
+                        return;
+                    }
+                }
+                currentIndex = 0;
+            }
+        }
 
-                Repeater {
-                    model: root.pageItemCount
+        KQC2.ColorButton {
+            id: colorButton
+            Kirigami.FormData.label: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","Background color:")
+            dialogTitle: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","Select Background Color")
+        }
 
-                    delegate: Item {
-                        required property int index
-                        property int realIndex: root.pageStart + index
-                        property string fileName: folderModel.get(realIndex, "fileName")
-                        property url fileUrl: folderModel.get(realIndex, "fileUrl")
+        QQC2.CheckBox {
+            Kirigami.FormData.label: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","Network:")
+            text: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","Update when using metered network connection")
+            checked: cfg_UpdateOverMeteredConnection === 1
+            onToggled: cfg_UpdateOverMeteredConnection = checked ? 1 : 0
+        }
 
-                        width: 120
-                        height: 75
+        Kirigami.Separator {
+            Kirigami.FormData.isSection: true
+        }
 
-                        Image {
-                            anchors.fill: parent
-                            anchors.margins: 2
-                            source: parent.fileUrl
-                            fillMode: Image.PreserveAspectCrop
-                            asynchronous: true
-                            smooth: true
-                            sourceSize.width: 240
-                            sourceSize.height: 150
+        RowLayout {
+            Kirigami.FormData.label: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","Actions:")
 
-                            Rectangle {
-                                anchors.fill: parent
-                                color: "transparent"
-                                border.color: cfg_SelectedFile === parent.parent.fileName
-                                    ? Kirigami.Theme.highlightColor
-                                    : (thumbMouse.containsMouse ? Kirigami.Theme.hoverColor : "transparent")
-                                border.width: cfg_SelectedFile === parent.parent.fileName ? 3 : 2
-                                radius: 3
-                            }
-                        }
+            QQC2.Button {
+                text: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","Open current image")
+                icon.name: "document-open"
+                enabled: cfg_SelectedFile && cfg_SelectedFile.length > 0
+                onClicked: Qt.openUrlExternally("file://" + root.selectedFilePath())
+            }
 
-                        MouseArea {
-                            id: thumbMouse
-                            anchors.fill: parent
-                            hoverEnabled: true
-                            cursorShape: Qt.PointingHandCursor
-                            onClicked: root.selectByRealIndex(parent.realIndex)
-                        }
+            QQC2.Button {
+                text: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","Clean up images older than 30 days")
+                icon.name: "edit-clear-history"
+                onClicked: cleanupExec.connectSource("find " + shellQuote(root.archiveDir) + " -maxdepth 1 -type f -name '*.jpg' -mtime +30 -delete")
+            }
+        }
 
-                        QQC2.ToolTip.visible: thumbMouse.containsMouse
-                        QQC2.ToolTip.text: fileName
+        Item {
+            Kirigami.FormData.label: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","History:")
+            Layout.fillWidth: true
+            Layout.preferredHeight: thumbsColumn.implicitHeight + Kirigami.Units.smallSpacing
+            visible: folderModel.count > 0
+
+            FolderListModel {
+                id: folderModel
+                folder: "file://" + root.archiveDir
+                nameFilters: ["*.jpg"]
+                sortField: FolderListModel.Name
+                sortReversed: true
+                showDirs: false
+
+                onCountChanged: root.ensureSelectedFile()
+                onStatusChanged: {
+                    if (status === FolderListModel.Ready) {
+                        root.ensureSelectedFile();
                     }
                 }
             }
 
-            RowLayout {
-                QQC2.Button {
-                    text: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","Previous page")
-                    enabled: root.currentPage > 0
-                    onClicked: root.currentPage -= 1
+            ColumnLayout {
+                id: thumbsColumn
+                anchors.left: parent.left
+                anchors.right: parent.right
+                spacing: Kirigami.Units.smallSpacing
+
+                RowLayout {
+                    spacing: Kirigami.Units.smallSpacing
+
+                    Repeater {
+                        model: root.pageItemCount
+
+                        delegate: Item {
+                            required property int index
+                            property int realIndex: root.pageStart + index
+                            property string fileName: folderModel.get(realIndex, "fileName")
+                            property url fileUrl: folderModel.get(realIndex, "fileUrl")
+
+                            width: 120
+                            height: 75
+
+                            Image {
+                                anchors.fill: parent
+                                anchors.margins: 2
+                                source: parent.fileUrl
+                                fillMode: Image.PreserveAspectCrop
+                                asynchronous: true
+                                smooth: true
+                                sourceSize.width: 240
+                                sourceSize.height: 150
+
+                                Rectangle {
+                                    anchors.fill: parent
+                                    color: "transparent"
+                                    border.color: cfg_SelectedFile === parent.parent.fileName
+                                        ? Kirigami.Theme.highlightColor
+                                        : (thumbMouse.containsMouse ? Kirigami.Theme.hoverColor : "transparent")
+                                    border.width: cfg_SelectedFile === parent.parent.fileName ? 3 : 2
+                                    radius: 3
+                                }
+                            }
+
+                            MouseArea {
+                                id: thumbMouse
+                                anchors.fill: parent
+                                hoverEnabled: true
+                                cursorShape: Qt.PointingHandCursor
+                                onClicked: root.selectByRealIndex(parent.realIndex)
+                            }
+
+                            QQC2.ToolTip.visible: thumbMouse.containsMouse
+                            QQC2.ToolTip.text: fileName
+                        }
+                    }
                 }
 
-                QQC2.Label {
-                    text: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","%1 / %2", root.currentPage + 1, root.totalPages)
-                }
+                RowLayout {
+                    QQC2.Button {
+                        text: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","Previous page")
+                        enabled: root.currentPage > 0
+                        onClicked: root.currentPage -= 1
+                    }
 
-                QQC2.Button {
-                    text: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","Next page")
-                    enabled: root.currentPage < root.totalPages - 1
-                    onClicked: root.currentPage += 1
+                    QQC2.Label {
+                        text: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","%1 / %2", root.currentPage + 1, root.totalPages)
+                    }
+
+                    QQC2.Button {
+                        text: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","Next page")
+                        enabled: root.currentPage < root.totalPages - 1
+                        onClicked: root.currentPage += 1
+                    }
                 }
             }
         }
-    }
 
-    QQC2.Label {
-        Kirigami.FormData.label: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","History:")
-        visible: folderModel.count === 0
-        text: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","No history wallpapers")
-        opacity: 0.6
+        QQC2.Label {
+            Kirigami.FormData.label: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","History:")
+            visible: folderModel.count === 0
+            text: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","No history wallpapers")
+            opacity: 0.6
+        }
     }
 
     Plasma5Support.DataSource {
