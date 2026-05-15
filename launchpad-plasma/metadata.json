@@ -20,7 +20,7 @@
     "License": "GPL-2.0+",
     "Name": "Launchpad Plasma",
     "Name[zh_CN]": "Launchpad 启动器",
-    "Version": "1.19",
+    "Version": "1.29",
     "Website": "https://github.com/WenYin-Community/plasma6-plasmoids"
   },
   "X-Plasma-API-Minimum-Version": "6.0",

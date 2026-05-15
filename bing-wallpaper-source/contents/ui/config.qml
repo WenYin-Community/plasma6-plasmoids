@@ -19,6 +19,9 @@ Kirigami.FormLayout {
     property int cfg_UpdateOverMeteredConnection
     property alias formLayout: root
 
+    // 实时预览属性
+    property string previewSelectedFile: ""
+
     property int pageSize: 5
     property int currentPage: 0
     readonly property int totalPages: Math.max(1, Math.ceil(folderModel.count / pageSize))
@@ -78,7 +81,13 @@ Kirigami.FormLayout {
         if (realIndex < 0 || realIndex >= folderModel.count) {
             return;
         }
-        cfg_SelectedFile = folderModel.get(realIndex, "fileName");
+        var fileName = folderModel.get(realIndex, "fileName");
+        cfg_SelectedFile = fileName;
+        previewSelectedFile = fileName;
+        // 通过配置系统通知 main.qml 进行实时预览
+        if (typeof root.configuration !== "undefined") {
+            root.configuration.SelectedFile = fileName;
+        }
         ensureSelectedFile();
     }
 

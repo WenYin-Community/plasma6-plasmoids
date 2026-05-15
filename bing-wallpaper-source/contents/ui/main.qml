@@ -17,7 +17,10 @@ WallpaperItem {
     property int selectedIndex: 0
     property int refreshNonce: 0
     property string pendingAction: ""
+    property bool archiveLoaded: false
     readonly property string selectedFile: (root.configuration.SelectedFile || "").toString()
+    property string lastAppliedFile: ""
+    property string previewFile: ""
 
     readonly property string selectedArchivePath: {
         if (selectedIndex < 0 || selectedIndex >= archiveFiles.length) {
@@ -38,13 +41,13 @@ WallpaperItem {
         PlasmaCore.Action {
             text: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","Previous")
             icon.name: "go-previous"
-            enabled: root.selectedIndex < root.archiveFiles.length - 1
+            enabled: root.archiveLoaded && root.archiveFiles.length > 0 && root.selectedIndex < root.archiveFiles.length - 1
             onTriggered: root.selectArchiveByIndex(root.selectedIndex + 1)
         },
         PlasmaCore.Action {
             text: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","Next")
             icon.name: "go-next"
-            enabled: root.selectedIndex > 0
+            enabled: root.archiveLoaded && root.archiveFiles.length > 0 && root.selectedIndex > 0
             onTriggered: root.selectArchiveByIndex(root.selectedIndex - 1)
         },
         PlasmaCore.Action {
@@ -113,23 +116,26 @@ WallpaperItem {
         }
         selectedIndex = idx;
         root.configuration.SelectedFile = archiveFiles[idx];
-        imageView.loadImage();
+        lastAppliedFile = archiveFiles[idx];
+        // imageSource 会自动更新，触发 onImageSourceChanged 调用 loadImage
     }
 
     function syncSelectedIndex() {
-        if (archiveFiles.length === 0) {
+        if (!archiveLoaded || archiveFiles.length === 0) {
             selectedIndex = 0;
-            root.configuration.SelectedFile = "";
             imageView.loadImage();
             return;
         }
 
-        var idx = archiveFiles.indexOf(selectedFile);
+        var targetFile = selectedFile || lastAppliedFile;
+        var idx = archiveFiles.indexOf(targetFile);
         if (idx < 0) {
             idx = 0;
-            root.configuration.SelectedFile = archiveFiles[0];
         }
-        selectedIndex = idx;
+        if (selectedIndex !== idx) {
+            selectedIndex = idx;
+            lastAppliedFile = archiveFiles[idx];
+        }
         imageView.loadImage();
     }
 
@@ -151,7 +157,27 @@ WallpaperItem {
     }
 
     onImageSourceChanged: Qt.callLater(imageView.loadImage)
-    onSelectedFileChanged: Qt.callLater(syncSelectedIndex)
+    onSelectedFileChanged: {
+        if (selectedFile && selectedFile.length > 0) {
+            lastAppliedFile = selectedFile;
+            previewFile = selectedFile;
+        }
+        Qt.callLater(syncSelectedIndex);
+    }
+    onPreviewFileChanged: {
+        if (previewFile && previewFile.length > 0) {
+            var idx = archiveFiles.indexOf(previewFile);
+            if (idx >= 0 && idx !== selectedIndex) {
+                selectedIndex = idx;
+                imageView.loadImage();
+            }
+        }
+    }
+    onArchiveLoadedChanged: {
+        if (archiveLoaded) {
+            Qt.callLater(syncSelectedIndex);
+        }
+    }
 
     PotdBackend {
         id: backend
@@ -281,6 +307,7 @@ WallpaperItem {
             if (pendingAction === "list") {
                 if (!stdout) {
                     root.archiveFiles = [];
+                    root.archiveLoaded = true;
                     root.syncSelectedIndex();
                     return;
                 }
@@ -288,6 +315,7 @@ WallpaperItem {
                 files.sort();
                 files.reverse();
                 root.archiveFiles = files;
+                root.archiveLoaded = true;
                 root.syncSelectedIndex();
                 return;
             }
