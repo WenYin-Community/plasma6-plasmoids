@@ -1,5 +1,6 @@
 {
   "KPackageStructure": "Plasma/Wallpaper",
+  "X-Plasma-API-Minimum-Version": "6.0",
   "KPlugin": {
     "Id": "com.wenyin.bingwallpapersource",
     "Version": "1.29.1",
