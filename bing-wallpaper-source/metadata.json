@@ -2,7 +2,7 @@
   "KPackageStructure": "Plasma/Wallpaper",
   "KPlugin": {
     "Id": "com.wenyin.bingwallpapersource",
-    "Version": "1.29",
+    "Version": "1.29.1",
     "Name": "Bing Wallpaper",
     "Name[zh_CN]": "必应壁纸",
     "Description": "Bing daily wallpaper with history browsing",
