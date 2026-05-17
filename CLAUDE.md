@@ -59,8 +59,12 @@ cd kde-control-station && sh ./build --i18n-only
 - Wallpaper 使用 `i18nd("catalog_name", "string")`（因运行在 plasmashell 进程中，需显式指定 domain）
 
 **翻译文件位置：**
-- 源文件：`<项目>/translate/*.po`
-- 编译输出：`<项目>/contents/locale/<locale>/LC_MESSAGES/<catalog>.mo`
+- 源文件：`<项目>/translate/*.po`（kde-control-station 在 `package/translate/`）
+- 编译输出：`<项目>/contents/locale/<locale>/LC_MESSAGES/<catalog>.mo`（kde-control-station 在 `package/contents/locale/`）
+
+**本地化目录命名规则：**
+- 简体中文统一使用 `zh_CN`（无 `zh_Hans`）
+- 繁体中文统一使用 `zh_TW`（无 `zh_Hant`）
 
 ## CI/CD
 

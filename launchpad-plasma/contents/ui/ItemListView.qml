@@ -97,7 +97,7 @@ FocusScope {
         }
     }
 
-    MouseEventListener {
+    MouseArea {
         id: listener
 
         anchors.fill: parent
