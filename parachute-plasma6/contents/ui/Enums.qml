@@ -1,13 +1,11 @@
-    import QtQuick 2.12
+import QtQuick
 
-    Item {
-        enum Position {
-            Top, Bottom, Left, Right
-        }
-
-        enum SearchMethod {
-            Krunner, Filter
-        }
+Item {
+    enum Position {
+        Top, Bottom, Left, Right
     }
 
-
+    enum SearchMethod {
+        Krunner, Filter
+    }
+}

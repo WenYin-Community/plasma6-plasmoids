@@ -1,8 +1,10 @@
-import QtQuick 2.12
-import QtQuick.Controls 2.12
-import org.kde.kwin 2.0 as KWinComponents
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 3.0 as PlasmaComponents
+import QtQuick
+import QtQuick.Controls
+import org.kde.kwin as KWinComponents
+import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.components as PlasmaComponents
+import org.kde.ksvg as KSvg
+import org.kde.kirigami as Kirigami
 
 Item {
     id: clientItem
@@ -88,7 +90,7 @@ Item {
         NumberAnimation { duration: mainWindow.configAnimationsDuration; easing.type: mainWindow.easingType; }
     }
 
-    PlasmaCore.FrameSvgItem {
+    KSvg.FrameSvgItem {
         id: selectedFrame
         width: clientItem.gridWidth
         height: clientItem.gridHeight
@@ -105,9 +107,9 @@ Item {
         visible: desktopItem.big && mainWindow.activated && !mainWindow.animating && mainWindow.configShowWindowTitles && !clientThumbnail.Drag.active
         spacing: 10
 
-        PlasmaCore.IconItem {
+        Kirigami.Icon {
             id: icon
-            height: mainWindow.clientsDecorationsHeight // PlasmaCore.Units.iconSizes.medium?
+            height: mainWindow.clientsDecorationsHeight
             width: height
             source: clientItem.client ? clientItem.client.icon : null
         }
@@ -154,7 +156,7 @@ Item {
         onClicked: clientItem.client.closeWindow();
     }
 
-    KWinComponents.ThumbnailItem {
+    PlasmaCore.WindowThumbnail {
         id: clientThumbnail
         anchors.fill: Drag.active ? undefined : parent // tried to change in the state, but doesn't work
         anchors.margins: thumbnailPadding
@@ -162,10 +164,8 @@ Item {
                 thumbnailPadding + mainWindow.clientsDecorationsHeight :
                 thumbnailPadding
         Drag.source: clientItem.client
-        wId: clientItem.client ? clientItem.client.internalId : "{00000000-0000-0000-0000-000000000000}"
+        winId: clientItem.client ? clientItem.client.windowId : 0
         clip: true
-        clipTo: screenItem
-        renderTarget: KWinComponents.ThumbnailItem.FramebufferObject
         visible: mainWindow.activated
 
         property int thumbnailPadding: desktopItem.clientsPadding + noBorderSpacing

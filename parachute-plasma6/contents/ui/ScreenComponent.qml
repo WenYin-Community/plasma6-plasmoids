@@ -1,8 +1,9 @@
-import QtQuick 2.12
-import QtQuick.Controls 2.12
-import QtGraphicalEffects 1.12
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 3.0 as PlasmaComponents
+import QtQuick
+import QtQuick.Controls
+import Qt5Compat.GraphicalEffects
+import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.components as PlasmaComponents
+import org.kde.kirigami as Kirigami
 
 Item {
     id: screenItem
@@ -62,10 +63,10 @@ Item {
                 width: screenItem.width
 
                 desktopsFullSize: (desktopsBar.height - desktopsWrapper.padding * 2) * screenItem.aspectRatio
-                shrinkDesktopsToFit: desktopsBar.width < (desktopsBar.desktopsFullSize + desktopsWrapper.spacing) * workspace.desktops +
+                shrinkDesktopsToFit: desktopsBar.width < (desktopsBar.desktopsFullSize + desktopsWrapper.spacing) * KWinComponents.Workspace.desktops +
                         2 * desktopsWrapper.padding + removeDesktop.width + addDesktop.width
                 desktopsWidth: desktopsBar.shrinkDesktopsToFit ?
-                        ((desktopsBar.width - (2 * desktopsWrapper.padding + removeDesktop.width + addDesktop.width)) / workspace.desktops) - desktopsWrapper.spacing :
+                        ((desktopsBar.width - (2 * desktopsWrapper.padding + removeDesktop.width + addDesktop.width)) / KWinComponents.Workspace.desktops) - desktopsWrapper.spacing :
                         desktopsBar.desktopsFullSize
                 desktopsHeight: desktopsBar.desktopsWidth / screenItem.aspectRatio
             }
@@ -122,11 +123,11 @@ Item {
                 height: screenItem.height
 
                 desktopsFullSize: (desktopsBar.width - desktopsWrapper.padding * 2) / screenItem.aspectRatio
-                shrinkDesktopsToFit: desktopsBar.height < (desktopsBar.desktopsFullSize + desktopsWrapper.spacing) * workspace.desktops +
+                shrinkDesktopsToFit: desktopsBar.height < (desktopsBar.desktopsFullSize + desktopsWrapper.spacing) * KWinComponents.Workspace.desktops +
                         2 * desktopsWrapper.padding + removeDesktop.height + addDesktop.height
                 desktopsWidth: desktopsBar.desktopsHeight * screenItem.aspectRatio
                 desktopsHeight: desktopsBar.shrinkDesktopsToFit ?
-                        ((desktopsBar.height - (2 * desktopsWrapper.padding + removeDesktop.height + addDesktop.height)) / workspace.desktops) - desktopsWrapper.spacing :
+                        ((desktopsBar.height - (2 * desktopsWrapper.padding + removeDesktop.height + addDesktop.height)) / KWinComponents.Workspace.desktops) - desktopsWrapper.spacing :
                         desktopsBar.desktopsFullSize
             }
 
@@ -172,7 +173,7 @@ Item {
 
         Repeater {
             id: bigDesktopsRepeater
-            model: workspace.desktops
+            model: KWinComponents.Workspace.desktops
 
             DesktopComponent { // Cannot set geometry of SwipeView's root item
                 visible: model.index === mainWindow.currentDesktop
@@ -190,7 +191,7 @@ Item {
             }
         }
 
-        onCurrentIndexChanged: workspace.currentDesktop = currentIndex + 1;
+        onCurrentIndexChanged: KWinComponents.Workspace.currentDesktop = currentIndex + 1;
     }
 
     Item {
@@ -274,7 +275,7 @@ Item {
 
     Rectangle {
         id: milouBackground
-        color: PlasmaCore.Theme.viewBackgroundColor ? PlasmaCore.Theme.viewBackgroundColor : "#111111"
+        color: Kirigami.Theme.viewBackgroundColor ? Kirigami.Theme.viewBackgroundColor : "#111111"
         opacity: 0.9
         visible: searchField.focus && searchField.text && mainWindow.configSearchMethod === Enums.SearchMethod.Krunner
         radius: 4
@@ -336,16 +337,16 @@ Item {
                 }
 
                 onClicked: {
-                    const currentDesktop = workspace.currentDesktop === workspace.desktops ?
-                            workspace.currentDesktop - 1 : workspace.currentDesktop;
-                    workspace.desktops--; // workspace.removeDesktop(desktopIndex);
-                    workspace.currentDesktop = currentDesktop; // Avoid going to the first desktop
+                    const currentDesktop = KWinComponents.Workspace.currentDesktop === KWinComponents.Workspace.desktops ?
+                            KWinComponents.Workspace.currentDesktop - 1 : KWinComponents.Workspace.currentDesktop;
+                    KWinComponents.Workspace.desktops--; // KWinComponents.Workspace.removeDesktop(desktopIndex);
+                    KWinComponents.Workspace.currentDesktop = currentDesktop; // Avoid going to the first desktop
                 }
             }
 
             Repeater {
                 id: desktopsBarRepeater
-                model: workspace.desktops
+                model: KWinComponents.Workspace.desktops
 
                 DesktopComponent {
                     width: desktopsBar.desktopsWidth
@@ -380,9 +381,9 @@ Item {
                 }
 
                 onClicked: {
-                    const currentDesktop = workspace.currentDesktop;
-                    workspace.desktops++; // workspace.createDesktop(desktopIndex + 1, "New desktop");
-                    workspace.currentDesktop = currentDesktop; // Avoid going to the first desktop
+                    const currentDesktop = KWinComponents.Workspace.currentDesktop;
+                    KWinComponents.Workspace.desktops++; // KWinComponents.Workspace.createDesktop(desktopIndex + 1, "New desktop");
+                    KWinComponents.Workspace.currentDesktop = currentDesktop; // Avoid going to the first desktop
                 }
             }
         }

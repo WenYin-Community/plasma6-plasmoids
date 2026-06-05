@@ -1,9 +1,10 @@
-import QtQuick 2.12
-import QtQuick.Window 2.12
-import QtQuick.Controls 2.12
-import org.kde.kwin 2.0 as KWinComponents
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.milou 0.3 as Milou
+import QtQuick
+import QtQuick.Window
+import QtQuick.Controls
+import org.kde.kwin as KWinComponents
+import org.kde.plasma.core as PlasmaCore
+import org.kde.milou as Milou
+import org.kde.kirigami as Kirigami
 
 Window {
     id: mainWindow
@@ -15,8 +16,7 @@ Window {
 
     property bool activated: false
     property bool dragging: false
-    property real qtVersion
-    property int currentDesktop: workspace.currentDesktop - 1 // workspace.currentDesktop is one based
+    property int currentDesktop: KWinComponents.Workspace.currentDesktop - 1 // KWinComponents.Workspace.currentDesktop is one based
     property bool horizontalDesktopsLayout: configDesktopsBarPlacement === Enums.Position.Top ||
             configDesktopsBarPlacement === Enums.Position.Bottom
     property int easingType: Easing.OutExpo
@@ -47,7 +47,7 @@ Window {
     property int desktopMargin: 5
     property int desktopsBarSpacing: 15
     property int clientsDecorationsHeight: 24
-    property color highlightColor: PlasmaCore.Theme.highlightColor ? PlasmaCore.Theme.highlightColor : "white"
+    property color highlightColor: Kirigami.Theme.highlightColor ? Kirigami.Theme.highlightColor : "white"
 
     Item {
         id: keyboardHandler
@@ -69,21 +69,21 @@ Window {
                     break;
                 case Qt.Key_Left:
                     if (event.modifiers & Qt.ShiftModifier) {
-                        workspace.slotSwitchDesktopPrevious();
+                        KWinComponents.Workspace.slotSwitchDesktopPrevious();
                     } else {
                         selectedClientItem ? selectNextClientOn(Enums.Position.Left) : selectFirstClient();
                     }
                     break;
                 case Qt.Key_Right:
                     if (event.modifiers & Qt.ShiftModifier) {
-                        workspace.slotSwitchDesktopNext();
+                        KWinComponents.Workspace.slotSwitchDesktopNext();
                     } else {
                         selectedClientItem ? selectNextClientOn(Enums.Position.Right) : selectLastClient();
                     }
                     break;
                 case Qt.Key_Up:
                     if (event.modifiers & Qt.ShiftModifier) {
-                        workspace.slotSwitchDesktopPrevious();
+                        KWinComponents.Workspace.slotSwitchDesktopPrevious();
                     } else {
                         let tmpSelectedClientItem = selectedClientItem;
 
@@ -98,7 +98,7 @@ Window {
                     break;
                 case Qt.Key_Down:
                     if (event.modifiers & Qt.ShiftModifier) {
-                        workspace.slotSwitchDesktopNext()
+                        KWinComponents.Workspace.slotSwitchDesktopNext()
                     } else {
                         selectedClientItem ? selectNextClientOn(Enums.Position.Bottom) : selectLastClient();
                     }
@@ -113,7 +113,7 @@ Window {
 
         Repeater {
             id: screensRepeater
-            model: workspace.numScreens
+            model: KWinComponents.Workspace.numScreens
 
             // Initial full hd dimensions to avoid division by zero on some internal calculations of ScreenComponent
             ScreenComponent {
@@ -123,20 +123,11 @@ Window {
         }
     }
 
-    KWinComponents.ClientModelByScreenAndDesktop {
+    ClientsModel {
         id: clientsByScreenAndDesktop
-        exclusions: configShowNotificationWindows ?
-                KWinComponents.ClientModel.NotAcceptingFocusExclusion | KWinComponents.ClientModel.DockWindowsExclusion |
-                KWinComponents.ClientModel.OtherActivitiesExclusion | KWinComponents.ClientModel.DesktopWindowsExclusion :
-                KWinComponents.ClientModel.NotAcceptingFocusExclusion | KWinComponents.ClientModel.DockWindowsExclusion |
-                KWinComponents.ClientModel.OtherActivitiesExclusion | KWinComponents.ClientModel.DesktopWindowsExclusion |
-                KWinComponents.ClientModel.SkipPagerExclusion | KWinComponents.ClientModel.SwitchSwitcherExclusion;
-    }
-
-    KWinComponents.ClientFilterModel {
-        id: clientsFilterModel
-        clientModel: clientsByScreenAndDesktop
-        filter: mainWindow.configSearchMethod === Enums.SearchMethod.Krunner ? "" : searchText
+        workspaceRef: KWinComponents.Workspace
+        searchText: mainWindow.configSearchMethod === Enums.SearchMethod.Krunner ? "" : mainWindow.searchText
+        showNotificationWindows: mainWindow.configShowNotificationWindows
     }    
 
     // Milou.ResultsView doesn't work inside a Repeater so it had to be placed here when it should be in ScreenComponent.
@@ -152,13 +143,19 @@ Window {
         onActivated: mainWindow.activated = false;
     }
 
-    KWinComponents.DBusCall {
+    // Reconfigure KWin via D-Bus (replaces Plasma 5 DBusCall)
+    QtObject {
         id: kwinReconfigure
-        service: "org.kde.KWin"; path: "/KWin"; method: "reconfigure";
+        function call() {
+            Qt.createQmlObject(
+                'import QtQuick; import org.kde.plasma.workspace.dbus as DBus; DBus.DBusCall { service: "org.kde.KWin"; path: "/KWin"; iface: "org.kde.KWin"; method: "reconfigure"; Component.onCompleted: { call(); destroy(); } }',
+                mainWindow, "kwinReconfigureCaller"
+            );
+        }
     }
 
     Connections {
-        target: workspace
+        target: KWinComponents.Workspace
         function onClientActivated(client) { getExternallySelectedClient(); }
         function onNumberScreensChanged(count) { updateScreens(); }
         function onScreenResized(screen) { updateScreens(); }
@@ -173,7 +170,7 @@ Window {
     // Get keyboard focus back when this script is activated and a client is activated externally
     Timer {
         id: requestActivateTimer; interval: 10; repeat: true; triggeredOnStart: true;
-        running: mainWindow.activated && workspace.activeClient
+        running: mainWindow.activated && KWinComponents.Workspace.activeClient
         onTriggered: requestActivate();
     }
 
@@ -211,13 +208,12 @@ Window {
                 for (let currentScreen = 0; currentScreen < screensRepeater.count; currentScreen++)
                     screensRepeater.itemAt(currentScreen).bigDesktopsRepeater.itemAt(currentDesktop).gridView = true;
 
-                workspace.activeClient = selectedClientItem ? selectedClientItem.client : externallySelectedClient;
+                KWinComponents.Workspace.activeClient = selectedClientItem ? selectedClientItem.client : externallySelectedClient;
             }
         }
     }
 
     Component.onCompleted: {
-        getQtVersion();
         loadConfig();
         KWin.registerShortcut("Parachute", "Parachute", "Ctrl+Meta+D", function() { selectedClientItem = null; toggleActive(); });
         getExternallySelectedClient();
@@ -265,13 +261,13 @@ Window {
     }
 
     function updateScreens() {
-        mainWindow.width = workspace.displayWidth;
-        mainWindow.height = workspace.displayHeight;
+        mainWindow.width = KWinComponents.Workspace.displayWidth;
+        mainWindow.height = KWinComponents.Workspace.displayHeight;
 
         let screensOnPositionZero = 0;
         for (let currentScreen = 0; currentScreen < screensRepeater.count; currentScreen++) {
             // KWin.ScreenArea not working here, but KWin.ScreenArea === 7
-            const screenRect = workspace.clientArea(7, currentScreen, workspace.currentDesktop);
+            const screenRect = KWinComponents.Workspace.clientArea(7, currentScreen, KWinComponents.Workspace.currentDesktop);
             if (screenRect.x === 0 && screenRect.y === 0) {
                 if (screensOnPositionZero > 0) return;
 
@@ -284,13 +280,13 @@ Window {
             currentScreenItem.width = screenRect.width;
             currentScreenItem.height = screenRect.height;
 
-            if (qtVersion >= 5.14 && !currentScreenItem.wheelHandlerCreated) {
+            if (!currentScreenItem.wheelHandlerCreated) {
                 Qt.createComponent("WheelHandlerComponent.qml").createObject(currentScreenItem);
                 currentScreenItem.wheelHandlerCreated = true;
             }
         }
 
-        const clients = workspace.clientList();
+        const clients = KWinComponents.Workspace.clientList();
         for (let i = 0; i < clients.length; i++) {
             if (clients[i].desktopWindow) {
                 screensRepeater.itemAt(clients[i].screen).desktopBackground.winId = clients[i].windowId;
@@ -301,14 +297,14 @@ Window {
     }
 
     function getExternallySelectedClient() {
-        if (workspace.activeClient) {
-            externallySelectedClient = workspace.activeClient;
+        if (KWinComponents.Workspace.activeClient) {
+            externallySelectedClient = KWinComponents.Workspace.activeClient;
 
             // Ugly code for KWin < 5.20
-            if (workspace.activeClient.desktopWindow) {
-                const currentScreenItem = screensRepeater.itemAt(workspace.activeClient.screen);
+            if (KWinComponents.Workspace.activeClient.desktopWindow) {
+                const currentScreenItem = screensRepeater.itemAt(KWinComponents.Workspace.activeClient.screen);
                 if (currentScreenItem.desktopBackground.winId === 0)
-                    currentScreenItem.desktopBackground.winId = workspace.activeClient.windowId;
+                    currentScreenItem.desktopBackground.winId = KWinComponents.Workspace.activeClient.windowId;
             }
         }
     }
@@ -428,9 +424,4 @@ Window {
         }
     }
 
-    function getQtVersion() {
-        const regexpNames = /Qt Version: (\d+.\d+).\d+/mg;
-        const match = regexpNames.exec(workspace.supportInformation());
-        if (match) qtVersion = match[1];
-    }
 }

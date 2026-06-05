@@ -1,4 +1,5 @@
-import QtQuick 2.14
+import QtQuick
+import org.kde.kwin as KWinComponents
 
 Item {
     anchors.fill: parent
@@ -12,7 +13,7 @@ Item {
             if (active) return;
 
             if (wheelDelta >= 120 || wheelDelta <= -120) {
-                wheelDelta > 0 ? workspace.slotSwitchDesktopPrevious() : workspace.slotSwitchDesktopNext();
+                wheelDelta > 0 ? KWinComponents.Workspace.slotSwitchDesktopPrevious() : KWinComponents.Workspace.slotSwitchDesktopNext();
                 wheelDelta = 0;
             }
         }

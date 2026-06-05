@@ -1,0 +1,23 @@
+{
+  "KPackageStructure": "KWin/Script",
+  "KPlugin": {
+    "Authors": [
+      {
+        "Name": "Tiago Corrêa",
+        "Email": "tcorreabr@gmail.com"
+      }
+    ],
+    "Name": "Parachute",
+    "Description": "Windows and desktops from above",
+    "Icon": "preferences-system-windows-effect-presentwindows",
+    "Id": "Parachute",
+    "License": "GPL-3.0-or-later",
+    "Version": "0.10.0",
+    "EnabledByDefault": true
+  },
+  "X-Plasma-API": "declarativescript",
+  "X-Plasma-MainScript": "ui/main.qml",
+  "X-KDE-Library": "kwin/effects/configs/kcm_kwin4_genericscripted",
+  "X-KDE-PluginKeyword": "Parachute",
+  "X-KDE-ParentComponents": ["Parachute"]
+}

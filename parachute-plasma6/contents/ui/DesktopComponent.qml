@@ -1,7 +1,8 @@
-import QtQuick 2.12
-import QtQuick.Controls 2.12
-import QtQml.Models 2.2
-import QtGraphicalEffects 1.12
+import QtQuick
+import QtQuick.Controls
+import QtQml.Models
+import Qt5Compat.GraphicalEffects
+import org.kde.kwin as KWinComponents
 
 Item {
     id: desktopItem
@@ -65,7 +66,7 @@ Item {
 
     ToolTip {
         visible: !big && hoverHandler.hovered
-        text: workspace.desktopName(desktopIndex + 1);
+        text: KWinComponents.Workspace.desktopName(desktopIndex + 1);
         delay: 1000
         timeout: 5000
     }
@@ -108,15 +109,15 @@ Item {
                     if (drag.source === mainWindow.externallySelectedClient) {
                         const tmpDragSourceDesktop = drag.source.desktop;
                         drag.source.desktop = desktopIndex + 1;
-                        workspace.currentDesktop = desktopIndex + 1;
-                        workspace.currentDesktop = tmpDragSourceDesktop; // Change desktop to select a new mainWindow.externallySelectedClient
+                        KWinComponents.Workspace.currentDesktop = desktopIndex + 1;
+                        KWinComponents.Workspace.currentDesktop = tmpDragSourceDesktop; // Change desktop to select a new mainWindow.externallySelectedClient
                     } else {
                         drag.source.desktop = desktopIndex + 1;
                     }
                 }
 
                 if (screenItem.screenIndex !== drag.source.screen && drag.source.moveableAcrossScreens)
-                    workspace.sendClientToScreen(drag.source, screenItem.screenIndex);
+                    KWinComponents.Workspace.sendClientToScreen(drag.source, screenItem.screenIndex);
             }
         }
 
@@ -166,10 +167,10 @@ Item {
                 switch (eventPoint.event.button) {
                     case Qt.LeftButton:
                     case Qt.NoButton:
-                        if (workspace.currentDesktop === model.index + 1)
+                        if (KWinComponents.Workspace.currentDesktop === model.index + 1)
                             mainWindow.toggleActive();
                         else
-                            workspace.currentDesktop = model.index + 1;
+                            KWinComponents.Workspace.currentDesktop = model.index + 1;
                         break;
                     case Qt.MiddleButton:
                         if (mainWindow.selectedClientItem && mainWindow.configCloseOnMiddleClick)
@@ -190,8 +191,7 @@ Item {
 
     DelegateModel {
         id: clientsModel
-        model: clientsFilterModel
-        rootIndex: clientsFilterModel.index(desktopItem.desktopIndex, 0, clientsFilterModel.index(screenItem.screenIndex,0))
+        model: clientsByScreenAndDesktop
         filterOnGroup: "showing"
 
         delegate: ClientComponent {}
@@ -205,8 +205,11 @@ Item {
             for (let i = 0; i < items.count; ++i) {
                 const item = items.get(i);
                 const client = item.model.client;
+                // Filter: must belong to this desktop and screen, and not be Yakuake or krunner
                 const show = client && !client.caption.endsWith(" — Yakuake") && !client.caption.endsWith(" — krunner") &&
-                        client.width !== 0 && client.height !== 0; // To avoid division by zero later
+                        client.width !== 0 && client.height !== 0 &&
+                        item.model.desktop === desktopItem.desktopIndex + 1 &&
+                        item.model.screen === screenItem.screenIndex;
 
                 if (item.inShowing !== show) item.inShowing = !item.inShowing;
             }
