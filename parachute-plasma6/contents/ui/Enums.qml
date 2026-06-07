@@ -1,11 +1,17 @@
 import QtQuick
 
 Item {
+
     enum Position {
-        Top, Bottom, Left, Right
+        Top,
+        Bottom,
+        Left,
+        Right
     }
 
     enum SearchMethod {
-        Krunner, Filter
+        Krunner,
+        Filter
     }
+
 }

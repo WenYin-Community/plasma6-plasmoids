@@ -11,7 +11,7 @@ KDE Plasma 6 小部件集合，包含四个子项目：
 | `kde-control-station/` | Plasma/Applet | `KdeControlStation` | 可用，Plasma 6 |
 | `launchpad-plasma/` | Plasma/Applet | `tt.launchpadPlasma` | 可用，Plasma 6 |
 | `bing-wallpaper-source/` | Plasma/Wallpaper | `com.wenyin.bingwallpapersource` | 可用，Plasma 6 |
-| `parachute-plasma6/` | KWin/Script | `Parachute` | **未移植**，仍是 Plasma 5 代码 |
+| `parachute-plasma6/` | KWin/Script | `Parachute` | ⚠️ **不可用**（代码仍是 KWin 5 API，18+ 不兼容） |
 
 ## 目录结构差异（关键）
 
@@ -35,10 +35,10 @@ bing-wallpaper-source/
 ├── contents/{ui,config,locale}/
 └── translate/*.po
 
-parachute-plasma6/         # Plasma 5 KWin 脚本（未移植）
-├── metadata.desktop       # 老格式，Plasma 6 需要 metadata.json
-├── Makefile               # 使用 kpackagetool5（需改为 kpackagetool6）
-└── contents/ui/*.qml      # 使用 Qt 5 版本化 import（需改为无版本）
+parachute-plasma6/         # KWin 脚本（不可用——KWin 5 API 未迁移）
+├── metadata.json          # 格式正确，但有 KWin 5 遗留字段
+├── Makefile               # 使用 kpackagetool6
+└── contents/ui/*.qml      # 无版本 import，但 API 调用全是 KWin 5
 ```
 
 ## 常用命令
@@ -131,13 +131,14 @@ msgfmt -o contents/locale/<lang>/LC_MESSAGES/plasma_applet_tt.launchpadPlasma.mo
 
 ## parachute-plasma6 注意事项
 
-这是一个 **Plasma 5 的 KWin 脚本**，尚未移植到 Plasma 6。移植需要：
-- `metadata.desktop` → `metadata.json`
-- `kpackagetool5` → `kpackagetool6`
-- Qt 5 版本化 import（`QtQuick 2.12`）→ 无版本 import（`QtQuick`）
-- `QtGraphicalEffects 1.12` → Qt 6 等效模块
-- `org.kde.kwin 2.0` → Plasma 6 KWin 脚本 API
-- 无翻译文件，无 README
+⚠️ **在当前 Plasma 6 系统上无法使用**。尽管已有 `metadata.json` 和无版本 import（表层适配），代码核心仍在调用 **KWin 5 已移除的 API**，约有 18+ 处不兼容，包括：
+- `workspace.numScreens`、`displayWidth/Height`、`clientList()`、`activeClient` 已移除
+- `currentDesktop`/`desktops` 从 int 变为对象类型
+- `client.desktop` → `client.desktops[]`、`client.screen` → `client.output`
+- `client.windowId` 已移除，`WindowThumbnail` 无法工作
+- 全部信号重命名（`clientActivated`→`windowActivated` 等）
+
+无翻译文件，无 README。详细分析见 `AGENTS.md`。
 
 ## 注意事项
 
