@@ -31,6 +31,7 @@ jobs:
           kcs_version="$(python3 -c 'import json; print(json.load(open("kde-control-station/package/metadata.json"))["KPlugin"]["Version"])')"
           launchpad_version="$(python3 -c 'import json; print(json.load(open("launchpad-plasma/metadata.json"))["KPlugin"]["Version"])')"
           bws_version="$(python3 -c 'import json; print(json.load(open("bing-wallpaper-source/metadata.json"))["KPlugin"]["Version"])')"
+          parachute_version="$(python3 -c 'import json; print(json.load(open("parachute-plasma6/metadata.json"))["KPlugin"]["Version"])')"
 
           for po in kde-control-station/package/translate/*.po; do
             [ -f "$po" ] || continue
@@ -69,16 +70,23 @@ jobs:
             zip -qr "../dist/BingWallpaper-v${bws_version}.plasmoid" . -x "translate/*"
           )
 
+          (
+            cd parachute-plasma6
+            zip -qr "../dist/Parachute-v${parachute_version}.kwinscript" . -x ".gitignore" "Makefile" "LICENSE"
+          )
+
           ls -lh dist
 
       - name: Upload workflow artifacts
         uses: actions/upload-artifact@v4
         with:
           name: plasmoid-packages
-          path: dist/*.plasmoid
+          path: |
+            dist/*.plasmoid
+            dist/*.kwinscript
 
       - name: Upload release assets
         if: github.event_name == 'release'
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release upload "${{ github.event.release.tag_name }}" dist/*.plasmoid --clobber
+        run: gh release upload "${{ github.event.release.tag_name }}" dist/*.plasmoid dist/*.kwinscript --clobber
