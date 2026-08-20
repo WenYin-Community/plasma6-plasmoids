@@ -202,3 +202,12 @@ msgstr "背景颜色"
 #: contents/config/config.qml:13
 msgid "General"
 msgstr "通用"
+
+#: ../contents/ui/main.qml
+msgid "Edit Applications…"
+msgstr "编辑应用程序…"
+
+#: ../contents/ui/DashboardRepresentation.qml
+msgctxt "@info:placeholder as in, 'start typing to initiate a search'"
+msgid "Search"
+msgstr "搜索"

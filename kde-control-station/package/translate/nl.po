@@ -1119,3 +1119,75 @@ msgstr ""
 #: ../contents/ui/pages/VolumePage.qml
 msgid "Raise maximum volume"
 msgstr ""
+
+#: ../contents/ui/config/configAppearance.qml ../contents/ui/config/configSupport.qml
+msgid "A modern control station for KDE Plasma 6"
+msgstr ""
+
+#: ../contents/ui/config/configAppearance.qml ../contents/ui/config/configSupport.qml
+msgid "Battery"
+msgstr ""
+
+#: ../contents/ui/config/configAppearance.qml ../contents/ui/config/configSupport.qml
+msgid "Color Scheme Switcher"
+msgstr ""
+
+#: ../contents/ui/config/configAppearance.qml ../contents/ui/config/configSupport.qml
+msgid "Contributors:"
+msgstr ""
+
+#: ../contents/ui/config/configAppearance.qml ../contents/ui/config/configSupport.qml
+msgid "Custom Command Block 1"
+msgstr ""
+
+#: ../contents/ui/config/configAppearance.qml ../contents/ui/config/configSupport.qml
+msgid "Custom Command Block 2"
+msgstr ""
+
+#: ../contents/ui/config/configAppearance.qml ../contents/ui/config/configSupport.qml
+msgid "Flat component"
+msgstr ""
+
+#: ../contents/ui/config/configAppearance.qml ../contents/ui/config/configSupport.qml
+msgid "KDE Control Station"
+msgstr ""
+
+#: ../contents/ui/config/configAppearance.qml ../contents/ui/config/configSupport.qml
+msgid "Repository:"
+msgstr ""
+
+#: ../contents/ui/config/configAppearance.qml ../contents/ui/config/configSupport.qml
+msgid "Screenshot Button"
+msgstr ""
+
+#: ../contents/ui/config/configAppearance.qml ../contents/ui/config/configSupport.qml
+msgid "Show brightness title"
+msgstr ""
+
+#: ../contents/ui/config/configAppearance.qml ../contents/ui/config/configSupport.qml
+msgid "Show volume title"
+msgstr ""
+
+#: ../contents/ui/config/configAppearance.qml ../contents/ui/config/configSupport.qml
+msgid "Thin slider"
+msgstr ""
+
+#: ../contents/ui/config/configAppearance.qml ../contents/ui/config/configSupport.qml
+msgid "Use System highlight color on sliders"
+msgstr ""
+
+#: ../contents/ui/config/configAppearance.qml ../contents/ui/config/configSupport.qml
+msgid "Use System highlight color on toggle buttons"
+msgstr ""
+
+#: ../contents/ui/config/configAppearance.qml ../contents/ui/config/configSupport.qml
+msgid "Use sliders provided by plasma theme"
+msgstr ""
+
+#: ../contents/ui/config/configAppearance.qml ../contents/ui/config/configSupport.qml
+msgid "User Avatar"
+msgstr ""
+
+#: ../contents/ui/config/configAppearance.qml ../contents/ui/config/configSupport.qml
+msgid "Volume Control"
+msgstr ""

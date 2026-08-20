@@ -1047,3 +1047,75 @@ msgstr "提高最大音量"
 
 #~ msgid "cmd"
 #~ msgstr "命令"
+
+#: ../contents/ui/config/configAppearance.qml ../contents/ui/config/configSupport.qml
+msgid "A modern control station for KDE Plasma 6"
+msgstr "基於 KDE Plasma 6 的現代化控制中心"
+
+#: ../contents/ui/config/configAppearance.qml ../contents/ui/config/configSupport.qml
+msgid "Battery"
+msgstr "電池"
+
+#: ../contents/ui/config/configAppearance.qml ../contents/ui/config/configSupport.qml
+msgid "Color Scheme Switcher"
+msgstr "配色方案切換器"
+
+#: ../contents/ui/config/configAppearance.qml ../contents/ui/config/configSupport.qml
+msgid "Contributors:"
+msgstr "貢獻者："
+
+#: ../contents/ui/config/configAppearance.qml ../contents/ui/config/configSupport.qml
+msgid "Custom Command Block 1"
+msgstr "自訂命令區塊 1"
+
+#: ../contents/ui/config/configAppearance.qml ../contents/ui/config/configSupport.qml
+msgid "Custom Command Block 2"
+msgstr "自訂命令區塊 2"
+
+#: ../contents/ui/config/configAppearance.qml ../contents/ui/config/configSupport.qml
+msgid "Flat component"
+msgstr "扁平元件"
+
+#: ../contents/ui/config/configAppearance.qml ../contents/ui/config/configSupport.qml
+msgid "KDE Control Station"
+msgstr "KDE 控制中心"
+
+#: ../contents/ui/config/configAppearance.qml ../contents/ui/config/configSupport.qml
+msgid "Repository:"
+msgstr "儲存庫："
+
+#: ../contents/ui/config/configAppearance.qml ../contents/ui/config/configSupport.qml
+msgid "Screenshot Button"
+msgstr "截圖按鈕"
+
+#: ../contents/ui/config/configAppearance.qml ../contents/ui/config/configSupport.qml
+msgid "Show brightness title"
+msgstr "顯示亮度標題"
+
+#: ../contents/ui/config/configAppearance.qml ../contents/ui/config/configSupport.qml
+msgid "Show volume title"
+msgstr "顯示音量標題"
+
+#: ../contents/ui/config/configAppearance.qml ../contents/ui/config/configSupport.qml
+msgid "Thin slider"
+msgstr "細滑桿"
+
+#: ../contents/ui/config/configAppearance.qml ../contents/ui/config/configSupport.qml
+msgid "Use System highlight color on sliders"
+msgstr "在滑桿上使用系統高亮色"
+
+#: ../contents/ui/config/configAppearance.qml ../contents/ui/config/configSupport.qml
+msgid "Use System highlight color on toggle buttons"
+msgstr "在開關按鈕上使用系統高亮色"
+
+#: ../contents/ui/config/configAppearance.qml ../contents/ui/config/configSupport.qml
+msgid "Use sliders provided by plasma theme"
+msgstr "使用 Plasma 主題提供的滑桿"
+
+#: ../contents/ui/config/configAppearance.qml ../contents/ui/config/configSupport.qml
+msgid "User Avatar"
+msgstr "使用者頭像"
+
+#: ../contents/ui/config/configAppearance.qml ../contents/ui/config/configSupport.qml
+msgid "Volume Control"
+msgstr "音量控制"
