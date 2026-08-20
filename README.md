@@ -70,8 +70,27 @@ A Bing daily wallpaper plugin for KDE Plasma 6 with history browsing.
 
 For development, copy `bing-wallpaper-source/` to `~/.local/share/plasma/wallpapers/com.wenyin.bingwallpapersource/` and restart Plasma Shell.
 
+### 4. Parachute
+
+A KWin script showing windows and desktops from above, ported to the Plasma 6 (KWin 6) API.
+
+**Features:**
+- Full-screen overview of windows and desktops across screens
+- Drag windows between desktops and screens
+- Window search
+
+**Installation:**
+
+```bash
+cd parachute-plasma6
+make install   # kpackagetool6 --type KWin/Script --install .
+```
+
+Uninstall with `make uninstall` (kpackagetool6 --type KWin/Script --remove Parachute).
+
 ## License
 
 - kde-control-station: [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)
 - launchpad-plasma: [GPL-2.0+](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
 - bing-wallpaper-source: [GPL-3.0-or-later](https://www.gnu.org/licenses/gpl-3.0.en.html)
+- parachute-plasma6: [GPL-3.0-or-later](https://www.gnu.org/licenses/gpl-3.0.en.html)

@@ -70,8 +70,27 @@ KDE Plasma 6 Bing 每日壁纸插件，支持历史壁纸浏览。
 
 开发调试时，可将 `bing-wallpaper-source/` 复制到 `~/.local/share/plasma/wallpapers/com.wenyin.bingwallpapersource/`，然后重启 Plasma Shell。
 
+### 4. Parachute
+
+KWin 脚本，从俯视视角展示窗口与桌面，已迁移至 Plasma 6（KWin 6）API。
+
+**功能特性：**
+- 全屏展示所有屏幕上的窗口与桌面总览
+- 拖拽窗口到其他桌面或屏幕
+- 窗口搜索
+
+**安装方法：**
+
+```bash
+cd parachute-plasma6
+make install   # kpackagetool6 --type KWin/Script --install .
+```
+
+卸载使用 `make uninstall`（kpackagetool6 --type KWin/Script --remove Parachute）。
+
 ## 许可证
 
 - kde-control-station：[GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)
 - launchpad-plasma：[GPL-2.0+](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
 - bing-wallpaper-source：[GPL-3.0-or-later](https://www.gnu.org/licenses/gpl-3.0.en.html)
+- parachute-plasma6：[GPL-3.0-or-later](https://www.gnu.org/licenses/gpl-3.0.en.html)
