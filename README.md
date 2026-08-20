@@ -59,11 +59,12 @@ For development, copy `launchpad-plasma/` to `~/.local/share/plasma/plasmoids/tt
 A Bing daily wallpaper plugin for KDE Plasma 6 with history browsing.
 
 **Features:**
-- Auto-fetch Bing daily wallpaper
-- Archive history wallpapers to `~/Pictures/bing-wallpaper-source/`
-- Browse and switch between history wallpapers via right-click menu
+- Fully independent daily fetch from the Bing API (no official wallpaper plugin dependencies)
+- Downloads once per day (first launch); auto refreshes across days
+- History archive capped at the latest 30 wallpapers in `~/Pictures/bing-wallpaper-source/`
+- Click history thumbnails in settings or use the right-click menu to switch instantly
+- Dynamic weather overlay (snow/rain) configurable in settings
 - Configurable image positioning (crop, stretch, fit, center, tile)
-- Clean up old wallpapers (older than 30 days)
 - Chinese and English localization
 
 **Installation:**
