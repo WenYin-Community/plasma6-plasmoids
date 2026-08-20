@@ -9,6 +9,8 @@ import org.kde.kquickcontrols as KQC2
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.plasma5support as Plasma5Support
 
+import "./js/archiveDir.js" as ArchiveDirUtils
+
 Kirigami.FormLayout {
     id: root
     twinFormLayouts: parentLayout
@@ -26,21 +28,7 @@ Kirigami.FormLayout {
     readonly property int pageStart: currentPage * pageSize
     readonly property int pageItemCount: Math.max(0, Math.min(pageSize, folderModel.count - pageStart))
 
-    readonly property string archiveDir: {
-        var pictures = StandardPaths.standardLocations(StandardPaths.PicturesLocation);
-        var dir = pictures.length > 0
-            ? pictures[0].toString()
-            : StandardPaths.standardLocations(StandardPaths.HomeLocation)[0].toString() + "/Pictures";
-        if (dir.startsWith("file://")) {
-            dir = dir.substring(7);
-        }
-        return dir + "/bing-wallpaper-source";
-    }
-
-    function shellQuote(raw) {
-        var s = (raw || "").toString();
-        return "'" + s.split("'").join("'\\''") + "'";
-    }
+    readonly property string archiveDir: ArchiveDirUtils.resolveArchiveDir()
 
     function selectedFilePath() {
         if (!cfg_SelectedFile || cfg_SelectedFile.length === 0) {
@@ -138,7 +126,7 @@ Kirigami.FormLayout {
         QQC2.Button {
             text: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","Clean up images older than 30 days")
             icon.name: "edit-clear-history"
-            onClicked: cleanupExec.connectSource("find " + shellQuote(root.archiveDir) + " -maxdepth 1 -type f -name '*.jpg' -mtime +30 -delete")
+            onClicked: cleanupExec.connectSource("find " + ArchiveDirUtils.shellQuote(root.archiveDir) + " -maxdepth 1 -type f -name '*.jpg' -mtime +30 -delete")
         }
     }
 

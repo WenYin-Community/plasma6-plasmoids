@@ -7,7 +7,6 @@
 import QtQuick
 import QtQuick.Controls
 
-import org.kde.kquickcontrolsaddons
 import org.kde.ksvg as KSvg
 import org.kde.plasma.components as PlasmaComponents
 import org.kde.plasma.extras as PlasmaExtras

@@ -10,13 +10,6 @@ ListModel {
     property var workspaceRef: null
     property string searchText: ""
     property bool showNotificationWindows: false
-    // Exclusion flags (simplified)
-    readonly property int notAcceptingFocusExclusion: 1
-    readonly property int dockWindowsExclusion: 2
-    readonly property int otherActivitiesExclusion: 4
-    readonly property int desktopWindowsExclusion: 8
-    readonly property int skipPagerExclusion: 16
-    readonly property int switchSwitcherExclusion: 32
 
     function updateModel() {
         if (!workspaceRef)

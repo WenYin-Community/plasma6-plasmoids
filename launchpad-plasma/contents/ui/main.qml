@@ -35,7 +35,6 @@ PlasmoidItem {
    compactRepresentation: isDash ? null : compactRepresentation
    fullRepresentation: compactRepresentation
 
-    property Component itemListDialogComponent: Qt.createComponent(Qt.resolvedUrl("./ItemListDialog.qml"))
     property Item dragSource: null
 
     property QtObject globalFavorites: rootModel.favoritesModel
@@ -156,9 +155,33 @@ PlasmoidItem {
         enabled: true
         maxFavorites: -1
 
-        Component.onCompleted: {
-            initForClient("org.kde.plasma.kicker.favorites.instance-287")
-            refresh()
+        function initForKickerInstance(appletId) {
+            initForClient("org.kde.plasma.kicker.favorites.instance-" + appletId);
+            refresh();
+        }
+    }
+
+    // 动态发现 Application Menu (kicker) 实例，替代硬编码 instance ID
+    PlasmaCore.DataSource {
+        id: appletsSource
+        engine: "applets"
+        connectedSources: ["system"]
+        onDataChanged: {
+            for (var key in data) {
+                var info = data[key];
+                if (typeof info === "string") {
+                    try {
+                        info = JSON.parse(info);
+                    } catch (e) {
+                        continue;
+                    }
+                }
+                if (info && info.plugin === "org.kde.plasma.kicker") {
+                    applicationMenuFavoritesModel.initForKickerInstance(info.id !== undefined ? info.id : key);
+                    disconnectSource("system");
+                    break;
+                }
+            }
         }
     }
 

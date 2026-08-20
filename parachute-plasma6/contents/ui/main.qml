@@ -269,7 +269,7 @@ Window {
                     let tmpSelectedClientItem = selectedClientItem;
                     selectedClientItem ? selectNextClientOn(Enums.Position.Top) : selectFirstClient();
                     if (tmpSelectedClientItem === selectedClientItem && searchText && mainWindow.configSearchMethod === Enums.SearchMethod.Filter) {
-                        const screen = selectedClientItem ? selectedClientItem.client.screen : 0;
+                        const screen = selectedClientItem ? KWinComponents.Workspace.screens.indexOf(selectedClientItem.client.output) : 0;
                         screensRepeater.itemAt(screen).searchField.focus = true;
                     }
                 }

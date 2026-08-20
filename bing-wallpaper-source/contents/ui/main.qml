@@ -9,6 +9,8 @@ import org.kde.plasma.plasma5support as Plasma5Support
 import org.kde.plasma.plasmoid
 import org.kde.plasma.wallpapers.potd
 
+import "./js/archiveDir.js" as ArchiveDirUtils
+
 WallpaperItem {
     id: root
 
@@ -30,7 +32,6 @@ WallpaperItem {
     }
     readonly property string imagePath: selectedArchivePath.length > 0 ? selectedArchivePath : backend.localUrl
     readonly property string imageSource: toFileUrl(imagePath)
-    readonly property bool isTodayImage: selectedArchivePath.length > 0 && selectedIndex === 0
 
     contextualActions: [
         PlasmaCore.Action {
@@ -57,11 +58,6 @@ WallpaperItem {
             onTriggered: Qt.openUrlExternally(root.toBingUrl(backend.infoUrl.toString()))
         }
     ]
-
-    function shellQuote(raw) {
-        var s = (raw || "").toString();
-        return "'" + s.split("'").join("'\\''") + "'";
-    }
 
     function toFileUrl(path) {
         if (!path) {
@@ -94,15 +90,18 @@ WallpaperItem {
         return y + m + day;
     }
 
-    function resolveArchiveDir() {
-        var pictures = StandardPaths.standardLocations(StandardPaths.PicturesLocation);
-        var dir = pictures.length > 0
-            ? pictures[0].toString()
-            : StandardPaths.standardLocations(StandardPaths.HomeLocation)[0].toString() + "/Pictures";
-        if (dir.startsWith("file://")) {
-            dir = dir.substring(7);
+    function cleanOldPotdCache() {
+        var cacheBase = StandardPaths.writableLocation(StandardPaths.GenericCacheLocation);
+        if (!cacheBase || !backend.localUrl || backend.localUrl.length === 0) {
+            return;
         }
-        return dir + "/bing-wallpaper-source";
+        if (cacheBase.startsWith("file://")) {
+            cacheBase = cacheBase.substring(7);
+        }
+        var current = backend.localUrl.toString().substring(backend.localUrl.toString().lastIndexOf("/") + 1);
+        runCommand("find " + ArchiveDirUtils.shellQuote(cacheBase + "/plasma_engine_potd")
+            + " -maxdepth 1 -type f -name 'bing:*' ! -name " + ArchiveDirUtils.shellQuote(current)
+            + " ! -name " + ArchiveDirUtils.shellQuote(current + ".json") + " -delete", "clean");
     }
 
     function runCommand(command, action) {
@@ -140,11 +139,11 @@ WallpaperItem {
     }
 
     function ensureArchiveDir() {
-        runCommand("mkdir -p " + shellQuote(archiveDir), "mkdir");
+        runCommand("mkdir -p " + ArchiveDirUtils.shellQuote(archiveDir), "mkdir");
     }
 
     function listArchiveFiles() {
-        runCommand("find " + shellQuote(archiveDir) + " -maxdepth 1 -type f -name '*.jpg' -printf '%f\\n'", "list");
+        runCommand("find " + ArchiveDirUtils.shellQuote(archiveDir) + " -maxdepth 1 -type f -name '*.jpg' -printf '%f\\n'", "list");
     }
 
     function saveTodayImage() {
@@ -152,7 +151,7 @@ WallpaperItem {
             return;
         }
         var target = archiveDir + "/" + todayText() + ".jpg";
-        var cmd = "cp -f " + shellQuote(backend.localUrl) + " " + shellQuote(target);
+        var cmd = "cp -f " + ArchiveDirUtils.shellQuote(backend.localUrl) + " " + ArchiveDirUtils.shellQuote(target);
         runCommand(cmd, "save");
     }
 
@@ -190,6 +189,7 @@ WallpaperItem {
         updateOverMeteredConnection: root.configuration.UpdateOverMeteredConnection
 
         onLocalUrlChanged: {
+            root.cleanOldPotdCache();
             root.saveTodayImage();
             Qt.callLater(imageView.loadImage);
         }
@@ -304,6 +304,10 @@ WallpaperItem {
                 console.warn("BingWallpaperSource command stderr:", stderr);
             }
 
+            if (pendingAction === "clean") {
+                return;
+            }
+
             if (pendingAction === "list") {
                 if (!stdout) {
                     root.archiveFiles = [];
@@ -327,7 +331,7 @@ WallpaperItem {
     }
 
     Component.onCompleted: {
-        archiveDir = resolveArchiveDir();
+        archiveDir = ArchiveDirUtils.resolveArchiveDir();
         ensureArchiveDir();
         listArchiveFiles();
     }
