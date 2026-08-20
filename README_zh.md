@@ -49,7 +49,7 @@ KDE Plasma 6 可配置的应用程序启动器网格。
 使用本地 `.plasmoid` 安装包：
 
 ```bash
-kpackagetool6 -i tt.launchpadPlasma-v1.30.plasmoid
+kpackagetool6 -i tt.launchpadPlasma-v1.31.plasmoid
 ```
 
 开发调试时，可将 `launchpad-plasma/` 复制到 `~/.local/share/plasma/plasmoids/tt.launchpadPlasma/`，然后重启 Plasma Shell。

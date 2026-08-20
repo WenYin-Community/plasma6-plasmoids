@@ -12,7 +12,7 @@
     "Icon": "preferences-system-windows-effect-presentwindows",
     "Id": "Parachute",
     "License": "GPL-3.0-or-later",
-    "Version": "1.30",
+    "Version": "1.31",
     "EnabledByDefault": true
   },
   "X-Plasma-API": "declarativescript",
