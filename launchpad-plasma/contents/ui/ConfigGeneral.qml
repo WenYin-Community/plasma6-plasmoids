@@ -49,6 +49,36 @@ KCM.SimpleKCM {
     property alias cfg_useCustomBackgroundColor: useCustomBackgroundColor.checked
     property string cfg_customBackgroundColor: Plasmoid.configuration.customBackgroundColor
 
+    property var cfg_extraRunners: Plasmoid.configuration.extraRunners
+    property var cfg_favoriteSystemActions: Plasmoid.configuration.favoriteSystemActions
+    property var cfg_hiddenApplications: Plasmoid.configuration.hiddenApplications
+
+    // Defaults（供 KCM 配置加载器使用，与 main.xml 保持一致）
+    property string cfg_iconDefault: "start-here-kde-symbolic"
+    property bool cfg_useCustomButtonImageDefault: false
+    property string cfg_customButtonImageDefault: ""
+    property int cfg_appNameFormatDefault: 0
+    property bool cfg_limitDepthDefault: false
+    property bool cfg_alphaSortDefault: false
+    property bool cfg_showIconsRootLevelDefault: false
+    property int cfg_recentOrderingDefault: 0
+    property bool cfg_showRecentAppsDefault: true
+    property bool cfg_showRecentDocsDefault: true
+    property bool cfg_useExtraRunnersDefault: true
+    property bool cfg_alignResultsToBottomDefault: true
+    property int cfg_appsIconSizeDefault: 3
+    property int cfg_systemIconSizeDefault: 1
+    property int cfg_showSystemIconsDefault: 1
+    property int cfg_gridColumnsDefault: 6
+    property int cfg_gridRowsDefault: 4
+    property bool cfg_useCustomGridSizeDefault: false
+    property double cfg_backgroundOpacityDefault: 0.4
+    property bool cfg_useCustomBackgroundColorDefault: false
+    property string cfg_customBackgroundColorDefault: "#3F4557"
+    property var cfg_extraRunnersDefault: ["krunner_shell", "krunner_bookmarksrunner", "baloosearch", "locations"]
+    property var cfg_favoriteSystemActionsDefault: ["shutdown", "reboot", "logout", "lock-screen"]
+    property var cfg_hiddenApplicationsDefault: []
+
     Kirigami.FormLayout {
         anchors.left: parent.left
         anchors.right: parent.right

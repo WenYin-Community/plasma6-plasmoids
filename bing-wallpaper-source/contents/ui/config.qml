@@ -17,6 +17,9 @@ Kirigami.FormLayout {
 
     property alias formLayout: root
 
+    property var configDialog
+    property var wallpaperConfiguration: wallpaper.configuration
+
     property string cfg_SelectedFile
     property int cfg_FillMode
     property alias cfg_Color: colorButton.color
@@ -70,6 +73,8 @@ Kirigami.FormLayout {
         var fileName = folderModel.get(realIndex, "fileName");
         cfg_SelectedFile = fileName;
         ensureSelectedFile();
+        // 即时应用所选壁纸（无需等待对话框确认）
+        wallpaperConfiguration.SelectedFile = fileName;
     }
 
     QQC2.ComboBox {

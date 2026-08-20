@@ -91,7 +91,8 @@ WallpaperItem {
     }
 
     function cleanOldPotdCache() {
-        var cacheBase = StandardPaths.writableLocation(StandardPaths.GenericCacheLocation);
+        // writableLocation 返回 QUrl，必须先转 string 再判断前缀
+        var cacheBase = StandardPaths.writableLocation(StandardPaths.GenericCacheLocation).toString();
         if (!cacheBase || !backend.localUrl || backend.localUrl.length === 0) {
             return;
         }

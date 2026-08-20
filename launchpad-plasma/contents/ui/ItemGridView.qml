@@ -427,12 +427,14 @@ FocusScope {
 
                             if (!dragHelper.dragging) {
                                 if (pressedItem) {
-                                    if ("trigger" in gridView.model) {
-                                        gridView.model.trigger(pressedItem.itemIndex, "", null);
-                                        root.toggle();
-                                    }
+                                    if (pressedItem.itemIndex !== undefined && pressedItem.itemIndex !== null && pressedItem.itemIndex >= 0) {
+                                        if ("trigger" in gridView.model) {
+                                            gridView.model.trigger(pressedItem.itemIndex, "", null);
+                                            root.toggle();
+                                        }
 
-                                    itemGrid.itemActivated(pressedItem.itemIndex, "", null);
+                                        itemGrid.itemActivated(pressedItem.itemIndex, "", null);
+                                    }
                                 } else if (mouse.button === Qt.LeftButton) {
                                     root.toggle();
                                 }

@@ -122,7 +122,7 @@ PlasmoidItem {
         id: executable
         engine: "executable"
         connectedSources: ["plasmashell -v"]
-        onNewData: {
+        onNewData: function(source, data) {
             if(data["exit code"] == 0){
                 // Parse version like "plasmashell 6.6.4"
                 var parts = data.stdout.trim().split(" ")
@@ -140,7 +140,8 @@ PlasmoidItem {
     
     switchHeight: fullRepWidth
     switchWidth: fullRepWidth
-    preferredRepresentation: inPanel ? Plasmoid.compactRepresentation : Plasmoid.fullRepresentation
+    // 引用本地组件而非 Plasmoid 单例属性，避免初始化时序导致的 undefined
+    preferredRepresentation: inPanel ? compactRepresentation : fullRepresentation
     fullRepresentation: FullRepresentation { }
     compactRepresentation: CompactRepresentation {}
 

@@ -4,6 +4,7 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
+import QtCore
 import QtQuick
 import QtQuick.Layouts
 
@@ -161,26 +162,27 @@ PlasmoidItem {
         }
     }
 
-    // 动态发现 Application Menu (kicker) 实例，替代硬编码 instance ID
-    PlasmaCore.DataSource {
-        id: appletsSource
-        engine: "applets"
-        connectedSources: ["system"]
-        onDataChanged: {
-            for (var key in data) {
-                var info = data[key];
-                if (typeof info === "string") {
-                    try {
-                        info = JSON.parse(info);
-                    } catch (e) {
-                        continue;
-                    }
-                }
-                if (info && info.plugin === "org.kde.plasma.kicker") {
-                    applicationMenuFavoritesModel.initForKickerInstance(info.id !== undefined ? info.id : key);
-                    disconnectSource("system");
-                    break;
-                }
+    // 动态发现 Application Menu (kicker) 实例，替代硬编码 instance ID。
+    // 本机无 plasma_engine_applets 插件，改为从 appletsrc 配置解析实例 ID
+    P5Support.DataSource {
+        id: appletScanner
+        engine: "executable"
+        connectedSources: []
+
+        function scanKickerInstance() {
+            var configDir = StandardPaths.writableLocation(StandardPaths.ConfigLocation).toString();
+            if (configDir.startsWith("file://")) {
+                configDir = configDir.substring(7);
+            }
+            connectSource("grep -B5 'plugin=org.kde.plasma.kicker' " + configDir + "/plasma-org.kde.plasma.desktop-appletsrc");
+        }
+
+        onNewData: function(source, data) {
+            disconnectSource(source);
+            var stdout = (data["stdout"] || "").trim();
+            var m = /\[Applets\]\[(\d+)\]/.exec(stdout);
+            if (m) {
+                applicationMenuFavoritesModel.initForKickerInstance(m[1]);
             }
         }
     }
@@ -290,5 +292,7 @@ PlasmoidItem {
         rootModel.refreshed.connect(reset);
 
         dragHelper.dropped.connect(resetDragSource);
+
+        appletScanner.scanKickerInstance();
     }
 }

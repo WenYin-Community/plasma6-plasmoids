@@ -168,7 +168,7 @@ PlasmaComponents3.ItemDelegate {
                 visible: powerManagementItem.inhibitsLidAction || (powerManagementItem.inhibitions.length > 0)
 
                 InhibitionHint {
-                  anchors.fill:parent
+                    Layout.fillWidth: true
                     visible: powerManagementItem.inhibitsLidAction
                     iconSource: "computer-laptop"
                     text: i18nc("Minimize the length of this string as much as possible", "Your laptop is configured not to sleep when closing the lid while an external monitor is connected.")
@@ -192,10 +192,10 @@ PlasmaComponents3.ItemDelegate {
                     model: powerManagementItem.inhibitions
 
                     InhibitionHint {
-                        property string icon: modelData.Icon
+                        property string icon: modelData.icon
                             || (KWindowSystem.isPlatformWayland ? "wayland" : "xorg")
-                        property string name: modelData.PrettyName
-                        property string reason: modelData.Reason
+                        property string name: modelData.prettyName
+                        property string reason: modelData.reason
 
                         Layout.fillWidth: true
                         iconSource: icon
