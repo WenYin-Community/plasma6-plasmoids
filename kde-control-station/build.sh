@@ -1,10 +1,10 @@
 #!/bin/bash
 # KDE Control Station Build Script
-# Version: 1.29.1
+# Version: 1.30
 
 packageDir="package"
 i18nDir="package/translate"
-version="1.29.1"
+version="1.30"
 plasmaMinVer="6.0"
 filenameTag="plasma${plasmaMinVer//./-}"
 outputFile="KdeControlStation-v${version}-${filenameTag}.plasmoid"
