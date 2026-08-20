@@ -18,8 +18,8 @@
       <label>背景色</label>
       <default>#000000</default>
     </entry>
-    <entry name="UpdateOverMeteredConnection" type="Int">
-      <label>是否在按流量计费网络更新：0 否，1 是，2 保留</label>
+    <entry name="ParticleType" type="Enum">
+      <label>动态天气效果：0 无，1 下雪，2 下雨</label>
       <default>0</default>
     </entry>
   </group>

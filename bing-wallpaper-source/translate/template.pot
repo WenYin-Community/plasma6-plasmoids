@@ -66,13 +66,7 @@ msgstr ""
 msgid "Select Background Color"
 msgstr ""
 
-#: ../contents/ui/config.qml
-msgid "Network:"
-msgstr ""
 
-#: ../contents/ui/config.qml
-msgid "Update when using metered network connection"
-msgstr ""
 
 #: ../contents/ui/config.qml
 msgid "Actions:"
@@ -105,4 +99,20 @@ msgstr ""
 
 #: ../contents/ui/config.qml
 msgid "Next page"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Weather effect:"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "None"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Snow"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Rain"
 msgstr ""

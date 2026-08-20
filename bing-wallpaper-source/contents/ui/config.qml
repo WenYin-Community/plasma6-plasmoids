@@ -23,7 +23,7 @@ Kirigami.FormLayout {
     property string cfg_SelectedFile
     property int cfg_FillMode
     property alias cfg_Color: colorButton.color
-    property int cfg_UpdateOverMeteredConnection
+    property int cfg_ParticleType
 
     property int pageSize: 5
     property int currentPage: 0
@@ -32,6 +32,14 @@ Kirigami.FormLayout {
     readonly property int pageItemCount: Math.max(0, Math.min(pageSize, folderModel.count - pageStart))
 
     readonly property string archiveDir: ArchiveDirUtils.resolveArchiveDir()
+
+    Component.onCompleted: {
+        console.log("BING_CFG_LOADED");
+    }
+
+    // 对话框确定时无需额外处理（无预览机制）
+    function saveConfig() {
+    }
 
     function selectedFilePath() {
         if (!cfg_SelectedFile || cfg_SelectedFile.length === 0) {
@@ -73,8 +81,10 @@ Kirigami.FormLayout {
         var fileName = folderModel.get(realIndex, "fileName");
         cfg_SelectedFile = fileName;
         ensureSelectedFile();
-        // 即时应用所选壁纸（无需等待对话框确认）
-        wallpaperConfiguration.SelectedFile = fileName;
+        // 直接写入配置对象即时切换（不依赖 PreviewImage 等官方机制）
+        if (wallpaperConfiguration) {
+            wallpaperConfiguration.SelectedFile = fileName;
+        }
     }
 
     QQC2.ComboBox {
@@ -107,11 +117,25 @@ Kirigami.FormLayout {
         dialogTitle: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","Select Background Color")
     }
 
-    QQC2.CheckBox {
-        Kirigami.FormData.label: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","Network:")
-        text: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","Update when using metered network connection")
-        checked: cfg_UpdateOverMeteredConnection === 1
-        onToggled: cfg_UpdateOverMeteredConnection = checked ? 1 : 0
+    QQC2.ComboBox {
+        id: particleTypeCombo
+        Kirigami.FormData.label: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","Weather effect:")
+        model: [
+            { text: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","None"), value: 0 },
+            { text: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","Snow"), value: 1 },
+            { text: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","Rain"), value: 2 }
+        ]
+        textRole: "text"
+        onActivated: cfg_ParticleType = model[currentIndex].value
+        Component.onCompleted: {
+            for (var i = 0; i < model.length; i++) {
+                if (model[i].value === cfg_ParticleType) {
+                    currentIndex = i;
+                    return;
+                }
+            }
+            currentIndex = 0;
+        }
     }
 
     Kirigami.Separator {

@@ -1,13 +1,13 @@
 import QtCore
 import QtQuick
 import QtQuick.Controls as QQC2
+import QtQuick.Particles
 import QtQuick.Window
 
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.plasma5support as Plasma5Support
 import org.kde.plasma.plasmoid
-import org.kde.plasma.wallpapers.potd
 
 import "./js/archiveDir.js" as ArchiveDirUtils
 
@@ -17,12 +17,26 @@ WallpaperItem {
     property string archiveDir: ""
     property var archiveFiles: []
     property int selectedIndex: 0
-    property int refreshNonce: 0
-    property string pendingAction: ""
     property bool archiveLoaded: false
     readonly property string selectedFile: (root.configuration.SelectedFile || "").toString()
     property string lastAppliedFile: ""
     property string previewFile: ""
+
+    property string todayInfoUrl: ""
+    property string todayTitle: ""
+    property string lastDownloadDate: ""
+
+    // 完全独立：python3 标准库请求 Bing API、下载今日壁纸并清理只保留最近 30 张。
+    // 当日文件已存在则跳过（每日仅首次下载）；第二个参数 1 表示强制重新下载
+    readonly property string bingDownloadScript: "import json, urllib.request, sys, glob, os; target = sys.argv[1]; force = len(sys.argv) > 2 and sys.argv[2] == '1'; " +
+        "if force or not os.path.exists(target): " +
+        "d = json.load(urllib.request.urlopen('https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1', timeout=15)); img = d['images'][0]; " +
+        "urllib.request.urlretrieve('https://www.bing.com' + img['url'], target); " +
+        "files = sorted(glob.glob(os.path.dirname(target) + '/*.jpg')); [os.remove(f) for f in files[:-30]]; " +
+        "print(img.get('title', '')); print(img.get('copyrightlink', ''))"
+
+    // 独立清理：只保留最近 30 张（下载脚本内也内置同样逻辑，此处覆盖"当日已存在跳过下载"的情况）
+    readonly property string bingPruneScript: "import sys, glob, os; files = sorted(glob.glob(sys.argv[1] + '/*.jpg')); [os.remove(f) for f in files[:-30]]"
 
     readonly property string selectedArchivePath: {
         if (selectedIndex < 0 || selectedIndex >= archiveFiles.length) {
@@ -30,14 +44,14 @@ WallpaperItem {
         }
         return archiveDir + "/" + archiveFiles[selectedIndex];
     }
-    readonly property string imagePath: selectedArchivePath.length > 0 ? selectedArchivePath : backend.localUrl
+    readonly property string imagePath: selectedArchivePath.length > 0 ? selectedArchivePath : ""
     readonly property string imageSource: toFileUrl(imagePath)
 
     contextualActions: [
         PlasmaCore.Action {
             text: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","Refresh today's wallpaper")
             icon.name: "view-refresh"
-            onTriggered: root.refreshNonce += 1
+            onTriggered: root.downloadToday(true)
         },
         PlasmaCore.Action {
             text: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","Previous")
@@ -54,8 +68,8 @@ WallpaperItem {
         PlasmaCore.Action {
             text: i18nd("plasma_wallpaper_com.wenyin.bingwallpapersource","Search image info")
             icon.name: "help-about"
-            enabled: backend.infoUrl.toString().length > 0
-            onTriggered: Qt.openUrlExternally(root.toBingUrl(backend.infoUrl.toString()))
+            enabled: root.todayInfoUrl.length > 0
+            onTriggered: Qt.openUrlExternally(root.toBingUrl(root.todayInfoUrl))
         }
     ]
 
@@ -90,24 +104,21 @@ WallpaperItem {
         return y + m + day;
     }
 
-    function cleanOldPotdCache() {
-        // writableLocation 返回 QUrl，必须先转 string 再判断前缀
-        var cacheBase = StandardPaths.writableLocation(StandardPaths.GenericCacheLocation).toString();
-        if (!cacheBase || !backend.localUrl || backend.localUrl.length === 0) {
-            return;
-        }
-        if (cacheBase.startsWith("file://")) {
-            cacheBase = cacheBase.substring(7);
-        }
-        var current = backend.localUrl.toString().substring(backend.localUrl.toString().lastIndexOf("/") + 1);
-        runCommand("find " + ArchiveDirUtils.shellQuote(cacheBase + "/plasma_engine_potd")
-            + " -maxdepth 1 -type f -name 'bing:*' ! -name " + ArchiveDirUtils.shellQuote(current)
-            + " ! -name " + ArchiveDirUtils.shellQuote(current + ".json") + " -delete", "clean");
+    function runCommand(command) {
+        executable.connectSource(command);
     }
 
-    function runCommand(command, action) {
-        pendingAction = action;
-        executable.connectSource(command);
+    function downloadToday(force) {
+        if (!archiveDir) {
+            return;
+        }
+        lastDownloadDate = todayText();
+        var target = archiveDir + "/" + todayText() + ".jpg";
+        var cmd = "python3 -c \"" + bingDownloadScript + "\" " + ArchiveDirUtils.shellQuote(target);
+        if (force) {
+            cmd += " 1";
+        }
+        runCommand(cmd);
     }
 
     function selectArchiveByIndex(idx) {
@@ -140,20 +151,18 @@ WallpaperItem {
     }
 
     function ensureArchiveDir() {
-        runCommand("mkdir -p " + ArchiveDirUtils.shellQuote(archiveDir), "mkdir");
+        runCommand("mkdir -p " + ArchiveDirUtils.shellQuote(archiveDir));
+    }
+
+    function pruneArchive() {
+        if (!archiveDir) {
+            return;
+        }
+        runCommand("python3 -c \"" + bingPruneScript + "\" " + ArchiveDirUtils.shellQuote(archiveDir));
     }
 
     function listArchiveFiles() {
-        runCommand("find " + ArchiveDirUtils.shellQuote(archiveDir) + " -maxdepth 1 -type f -name '*.jpg' -printf '%f\\n'", "list");
-    }
-
-    function saveTodayImage() {
-        if (!backend.localUrl || backend.localUrl.length === 0) {
-            return;
-        }
-        var target = archiveDir + "/" + todayText() + ".jpg";
-        var cmd = "cp -f " + ArchiveDirUtils.shellQuote(backend.localUrl) + " " + ArchiveDirUtils.shellQuote(target);
-        runCommand(cmd, "save");
+        runCommand("find " + ArchiveDirUtils.shellQuote(archiveDir) + " -maxdepth 1 -type f -name '*.jpg' -printf '%f\\n'");
     }
 
     onImageSourceChanged: Qt.callLater(imageView.loadImage)
@@ -177,25 +186,6 @@ WallpaperItem {
         if (archiveLoaded) {
             Qt.callLater(syncSelectedIndex);
         }
-    }
-
-    PotdBackend {
-        id: backend
-        identifier: "bing"
-        arguments: {
-            const w = imageView.sourceSize.width;
-            const h = imageView.sourceSize.height;
-            return [w, h, root.refreshNonce];
-        }
-        updateOverMeteredConnection: root.configuration.UpdateOverMeteredConnection
-
-        onLocalUrlChanged: {
-            root.cleanOldPotdCache();
-            root.saveTodayImage();
-            Qt.callLater(imageView.loadImage);
-        }
-
-        onImageChanged: Qt.callLater(imageView.loadImage)
     }
 
     QQC2.StackView {
@@ -291,6 +281,68 @@ WallpaperItem {
         }
     }
 
+    // 动态天气效果（参考 org.kde.snow/org.kde.rain）：1=下雪 2=下雨
+    Item {
+        id: weatherLayer
+        anchors.fill: parent
+        visible: root.configuration.ParticleType > 0
+
+        readonly property bool isSnow: root.configuration.ParticleType === 1
+
+        ParticleSystem {
+            id: weatherParticles
+        }
+
+        ItemParticle {
+            system: weatherParticles
+            delegate: weatherLayer.isSnow ? snowDelegate : rainDelegate
+        }
+
+        Emitter {
+            system: weatherParticles
+            enabled: root.configuration.ParticleType > 0
+            emitRate: weatherLayer.isSnow ? 14 : 80
+            lifeSpan: weatherLayer.isSnow ? 6000 : 1500
+            velocity: PointDirection {
+                y: weatherLayer.isSnow ? 60 : 320
+                yVariation: weatherLayer.isSnow ? 30 : 80
+                xVariation: 30
+            }
+            size: 8
+            sizeVariation: 4
+            width: parent.width
+            height: 10
+            y: -20
+        }
+
+        Component {
+            id: snowDelegate
+
+            Rectangle {
+                width: 6
+                height: 6
+                radius: 3
+                color: "white"
+                opacity: 0.85
+            }
+        }
+
+        Component {
+            id: rainDelegate
+
+            Rectangle {
+                width: 2
+                height: 20
+                radius: 1
+                color: "#B0DCF8"
+                opacity: 0.55
+                transform: Rotation {
+                    angle: 12
+                }
+            }
+        }
+    }
+
     Plasma5Support.DataSource {
         id: executable
         engine: "executable"
@@ -305,11 +357,27 @@ WallpaperItem {
                 console.warn("BingWallpaperSource command stderr:", stderr);
             }
 
-            if (pendingAction === "clean") {
+            // 按命令内容分发（避免并发命令的 pendingAction 串扰）
+            if (source.indexOf("HPImageArchive") >= 0) {
+                // 下载完成（或跳过）：非空输出才更新标题/信息链接，刷新列表
+                var lines = stdout.split("\n");
+                if (lines[0]) {
+                    root.todayTitle = lines[0];
+                }
+                if (lines[1]) {
+                    root.todayInfoUrl = lines[1];
+                }
+                root.listArchiveFiles();
                 return;
             }
 
-            if (pendingAction === "list") {
+            if (source.indexOf("import sys, glob, os; files") >= 0) {
+                // 清理完成：刷新列表
+                root.listArchiveFiles();
+                return;
+            }
+
+            if (source.indexOf("find ") === 0) {
                 if (!stdout) {
                     root.archiveFiles = [];
                     root.archiveLoaded = true;
@@ -325,15 +393,27 @@ WallpaperItem {
                 return;
             }
 
-            if (pendingAction === "save" || pendingAction === "mkdir") {
-                root.listArchiveFiles();
-            }
+            // mkdir：无需处理（列表由 onCompleted 与下载完成时刷新）
         }
     }
 
     Component.onCompleted: {
         archiveDir = ArchiveDirUtils.resolveArchiveDir();
         ensureArchiveDir();
+        pruneArchive();
+        downloadToday();
         listArchiveFiles();
+    }
+
+    // 跨天自动刷新：每分钟检测日期变化，跨天后重新下载当日壁纸
+    Timer {
+        interval: 60000
+        repeat: true
+        running: true
+        onTriggered: {
+            if (root.archiveDir && root.todayText() !== root.lastDownloadDate) {
+                root.downloadToday();
+            }
+        }
     }
 }

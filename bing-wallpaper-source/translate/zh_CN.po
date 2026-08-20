@@ -64,13 +64,7 @@ msgstr "背景色："
 msgid "Select Background Color"
 msgstr "选择背景色"
 
-#: ../contents/ui/config.qml
-msgid "Network:"
-msgstr "网络："
 
-#: ../contents/ui/config.qml
-msgid "Update when using metered network connection"
-msgstr "在按流量计费的网络连接时更新"
 
 #: ../contents/ui/config.qml
 msgid "Actions:"
@@ -104,3 +98,19 @@ msgstr "%1 / %2"
 #: ../contents/ui/config.qml
 msgid "Next page"
 msgstr "下一页"
+
+#: ../contents/ui/config.qml
+msgid "Weather effect:"
+msgstr "天气效果："
+
+#: ../contents/ui/config.qml
+msgid "None"
+msgstr "无"
+
+#: ../contents/ui/config.qml
+msgid "Snow"
+msgstr "下雪"
+
+#: ../contents/ui/config.qml
+msgid "Rain"
+msgstr "下雨"
