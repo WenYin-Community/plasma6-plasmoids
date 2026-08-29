@@ -27,13 +27,21 @@ WallpaperItem {
     property string lastDownloadDate: ""
 
     // 完全独立：python3 标准库请求 Bing API、下载今日壁纸并清理只保留最近 30 张。
-    // 当日文件已存在则跳过（每日仅首次下载）；第二个参数 1 表示强制重新下载
-    readonly property string bingDownloadScript: "import json, urllib.request, sys, glob, os; target = sys.argv[1]; force = len(sys.argv) > 2 and sys.argv[2] == '1'; " +
-        "if force or not os.path.exists(target): " +
-        "d = json.load(urllib.request.urlopen('https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1', timeout=15)); img = d['images'][0]; " +
-        "urllib.request.urlretrieve('https://www.bing.com' + img['url'], target); " +
-        "files = sorted(glob.glob(os.path.dirname(target) + '/*.jpg')); [os.remove(f) for f in files[:-30]]; " +
-        "print(img.get('title', '')); print(img.get('copyrightlink', ''))"
+    // 当日文件已存在则跳过（每日仅首次下载）；第二个参数 1 表示强制重新下载。
+    // 脚本以 \n 分行经 /bin/sh 双引号传给 python -c：Python 复合语句（if/for）不能写在
+    // 分号单行内；且须避免 $、`、"、反斜杠，否则会被 shell 展开或截断
+    readonly property string bingDownloadScript: "import json, urllib.request, sys, glob, os\n" +
+        "target = sys.argv[1]\n" +
+        "force = len(sys.argv) > 2 and sys.argv[2] == '1'\n" +
+        "img = None\n" +
+        "if force or not os.path.exists(target):\n" +
+        "    img = json.load(urllib.request.urlopen('https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1', timeout=15))['images'][0]\n" +
+        "    url = img['url'] if img['url'].startswith('http') else 'https://www.bing.com' + img['url']\n" +
+        "    urllib.request.urlretrieve(url, target)\n" +
+        "    files = sorted(glob.glob(os.path.dirname(target) + '/*.jpg'))\n" +
+        "    [os.remove(f) for f in files[:-30]]\n" +
+        "print(img.get('title', '') if img else '')\n" +
+        "print(img.get('copyrightlink', '') if img else '')"
 
     // 独立清理：只保留最近 30 张（下载脚本内也内置同样逻辑，此处覆盖"当日已存在跳过下载"的情况）
     readonly property string bingPruneScript: "import sys, glob, os; files = sorted(glob.glob(sys.argv[1] + '/*.jpg')); [os.remove(f) for f in files[:-30]]"
@@ -363,6 +371,12 @@ WallpaperItem {
                 var lines = stdout.split("\n");
                 if (lines[0]) {
                     root.todayTitle = lines[0];
+                    // 新图下载成功：切换到当日并持久化 SelectedFile，否则跨天后仍停留在旧图
+                    var todayFile = root.todayText() + ".jpg";
+                    if (root.configuration.SelectedFile !== todayFile) {
+                        root.configuration.SelectedFile = todayFile;
+                        root.lastAppliedFile = todayFile;
+                    }
                 }
                 if (lines[1]) {
                     root.todayInfoUrl = lines[1];
