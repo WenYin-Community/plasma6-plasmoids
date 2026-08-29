@@ -3,7 +3,7 @@
   "X-Plasma-API-Minimum-Version": "6.0",
   "KPlugin": {
     "Id": "com.wenyin.bingwallpapersource",
-    "Version": "1.50",
+    "Version": "1.51",
     "Name": "Bing Wallpaper",
     "Name[zh_CN]": "必应壁纸",
     "Description": "Bing daily wallpaper with history browsing",

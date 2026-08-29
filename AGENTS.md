@@ -34,7 +34,7 @@ cp -rf bing-wallpaper-source/* ~/.local/share/plasma/wallpapers/com.wenyin.bingw
 plasmashell --replace &
 ```
 
-launchpad-plasma 没有构建脚本，打包由 CI 直接 zip。`.github/workflows/release.yml` 手动触发时打包全部三个项目，版本号从各项目 `metadata.json` 的 `KPlugin.Version` 读取——改版本需同步改对应目录下的 build.sh / CI 中读取逻辑。
+launchpad-plasma 没有构建脚本，打包由 CI 直接 zip。`.github/workflows/release.yml` 手动触发时打包全部四个项目，版本号从各项目 `metadata.json` 的 `KPlugin.Version` 读取——改版本需同步改对应目录下的 build.sh / CI 中读取逻辑。
 
 ## 翻译系统（gettext）
 

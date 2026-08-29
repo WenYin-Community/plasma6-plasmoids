@@ -49,7 +49,7 @@ A configurable application launcher grid for KDE Plasma 6.
 Install a local `.plasmoid` package:
 
 ```bash
-kpackagetool6 -i tt.launchpadPlasma-v1.31.plasmoid
+kpackagetool6 -i tt.launchpadPlasma-v1.51.plasmoid
 ```
 
 For development, copy `launchpad-plasma/` to `~/.local/share/plasma/plasmoids/tt.launchpadPlasma/` and restart Plasma Shell.
