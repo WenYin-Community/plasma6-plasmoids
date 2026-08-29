@@ -240,10 +240,13 @@ PlasmaExtras.ExpandableListItem {
         property double prevRxBytes: 0
         property double prevTxBytes: 0
         onTriggered: {
-            rxSpeed = prevRxBytes === 0 ? 0 : (RxBytes - prevRxBytes) * 1000 / interval
-            txSpeed = prevTxBytes === 0 ? 0 : (TxBytes - prevTxBytes) * 1000 / interval
-            prevRxBytes = RxBytes
-            prevTxBytes = TxBytes
+            // Some connection types (e.g. Gsm/Cdma) don't expose the statistics roles.
+            var rx = RxBytes || 0
+            var tx = TxBytes || 0
+            rxSpeed = prevRxBytes === 0 ? 0 : (rx - prevRxBytes) * 1000 / interval
+            txSpeed = prevTxBytes === 0 ? 0 : (tx - prevTxBytes) * 1000 / interval
+            prevRxBytes = rx
+            prevTxBytes = tx
         }
     }
 
