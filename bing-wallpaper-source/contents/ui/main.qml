@@ -135,6 +135,7 @@ WallpaperItem {
         }
         selectedIndex = idx;
         root.configuration.SelectedFile = archiveFiles[idx];
+        root.configuration.writeConfig();
         lastAppliedFile = archiveFiles[idx];
         // imageSource 会自动更新，触发 onImageSourceChanged 调用 loadImage
     }
@@ -371,10 +372,12 @@ WallpaperItem {
                 var lines = stdout.split("\n");
                 if (lines[0]) {
                     root.todayTitle = lines[0];
-                    // 新图下载成功：切换到当日并持久化 SelectedFile，否则跨天后仍停留在旧图
+                    // 新图下载成功：切换到当日并持久化 SelectedFile，否则跨天后仍停留在旧图。
+                    // 运行时修改配置须显式 writeConfig() 才会落盘到 appletsrc，否则重启后弹回旧值。
                     var todayFile = root.todayText() + ".jpg";
                     if (root.configuration.SelectedFile !== todayFile) {
                         root.configuration.SelectedFile = todayFile;
+                        root.configuration.writeConfig();
                         root.lastAppliedFile = todayFile;
                     }
                 }
