@@ -64,7 +64,7 @@ Item {
 
     ToolTip {
         visible: !big && hoverHandler.hovered
-        text: KWinComponents.Workspace.desktopName(desktopIndex + 1)
+        text: KWinComponents.Workspace.desktops[desktopIndex] ? KWinComponents.Workspace.desktops[desktopIndex].name : ""
         delay: 1000
         timeout: 5000
     }
@@ -202,7 +202,8 @@ Item {
                 const item = items.get(i);
                 const client = item.model.client;
                 // Filter: must belong to this desktop and screen, and not be Yakuake or krunner
-                const show = client && !client.caption.endsWith(" — Yakuake") && !client.caption.endsWith(" — krunner") && client.width !== 0 && client.height !== 0 && item.model.desktops.includes(KWinComponents.Workspace.desktops[desktopItem.desktopIndex]) && KWinComponents.Workspace.screens.indexOf(client.output) === screenItem.screenIndex;
+                const desktopId = KWinComponents.Workspace.desktops[desktopItem.desktopIndex] ? String(KWinComponents.Workspace.desktops[desktopItem.desktopIndex].id) : "";
+                const show = client && !client.caption.endsWith(" — Yakuake") && !client.caption.endsWith(" — krunner") && client.width !== 0 && client.height !== 0 && item.model.desktopIds.split(",").indexOf(desktopId) >= 0 && KWinComponents.Workspace.screens.indexOf(client.output) === screenItem.screenIndex;
                 if (item.inShowing !== show)
                     item.inShowing = !item.inShowing;
 

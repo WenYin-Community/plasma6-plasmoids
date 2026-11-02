@@ -16,7 +16,9 @@ ListModel {
             return ;
 
         clear();
-        var clients = workspaceRef.windowList ? workspaceRef.windowList() : [];
+        // KWin 6 QML (declarative script) exposes the window list as `stackingOrder`;
+        // windowList() only exists on the legacy QtScript workspace wrapper.
+        var clients = workspaceRef.stackingOrder || [];
         for (var i = 0; i < clients.length; i++) {
             var client = clients[i];
             // Apply exclusion filters
@@ -33,10 +35,16 @@ ListModel {
                     continue;
 
             }
+            // ListModel cannot store a QList of VirtualDesktop objects (it turns into a
+            // nested model), so keep a flat, comma separated list of desktop ids.
+            var desktopIds = [];
+            for (var j = 0; j < client.desktops.length; j++) {
+                desktopIds.push(String(client.desktops[j].id));
+            }
             append({
                 "client": client,
                 "screen": workspaceRef ? workspaceRef.screens.indexOf(client.output) : 0,
-                "desktops": client.desktops,
+                "desktopIds": desktopIds.join(","),
                 "caption": client.caption,
                 "icon": client.icon,
                 "internalId": client.internalId,
@@ -56,21 +64,30 @@ ListModel {
         return desktop * 1000 + screen;
     }
 
-    // Update model when workspace changes
-    Connections {
-        function onWindowAdded(client) {
-            updateModel();
-        }
+    // Update model when workspace changes.
+    // A ListModel can only contain ListElements, so the signal handlers live here
+    // instead of in a nested Connections item.
+    Component.onCompleted: {
+        if (!workspaceRef)
+            return;
+        if (workspaceRef.windowAdded)
+            workspaceRef.windowAdded.connect(updateModel);
+        if (workspaceRef.windowRemoved)
+            workspaceRef.windowRemoved.connect(updateModel);
+        if (workspaceRef.windowActivated)
+            workspaceRef.windowActivated.connect(updateModel);
+        updateModel();
+    }
 
-        function onWindowRemoved(client) {
-            updateModel();
-        }
-
-        function onWindowActivated(client) {
-            updateModel();
-        }
-
-        target: workspaceRef
+    Component.onDestruction: {
+        if (!workspaceRef)
+            return;
+        if (workspaceRef.windowAdded)
+            workspaceRef.windowAdded.disconnect(updateModel);
+        if (workspaceRef.windowRemoved)
+            workspaceRef.windowRemoved.disconnect(updateModel);
+        if (workspaceRef.windowActivated)
+            workspaceRef.windowActivated.disconnect(updateModel);
     }
 
 }

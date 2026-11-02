@@ -167,7 +167,9 @@ Item {
         anchors.margins: thumbnailPadding
         anchors.topMargin: desktopItem.big && mainWindow.configShowWindowTitles ? thumbnailPadding + mainWindow.clientsDecorationsHeight : thumbnailPadding
         Drag.source: clientItem.client
-        client: clientItem.client || null
+        // KWin 6 WindowThumbnail identifies the window by id (wId); the old
+        // `client` object property was removed after KWin 5.
+        wId: clientItem.client ? clientItem.client.internalId : ""
         clip: true
         visible: mainWindow.activated
 

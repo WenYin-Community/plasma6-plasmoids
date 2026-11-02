@@ -44,6 +44,10 @@ Window {
         if (animating)
             return ;
 
+        // Re-read the script config on every activation: KWin 6 no longer exposes
+        // the global `options` object, so there is no configChanged signal to listen to.
+        loadConfig();
+
         animating = true;
         if (activated) {
             easingType = Easing.InExpo;
@@ -91,7 +95,7 @@ Window {
                 currentScreenItem.wheelHandlerCreated = true;
             }
         }
-        const clients = KWinComponents.Workspace.windowList();
+        const clients = KWinComponents.Workspace.stackingOrder;
         for (let i = 0; i < clients.length; i++) {
             if (clients[i].desktopWindow)
                 screensRepeater.itemAt(KWinComponents.Workspace.screens.indexOf(clients[i].output)).desktopBackground.desktopWindow = clients[i];
@@ -213,16 +217,26 @@ Window {
     flags: Qt.X11BypassWindowManagerHint
     visible: true
     color: "transparent"
-    x: activated ? 0 : mainWindow.width * 2
-    y: activated ? 0 : mainWindow.height * 2
+    // Off-screen while inactive. A constant avoids a binding loop with the window
+    // size (x/y bound to width/height re-triggered updateScreens()).
+    x: activated ? 0 : 100000
+    y: activated ? 0 : 100000
     Component.onCompleted: {
         loadConfig();
-        KWin.registerShortcut("Parachute", "Parachute", "Ctrl+Meta+D", function() {
-            selectedClientItem = null;
-            toggleActive();
-        });
         getExternallySelectedClient();
         getCorrectScreensInfo.start();
+    }
+
+    // KWin 6 dropped the scripting-only KWin.registerShortcut() global; ShortcutHandler
+    // is the declarative replacement.
+    KWinComponents.ShortcutHandler {
+        name: "Parachute"
+        text: "Parachute"
+        sequence: "Ctrl+Meta+D"
+        onActivated: {
+            selectedClientItem = null;
+            toggleActive();
+        }
     }
     // Milou.ResultsView put internal ToolButton in focus chain, which we don't want.
     // This hack prevents this button from getting focus.
@@ -350,14 +364,6 @@ Window {
         }
 
         target: KWinComponents.Workspace
-    }
-
-    Connections {
-        function onConfigChanged() {
-            loadConfig();
-        }
-
-        target: options
     }
 
     // Get keyboard focus back when this script is activated and a client is activated externally

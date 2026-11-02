@@ -95,22 +95,6 @@ function revokeInhibitions() {
     notificationSettings.save();
 }
 
-function toggleRedshiftInhibition() {
-    if (!monitor.available) {
-        return;
-    }
-    switch (inhibitor.state) {
-    case Redshift.Inhibitor.Inhibiting:
-    case Redshift.Inhibitor.Inhibited:
-        inhibitor.uninhibit();
-        break;
-    case Redshift.Inhibitor.Uninhibiting:
-    case Redshift.Inhibitor.Uninhibited:
-        inhibitor.inhibit();
-        break;
-    }
-}
-
 function volumePercent(volume) {
     return volume / Vol.PulseAudio.NormalVolume * 100
 }

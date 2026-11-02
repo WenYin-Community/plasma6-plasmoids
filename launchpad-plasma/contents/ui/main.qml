@@ -285,9 +285,9 @@ PlasmoidItem {
         kicker.hideOnWindowDeactivate = true;
 
         updateSvgMetrics();
-        if (PlasmaCore.Theme && PlasmaCore.Theme.themeChanged) {
-            PlasmaCore.Theme.themeChanged.connect(updateSvgMetrics);
-        }
+        // PlasmaCore.Theme was removed in Plasma 6; recompute the line metrics when the
+        // SVG is re-rendered for a new theme instead.
+        lineSvg.repaintNeeded.connect(updateSvgMetrics);
 
         rootModel.refreshed.connect(reset);
 

@@ -6,7 +6,7 @@ import org.kde.plasma.components as PlasmaComponents
 import org.kde.plasma.components as PC3
 import org.kde.plasma.extras as PlasmaExtras
 
-import org.kde.kirigami 2 as Kirigami
+import org.kde.kirigami as Kirigami
 
 
 import org.kde.plasma.private.mpris as Mpris

@@ -58,14 +58,9 @@ Item {
                 height: Math.round(screenItem.height / 6)
                 width: screenItem.width
                 desktopsFullSize: (desktopsBar.height - desktopsWrapper.padding * 2) * screenItem.aspectRatio
-                shrinkDesktopsToFit: desktopsBar.width < (desktopsBar.desktopsFullSize + desktopsWrapper.spacing) * KWinComponents.Workspace.desktops + 2 * desktopsWrapper.padding + removeDesktop.width + addDesktop.width
-                desktopsWidth: desktopsBar.shrinkDesktopsToFit ? ((desktopsBar.width - (2 * desktopsWrapper.padding + removeDesktop.width + addDesktop.width)) / KWinComponents.Workspace.desktops) - desktopsWrapper.spacing : desktopsBar.desktopsFullSize
+                shrinkDesktopsToFit: desktopsBar.width < (desktopsBar.desktopsFullSize + desktopsWrapper.spacing) * KWinComponents.Workspace.desktops.length + 2 * desktopsWrapper.padding + removeDesktop.width + addDesktop.width
+                desktopsWidth: desktopsBar.shrinkDesktopsToFit ? ((desktopsBar.width - (2 * desktopsWrapper.padding + removeDesktop.width + addDesktop.width)) / KWinComponents.Workspace.desktops.length) - desktopsWrapper.spacing : desktopsBar.desktopsFullSize
                 desktopsHeight: desktopsBar.desktopsWidth / screenItem.aspectRatio
-            }
-
-            PropertyChanges {
-                target: desktopsWrapper
-                rows: 1
             }
 
         },
@@ -106,14 +101,9 @@ Item {
                 width: Math.round(screenItem.width / 6)
                 height: screenItem.height
                 desktopsFullSize: (desktopsBar.width - desktopsWrapper.padding * 2) / screenItem.aspectRatio
-                shrinkDesktopsToFit: desktopsBar.height < (desktopsBar.desktopsFullSize + desktopsWrapper.spacing) * KWinComponents.Workspace.desktops + 2 * desktopsWrapper.padding + removeDesktop.height + addDesktop.height
+                shrinkDesktopsToFit: desktopsBar.height < (desktopsBar.desktopsFullSize + desktopsWrapper.spacing) * KWinComponents.Workspace.desktops.length + 2 * desktopsWrapper.padding + removeDesktop.height + addDesktop.height
                 desktopsWidth: desktopsBar.desktopsHeight * screenItem.aspectRatio
-                desktopsHeight: desktopsBar.shrinkDesktopsToFit ? ((desktopsBar.height - (2 * desktopsWrapper.padding + removeDesktop.height + addDesktop.height)) / KWinComponents.Workspace.desktops) - desktopsWrapper.spacing : desktopsBar.desktopsFullSize
-            }
-
-            PropertyChanges {
-                target: desktopsWrapper
-                columns: 1
+                desktopsHeight: desktopsBar.shrinkDesktopsToFit ? ((desktopsBar.height - (2 * desktopsWrapper.padding + removeDesktop.height + addDesktop.height)) / KWinComponents.Workspace.desktops.length) - desktopsWrapper.spacing : desktopsBar.desktopsFullSize
             }
 
         }
@@ -125,9 +115,9 @@ Item {
         property var desktopWindow: null
 
         anchors.fill: parent
-        visible: client !== null
+        visible: desktopWindow !== null
         opacity: mainWindow.configBlurBackground ? 0 : 1
-        client: desktopWindow
+        wId: desktopWindow ? desktopWindow.internalId : ""
     }
 
     FastBlur {
@@ -304,6 +294,11 @@ Item {
         Grid {
             id: desktopsWrapper
 
+            // Single source of truth: Qt 6 keeps stale state values when a state only
+            // overrides one axis, which triggers "Grid contains more visible items than
+            // rows*columns". -1 lets Grid derive the other dimension automatically.
+            rows: mainWindow.horizontalDesktopsLayout ? 1 : -1
+            columns: mainWindow.horizontalDesktopsLayout ? -1 : 1
             spacing: mainWindow.desktopsBarSpacing
             padding: mainWindow.desktopsBarSpacing
             anchors.centerIn: parent
