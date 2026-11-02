@@ -49,7 +49,7 @@ A configurable application launcher grid for KDE Plasma 6.
 Install a local `.plasmoid` package:
 
 ```bash
-kpackagetool6 -i tt.launchpadPlasma-v1.51.plasmoid
+kpackagetool6 -i tt.launchpadPlasma-v1.60.plasmoid
 ```
 
 For development, copy `launchpad-plasma/` to `~/.local/share/plasma/plasmoids/tt.launchpadPlasma/` and restart Plasma Shell.
@@ -88,6 +88,17 @@ make install   # kpackagetool6 --type KWin/Script --install .
 ```
 
 Uninstall with `make uninstall` (kpackagetool6 --type KWin/Script --remove Parachute).
+
+## Changelog
+
+### 1.60
+
+Verified on Plasma 6.8.2 / KWin 6.8.2 / KF6 6.31.
+
+- **Parachute**: fixed the script failing to load entirely (a `Connections` element nested inside a `ListModel`), and ported the remaining KWin 5 APIs: `WindowThumbnail.client` → `wId`, `Workspace.windowList()` → `stackingOrder`, `desktopName()` → `VirtualDesktop.name`, `Workspace.desktops` used as a number → `.length`, `KWin.registerShortcut()` → `ShortcutHandler`, and dropped the non-existent `options` global.
+- **Launchpad Plasma**: `PlasmaCore.Theme` (removed in Plasma 6) replaced with `KSvg`'s `repaintNeeded` for theme-change tracking.
+- **KDE Control Station**: removed an unused component that required the removed `org.kde.plasma.private.nightcolorcontrol` module, and the obsolete versioned Kirigami import.
+- **Bing Wallpaper**: no changes required.
 
 ## License
 

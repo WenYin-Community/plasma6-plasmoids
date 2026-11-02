@@ -49,7 +49,7 @@ KDE Plasma 6 可配置的应用程序启动器网格。
 使用本地 `.plasmoid` 安装包：
 
 ```bash
-kpackagetool6 -i tt.launchpadPlasma-v1.51.plasmoid
+kpackagetool6 -i tt.launchpadPlasma-v1.60.plasmoid
 ```
 
 开发调试时，可将 `launchpad-plasma/` 复制到 `~/.local/share/plasma/plasmoids/tt.launchpadPlasma/`，然后重启 Plasma Shell。
@@ -88,6 +88,17 @@ make install   # kpackagetool6 --type KWin/Script --install .
 ```
 
 卸载使用 `make uninstall`（kpackagetool6 --type KWin/Script --remove Parachute）。
+
+## 更新日志
+
+### 1.60
+
+已在 Plasma 6.8.2 / KWin 6.8.2 / KF6 6.31 上验证。
+
+- **Parachute**：修复脚本完全无法加载的问题（`Connections` 被嵌在 `ListModel` 内），并移植剩余 KWin 5 API：`WindowThumbnail.client` → `wId`、`Workspace.windowList()` → `stackingOrder`、`desktopName()` → `VirtualDesktop.name`、把 `Workspace.desktops` 当数字用 → `.length`、`KWin.registerShortcut()` → `ShortcutHandler`，并移除不存在的全局 `options`。
+- **Launchpad Plasma**：`PlasmaCore.Theme`（Plasma 6 已删除）改为监听 `KSvg` 的 `repaintNeeded` 来跟踪主题变化。
+- **KDE 控制中心**：移除依赖已删除模块 `org.kde.plasma.private.nightcolorcontrol` 的无用组件，以及过时的 Kirigami 版本化导入。
+- **必应壁纸**：无需改动。
 
 ## 许可证
 

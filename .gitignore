@@ -6,4 +6,11 @@ launchpad-plasma/package/contents/ui/js/helpers.js
 
 # General
 *.plasmoid
+*.kwinscript
 *.mo
+
+# Build output
+dist/
+
+# AI workspace data
+.workbuddy/
