@@ -21,27 +21,37 @@ WallpaperItem {
     readonly property string selectedFile: (root.configuration.SelectedFile || "").toString()
     property string lastAppliedFile: ""
     property string previewFile: ""
+    // 启动/跨天/新图就绪后优先选中最新文件；用户手动翻历史后置 false
+    property bool alignToToday: true
+    // 最近一次下载实际使用的文件名（发起时刻的日期，可能跨天）
+    property string pendingDownloadFile: ""
+    // 该文件是否尚未出现在任何目录快照中（下载后需并入列表，直到 find 确认）
+    property bool pendingDownloadActive: false
+    // Bing 尚未切换到本地当天（跨午夜发布有延迟）时为 true，重试需强制覆盖
+    property bool bingStale: false
+    property int staleRetryCount: 0
 
     property string todayInfoUrl: ""
     property string todayTitle: ""
     property string lastDownloadDate: ""
 
     // 完全独立：python3 标准库请求 Bing API、下载今日壁纸并清理只保留最近 30 张。
-    // 当日文件已存在则跳过（每日仅首次下载）；第二个参数 1 表示强制重新下载。
+    // 当日文件已存在则跳过下载，但仍返回图片发布时间（用于判断 Bing 是否已切换）；
+    // 第二个参数 1 表示强制重新下载。
     // 脚本以 \n 分行经 /bin/sh 双引号传给 python -c：Python 复合语句（if/for）不能写在
     // 分号单行内；且须避免 $、`、"、反斜杠，否则会被 shell 展开或截断
     readonly property string bingDownloadScript: "import json, urllib.request, sys, glob, os\n" +
         "target = sys.argv[1]\n" +
         "force = len(sys.argv) > 2 and sys.argv[2] == '1'\n" +
-        "img = None\n" +
+        "img = json.load(urllib.request.urlopen('https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1', timeout=15))['images'][0]\n" +
         "if force or not os.path.exists(target):\n" +
-        "    img = json.load(urllib.request.urlopen('https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1', timeout=15))['images'][0]\n" +
         "    url = img['url'] if img['url'].startswith('http') else 'https://www.bing.com' + img['url']\n" +
         "    urllib.request.urlretrieve(url, target)\n" +
         "    files = sorted(glob.glob(os.path.dirname(target) + '/*.jpg'))\n" +
         "    [os.remove(f) for f in files[:-30]]\n" +
-        "print(img.get('title', '') if img else '')\n" +
-        "print(img.get('copyrightlink', '') if img else '')"
+        "print(img.get('title', ''))\n" +
+        "print(img.get('copyrightlink', ''))\n" +
+        "print(img.get('fullstartdate', ''))"
 
     // 独立清理：只保留最近 30 张（下载脚本内也内置同样逻辑，此处覆盖"当日已存在跳过下载"的情况）
     readonly property string bingPruneScript: "import sys, glob, os; files = sorted(glob.glob(sys.argv[1] + '/*.jpg')); [os.remove(f) for f in files[:-30]]"
@@ -112,6 +122,27 @@ WallpaperItem {
         return y + m + day;
     }
 
+    // Bing 的 fullstartdate 是 UTC 时间戳（YYYYMMDDHHMM，整点发布），换算成本地日期
+    function utcStampToLocalDate(stamp) {
+        if (!stamp || stamp.length < 12) {
+            return "";
+        }
+        var dt = new Date(Date.UTC(
+            parseInt(stamp.substring(0, 4), 10),
+            parseInt(stamp.substring(4, 6), 10) - 1,
+            parseInt(stamp.substring(6, 8), 10),
+            parseInt(stamp.substring(8, 10), 10),
+            parseInt(stamp.substring(10, 12), 10)
+        ));
+        if (isNaN(dt.getTime())) {
+            return "";
+        }
+        var y = dt.getFullYear().toString();
+        var m = ("0" + (dt.getMonth() + 1)).slice(-2);
+        var d = ("0" + dt.getDate()).slice(-2);
+        return y + m + d;
+    }
+
     function runCommand(command) {
         executable.connectSource(command);
     }
@@ -121,7 +152,13 @@ WallpaperItem {
             return;
         }
         lastDownloadDate = todayText();
-        var target = archiveDir + "/" + todayText() + ".jpg";
+        if (force) {
+            staleRetryCount = 0;
+        }
+        // 记录本次下载实际使用的文件名：回调时系统日期可能已跨天，
+        // 不能再按当时日期重新拼接。
+        pendingDownloadFile = todayText() + ".jpg";
+        var target = archiveDir + "/" + pendingDownloadFile;
         var cmd = "python3 -c \"" + bingDownloadScript + "\" " + ArchiveDirUtils.shellQuote(target);
         if (force) {
             cmd += " 1";
@@ -133,6 +170,7 @@ WallpaperItem {
         if (idx < 0 || idx >= archiveFiles.length) {
             return;
         }
+        alignToToday = false;
         selectedIndex = idx;
         root.configuration.SelectedFile = archiveFiles[idx];
         root.configuration.writeConfig();
@@ -147,7 +185,16 @@ WallpaperItem {
             return;
         }
 
-        var targetFile = selectedFile || lastAppliedFile;
+        // 启动、跨天或新图就绪后，选中列表最新的文件（文件名是日期，倒序即最新），
+        // 不按"系统日期 == 文件名"匹配，也不依赖可能停留在旧图的配置值。
+        var targetFile;
+        if (alignToToday) {
+            targetFile = archiveFiles[0];
+            alignToToday = false;
+        } else {
+            targetFile = archiveFiles.indexOf(selectedFile) >= 0 ? selectedFile : (lastAppliedFile || "");
+        }
+
         var idx = archiveFiles.indexOf(targetFile);
         if (idx < 0) {
             idx = 0;
@@ -157,6 +204,20 @@ WallpaperItem {
             lastAppliedFile = archiveFiles[idx];
         }
         imageView.loadImage();
+    }
+
+    // 新下载的文件已确认可用但列表快照尚未包含时先并入，避免 executable 引擎对
+    // 相同命令去重（或 find 早于下载完成）导致列表停留在旧内容、壁纸不切换。
+    function mergeDownloadedFile(files) {
+        if (!pendingDownloadFile) {
+            return files;
+        }
+        if (files.indexOf(pendingDownloadFile) >= 0) {
+            pendingDownloadActive = false;
+        } else if (pendingDownloadActive) {
+            files.unshift(pendingDownloadFile);
+        }
+        return files;
     }
 
     function ensureArchiveDir() {
@@ -174,7 +235,9 @@ WallpaperItem {
         runCommand("find " + ArchiveDirUtils.shellQuote(archiveDir) + " -maxdepth 1 -type f -name '*.jpg' -printf '%f\\n'");
     }
 
-    onImageSourceChanged: Qt.callLater(imageView.loadImage)
+    onImageSourceChanged: {
+        Qt.callLater(imageView.loadImage);
+    }
     onSelectedFileChanged: {
         if (selectedFile && selectedFile.length > 0) {
             lastAppliedFile = selectedFile;
@@ -368,22 +431,49 @@ WallpaperItem {
 
             // 按命令内容分发（避免并发命令的 pendingAction 串扰）
             if (source.indexOf("HPImageArchive") >= 0) {
-                // 下载完成（或跳过）：非空输出才更新标题/信息链接，刷新列表
+                // 下载失败：清空当日标记，下次强制覆盖（避免残留半截文件），稍后重试
+                if (stderr.length > 0) {
+                    root.lastDownloadDate = "";
+                    root.pendingDownloadFile = "";
+                    root.pendingDownloadActive = false;
+                    root.bingStale = true;
+                    return;
+                }
                 var lines = stdout.split("\n");
                 if (lines[0]) {
                     root.todayTitle = lines[0];
-                    // 新图下载成功：切换到当日并持久化 SelectedFile，否则跨天后仍停留在旧图。
-                    // 运行时修改配置须显式 writeConfig() 才会落盘到 appletsrc，否则重启后弹回旧值。
-                    var todayFile = root.todayText() + ".jpg";
-                    if (root.configuration.SelectedFile !== todayFile) {
-                        root.configuration.SelectedFile = todayFile;
-                        root.configuration.writeConfig();
-                        root.lastAppliedFile = todayFile;
-                    }
                 }
                 if (lines[1]) {
                     root.todayInfoUrl = lines[1];
                 }
+
+                // fullstartdate 换算成本地日期；早于今天说明 Bing 还没切到当天（跨午夜
+                // 发布有延迟），先显示现有图，1 分钟后强制重试，最多 10 次后接受。
+                var bingDate = root.utcStampToLocalDate(lines[2] || "");
+                if (bingDate && bingDate !== root.todayText() && root.staleRetryCount < 10) {
+                    root.bingStale = true;
+                    root.staleRetryCount += 1;
+                    root.lastDownloadDate = "";
+                } else {
+                    root.bingStale = false;
+                    root.staleRetryCount = 0;
+                    root.lastDownloadDate = root.todayText();
+                }
+
+                // 用发起时的文件名持久化，立即并入列表并切到最新，
+                // 不等待可能被引擎去重的列表刷新。
+                if (root.pendingDownloadFile) {
+                    if (root.configuration.SelectedFile !== root.pendingDownloadFile) {
+                        root.configuration.SelectedFile = root.pendingDownloadFile;
+                        root.configuration.writeConfig();
+                    }
+                    root.lastAppliedFile = root.pendingDownloadFile;
+                    root.pendingDownloadActive = true;
+                }
+                root.alignToToday = true;
+                root.archiveFiles = root.mergeDownloadedFile(root.archiveFiles.slice());
+                root.archiveLoaded = true;
+                root.syncSelectedIndex();
                 root.listArchiveFiles();
                 return;
             }
@@ -395,16 +485,10 @@ WallpaperItem {
             }
 
             if (source.indexOf("find ") === 0) {
-                if (!stdout) {
-                    root.archiveFiles = [];
-                    root.archiveLoaded = true;
-                    root.syncSelectedIndex();
-                    return;
-                }
-                var files = stdout.split("\n").filter(function(x) { return x.length > 0; });
+                var files = stdout ? stdout.split("\n").filter(function(x) { return x.length > 0; }) : [];
                 files.sort();
                 files.reverse();
-                root.archiveFiles = files;
+                root.archiveFiles = root.mergeDownloadedFile(files);
                 root.archiveLoaded = true;
                 root.syncSelectedIndex();
                 return;
@@ -429,7 +513,7 @@ WallpaperItem {
         running: true
         onTriggered: {
             if (root.archiveDir && root.todayText() !== root.lastDownloadDate) {
-                root.downloadToday();
+                root.downloadToday(root.bingStale);
             }
         }
     }
